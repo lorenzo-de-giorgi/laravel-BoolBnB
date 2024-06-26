@@ -64,3 +64,148 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+## Installazione Laravel
+
+```bash
+cd your parent_folder_path
+
+composer create-project --prefer-dist laravel/laravel:^9.2 your_project_name_here
+
+cd your_project_name_here
+
+code . -r
+
+php artisan serve
+
+ctrl + c
+
+```
+## Configurazione Laravel
+```bash
+# installo breeze che mi occorre per la dashboard
+php artisan breeze:install
+
+# installo pacificdev
+composer require pacificdev/laravel_9_preset
+
+php artisan preset:ui bootstrap
+
+npm install
+
+npm install --save @fortawesome/fontawesome-free
+
+# installato il pacchetto ci ricopiamo i seguenti pezzi di codice in app.scss
+$fa-font-path: "../webfonts" !default;
+
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/brands';
+
+#in vite config aggiungo agli alias
+'~@fortawesome': path.resolve(__dirname, 'node_modules/@fortawesome'),
+
+#copio la cartella dei webfont e se voglio la rinomino
+
+#installo dbal per migration e seeder
+composer require doctrine/dbal
+
+
+#comandi git
+
+git init
+git add .
+git commit -m "first commit"
+git branch -M main
+git remote add origin your_git_url 
+git push -u origin main
+
+
+```
+## Clono progetto da github 
+
+```bash
+# copio file .env.example e lo rinomino in .env
+
+composer install
+
+php artisan key:generate
+
+npm install
+
+# creo il database da phpmyadmin
+
+# inserisco i dati per il collegamento al db in env
+
+#creo migration es.
+php artisan make:migration create_nome_tabella_table
+php artisan make:migration update_users_table --table=users
+php artisan make:migration add_phone_number_to_users_table
+
+#lanciare migration
+php artisan migrate
+
+#revert migration
+php artisan migrate:rollback
+
+#creare il model (necessario per salvare dati su db con seeder)
+php artisan make:model Nome
+
+#popolare il db  es.
+php artisan make:seeder UsersTableSeeder
+
+php artisan db:seed --class=UsersTableSeeder
+
+# preparo le rotte file web.php es. 
+Route::get('/books', [BookController::class, 'index'])->name('books.index');
+
+# creo controller
+php artisan make:controller NomeController
+
+# creo un controller di tipo risorsa 
+php artisan make:controller --resource NomeController
+
+# controllo le rotte
+php artisan route:list --except-vendor  
+### cosi controlliamo tutte le rotte eccetto vendor con l'attributo --except-vendor
+
+# creare un modello Table che comprende  Migration/Seeder/Resources/Controller
+php artisan make:model NomeModel -msrc
+
+# poi bisogna creare la rotta di riferimento es.
+Route::resource('NomeModel', NomeController::class);
+
+# creo le views relative
+
+```
+
+```bash
+
+## Creazione pagine
+php artisan vendor:publish --tag=laravel-pagination
+
+## Creazione error
+php artisan vendor:publish --tag=laravel-errors
+
+## Creazione traduzioni
+php artisan lang:publish
+
+## creazione file di validazione dello store
+php artisan make:request StoreNome_ModelRequest
+
+## creazione file di validazione dello update
+php artisan make:request UpdateNome_ModelRequest
+
+```
+
+```bash
+
+#In config/filestystems.php 
+#Caricheremo i nostri file nella cartella storage/app/public
+# modifichiamo quindi e volendo anche env file modifica chiave FILESYSTEM_DRIVER=public
+'default' => env('FILESYSTEM_DRIVER', 'public'),
+#lanciare comando
+php artisan storage:link
+
