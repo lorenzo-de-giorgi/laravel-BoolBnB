@@ -209,3 +209,5 @@ php artisan make:request UpdateNome_ModelRequest
 #lanciare comando
 php artisan storage:link
 
+#Eseguire questo comando per instrallare le dipendenze di Braintree
+composer require braintree/braintree_php
