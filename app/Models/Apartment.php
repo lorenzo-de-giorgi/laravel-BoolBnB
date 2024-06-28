@@ -71,7 +71,11 @@ class Apartment extends Model
             'verify' => false,
         ]);
        /*  $addressencode = urlencode($address); */
-        $response = $client->get('https://api.tomtom.com/search/2/geocode/%27.'.$address.'.%27.json?&countrySet=IT&key=hIVJ6KmFQZmgUkP1BtrGvGv1TDEXnA7G');
+        $response = $client->get('https://api.tomtom.com/search/2/geocode/%27.'.$address.'.%27.json?&countrySet=IT', [
+            'query' => [
+                'key' => env('TOMTOM_API_KEY')
+            ]
+        ]);
         error_log(print_r($response,true));
         $data = json_decode($response->getBody(), true);
         $latitude = $data['results'][0]['position']['lat'];
