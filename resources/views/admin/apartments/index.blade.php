@@ -63,4 +63,5 @@
           </tbody>
       </table>
 </section>
+@include('partials.modal-delete')
 @endsection
