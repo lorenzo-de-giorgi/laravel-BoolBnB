@@ -57,8 +57,8 @@
             <div class="mb-3">
                 {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
                 <label for="image" class="form-label">Image</label>
-                <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="uploadImage"
-                    name="image" value="{{ old('image') }}" maxlength="255">
+                <input type="file" accept="image/*" multiple="multiple" class="form-control @error('image') is-invalid @enderror" id="uploadImage"
+                    name="image[]" maxlength="255">
             </div>
             {{-- visibility --}}
             <div class="form-group mb-3">

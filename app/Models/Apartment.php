@@ -15,7 +15,7 @@ use app\Models\Sponsorship;
 class Apartment extends Model
 {
     use HasFactory;
-
+   
     protected $fillable = 
     [
         'user_id',
@@ -28,7 +28,7 @@ class Apartment extends Model
         /* 'address', */
         'latitude',
         'longitude',
-        'image',
+      /*   'image', */
         'visibility',
     ];    
 

@@ -52,9 +52,12 @@ class ApartmentController extends Controller
         $longitude = $result['longitude'];
         $new_apartment = New Apartment();
         if ($request->hasFile('image')) {
-           
-            $path = Storage::put('post_images', $request->image);
-            $new_apartment->image = $path;
+            $imagePaths= [];
+           foreach ($request->file('image') as $image){
+            $path = Storage::put('apartment_images', $image);
+            $imagePaths[] = $path;
+           }
+           $new_apartment->image = json_encode($imagePaths);
         }
         
         //dd($form_data);
@@ -72,7 +75,7 @@ class ApartmentController extends Controller
         $new_apartment->address = $address;
         $new_apartment->save();
         //dd($new_apartment);
-        
+        dd($new_apartment);
        /*  Apartment::create($form_data); */
         return redirect()->route('admin.apartments.index');
     }
