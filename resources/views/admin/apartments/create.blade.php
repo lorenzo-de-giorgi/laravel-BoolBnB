@@ -39,10 +39,19 @@
             </div>
             {{-- address --}}
             <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <textarea class="form-control @error('address') is-invalid @enderror" id="address" name="address">
-                {{ old('address') }}
-              </textarea>
+                <label for="street" class="form-label">Address</label>
+                <input type="text" class="form-control  @error('street') is-invalid @enderror" id="street" name="street">{{ old('street') }}
+            </div>
+            <div class="d-flex">
+                {{-- CAP --}}
+                <label for="cap" class="form-label">CAP</label>
+                <input type="number" class="form-control me-2" id="cap" name="cap">
+                {{-- citta --}}
+                <label for="city" class="form-label">City</label>
+                <input type="text" class="form-control me-2" id="city" name="city">
+                {{-- Provincia --}}
+                <label for="province" class="form-label">Province</label>
+                <input type="text" maxlength="2" class="form-control me-2" id="province" name="province">
             </div>
             {{-- image --}}
             <div class="mb-3">
@@ -52,9 +61,13 @@
                     name="image" value="{{ old('image') }}" maxlength="255">
             </div>
             {{-- visibility --}}
-            <div class="form-group mb-3">
-
-            </div>
+            {{-- <div class="form-group mb-3">
+                <p>Visibility</p>
+                <input type="radio" id="yes" name="visibility" value="1">
+                <label for="visibility">No</label><br>
+                <input type="radio" id="no" name="visibility" value="0">
+                <label for="visibility">Yes</label><br>
+            </div> --}}
             {{-- buttons --}}
             <div class="mb-3 text-center">
                 <button type="submit" class="btn btn-primary">Crea</button>

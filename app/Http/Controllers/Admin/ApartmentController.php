@@ -14,7 +14,9 @@ class ApartmentController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {  
+        $id = Auth::id();
+        $apartments = Apartment::where('user_id', $id)->paginate(3);
         $apartments = Apartment::all();
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -32,19 +34,40 @@ class ApartmentController extends Controller
      */
     public function store(Request $request)
     {   
+        $street = $request->input('street');
+        $cap = $request->input('cap');
+        $city = $request->input('city');
+        $province = $request->input('province');
+        $address = $street . ' ' . $cap . ' ' . $city . ' ' . $province;
         $form_data = $request->all();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
     
-        $result = Apartment::getCoordinatesFromAddress($form_data['address']);
-        $form_data['latitude'] = $result['latitude'];
-        $form_data['longitude'] = $result['longitude'];
+        $result = Apartment::getCoordinatesFromAddress($address);
+        $latitude = $result['latitude'];
+        $longitude = $result['longitude'];
        
+        //dd($form_data);
+        $new_apartment = New Apartment();
+        $new_apartment->title = $form_data['title'];
+        $new_apartment->user_id = Auth::id();
+        $new_apartment->slug = Apartment::generateSlug($form_data['title']);
+        $new_apartment->image = $form_data['image'];
+        $new_apartment->beds_num = $form_data['beds_num'];
+        $new_apartment->rooms_num = $form_data['rooms_num'];
+        $new_apartment->bathrooms_num = $form_data['bathrooms_num'];
+        $new_apartment->square_meters = $form_data['square_meters'];
+        $new_apartment->latitude = $latitude;
+        $new_apartment->longitude = $longitude;
+        $new_apartment->address = $address;
+        $new_apartment->save();
+
         if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $data['image'] = $path;
         }
-        Apartment::create($form_data);
+         
+       /*  Apartment::create($form_data); */
         return redirect()->route('admin.apartments.index');
     }
 
