@@ -61,13 +61,13 @@
                     name="image" value="{{ old('image') }}" maxlength="255">
             </div>
             {{-- visibility --}}
-            {{-- <div class="form-group mb-3">
+            <div class="form-group mb-3">
                 <p>Visibility</p>
-                <input type="radio" id="yes" name="visibility" value="1">
-                <label for="visibility">No</label><br>
                 <input type="radio" id="no" name="visibility" value="0">
+                <label for="visibility">No</label><br>
+                <input type="radio" id="yes" name="visibility" value="1">
                 <label for="visibility">Yes</label><br>
-            </div> --}}
+            </div>
             {{-- buttons --}}
             <div class="mb-3 text-center">
                 <button type="submit" class="btn btn-primary">Crea</button>
