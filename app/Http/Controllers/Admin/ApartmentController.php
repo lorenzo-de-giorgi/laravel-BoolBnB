@@ -42,7 +42,7 @@ class ApartmentController extends Controller
         // $addressArray = [];
         // array_push($addressArray, $street, $cap, $city, $province);
         // $address = implode(', ', $addressArray);
-        $address = $street . ',' . $cap . ',' . $city . ',' . $province;
+        $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
         $form_data = $request->all();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
@@ -91,7 +91,7 @@ class ApartmentController extends Controller
     public function edit(Apartment $apartment)
     {   
         $address = $apartment->address;
-        $array = explode(',', $address, 4);
+        $array = explode(', ', $address, 4);
         // dd($array);
         return view('admin.apartments.edit', compact('apartment', 'array'));
     }
@@ -108,7 +108,7 @@ class ApartmentController extends Controller
         // $addressArray = [];
         // array_push($addressArray, $street, $cap, $city, $province);
         // $address = implode(' ', $addressArray);
-        $address = $street . ',' . $cap . ',' . $city . ',' . $province;
+        $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
         // $array = explode(',', $address);
         // dd($array);
         $form_data = $request->all();
