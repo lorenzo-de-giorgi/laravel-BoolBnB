@@ -70,8 +70,8 @@ class Apartment extends Model
         $client = new \GuzzleHttp\Client([
             'verify' => false,
         ]);
-        $address = urlencode('109 Park Row, New York, United States');
-        $response = $client->get('https://api.tomtom.com/search/2/geocode/Via%20del%20Corso%203,%2000186%20RM,%20Roma.json?&countrySet=IT&key=hIVJ6KmFQZmgUkP1BtrGvGv1TDEXnA7G');
+       /*  $addressencode = urlencode($address); */
+        $response = $client->get('https://api.tomtom.com/search/2/geocode/%27.'.$address.'.%27.json?&countrySet=IT&key=hIVJ6KmFQZmgUkP1BtrGvGv1TDEXnA7G');
         error_log(print_r($response,true));
         $data = json_decode($response->getBody(), true);
         $latitude = $data['results'][0]['position']['lat'];
