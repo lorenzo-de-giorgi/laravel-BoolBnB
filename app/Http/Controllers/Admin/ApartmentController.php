@@ -55,8 +55,13 @@ class ApartmentController extends Controller
         $longitude = $result['longitude'];
         $new_apartment = New Apartment();
         if ($request->hasFile('image')) {
-           
-            $path = Storage::put('post_images', $request->image);
+            $imagePaths= [];
+           foreach ($request->file('image') as $image){
+            $path = Storage::put('apartment_images', $image);
+            $imagePaths[] = $path;
+           }
+           $new_apartment->image = json_encode($imagePaths);
+                      $path = Storage::put('post_images', $request->image);
             $new_apartment->image = $path;
         }
         
@@ -104,6 +109,8 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
+  /*  dd($request->input('deleted')); */
+        $index = $request->input('deleted'); 
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -122,11 +129,26 @@ class ApartmentController extends Controller
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
        
+        $apartmentImage = json_decode($apartment->image);
+        array_splice($apartmentImage, $index, 1);
+        
+        if ($request->hasFile('image')) {
+            $imagePaths= [];
+           foreach ($request->file('image') as $image){
+            $path = Storage::put('apartment_images', $image);
+            array_push($apartmentImage, $path);
+           
+           }
+         
+          /*  $newImage = json_decode($imagePaths); */
+         
+        }
+        $apartment->image = $apartmentImage;
         //dd($form_data)
         $apartment->title = $form_data['title'];
         $apartment->user_id = Auth::id();
         $apartment->slug = Apartment::generateSlug($form_data['title']);
-        $apartment->image = $form_data['image'];
+      
         $apartment->beds_num = $form_data['beds_num'];
         $apartment->rooms_num = $form_data['rooms_num'];
         $apartment->bathrooms_num = $form_data['bathrooms_num'];
@@ -138,11 +160,12 @@ class ApartmentController extends Controller
         $apartment->update();
         // dd($apartment);
 
-        if ($request->hasFile('image')) {
+    /*     if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $data['image'] = $path;
-        }
-        return redirect()->route('admin.apartments.index', $apartment->slug);
+        } */
+      
+        return redirect()->route('admin.apartments.show', $apartment->slug);
     }
 
     /**

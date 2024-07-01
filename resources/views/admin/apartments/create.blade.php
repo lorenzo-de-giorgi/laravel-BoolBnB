@@ -67,7 +67,7 @@
             <div class="mb-3">
                 {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
                 <label for="image" class="form-label">Image</label>
-                <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="image" value="{{ old('image') }}" maxlength="255" max="1024" required>
+                <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="name="image[]"" value="{{ old('image') }}" maxlength="255" max="1024" required>
                 @error('image')
                     <div class="alert alert-danger mt-2">{{ $message }}</div>
                 @enderror

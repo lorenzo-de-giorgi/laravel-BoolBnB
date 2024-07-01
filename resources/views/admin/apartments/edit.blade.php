@@ -68,7 +68,7 @@
         <div class="mb-3">
             {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
             <label for="image" class="form-label">Image</label>
-            <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="image" value="{{ old('image', $apartment->image) }}" maxlength="255" max="1024">
+            <input type="file" accept="image/*" class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="image[]" value="{{ old('image', $apartment->image) }}" maxlength="255" max="1024">
             <div class="media me-4">
                 @if($apartment->image)
                     <img class="shadow" width="100" src="{{asset('storage/' . $apartment->image)}}"
@@ -79,6 +79,26 @@
                 <div class="alert alert-danger mt-2">{{ $message }}</div>
             @enderror
         </div>
+{{--anteprima--}}
+
+        @php
+            $images = json_decode($apartment->image, true);
+        @endphp
+
+      
+        @foreach ($images as $image)
+            @php $index = array_search($image, $images); @endphp
+            <div class="d-flex">
+                <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento"
+                    style="max-width: 50%; height: auto;">
+                    <input type="button" value="delete" class="deletedImages" id="{{$index}}">
+            </div>
+           
+       
+        @endforeach
+        <input type="number" value="" id="toDelete" name="deleted">
+        <input type="text" value="{{$apartment->image}}" class="w-100">
+
         {{-- visibility --}}
         <div class="form-group mb-3">
             <p>Visibility</p>
