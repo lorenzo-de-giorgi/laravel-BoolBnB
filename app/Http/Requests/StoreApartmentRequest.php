@@ -22,7 +22,8 @@ class StoreApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|unique:apartments|min:5|max:255',
+            'title' => 'required|min:5|max:255',
+            
             'beds_num' => 'required|numeric',
             'rooms_num' => 'required|numeric',
             'bathrooms_num' => 'required|numeric',
