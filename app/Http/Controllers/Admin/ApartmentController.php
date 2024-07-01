@@ -45,7 +45,6 @@ class ApartmentController extends Controller
         // array_push($addressArray, $street, $cap, $city, $province);
         // $address = implode(', ', $addressArray);
         $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
-
         $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
@@ -103,7 +102,9 @@ class ApartmentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
-    {
+    {  
+       /*  dd($request->input('deleted')); */
+        $index = $request->input('deleted'); 
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -115,7 +116,7 @@ class ApartmentController extends Controller
         // $array = explode(',', $address);
         // dd($array);
         $form_data = $request->validated();
-        $form_data['slug'] = Apartment::generateSlug($form_data['title']);
+        $form_data['slug'] = Apartment::generateSlug($form_data['title']); 
         $form_data['user_id'] = Auth::id();
     
         $result = Apartment::getCoordinatesFromAddress($address);
