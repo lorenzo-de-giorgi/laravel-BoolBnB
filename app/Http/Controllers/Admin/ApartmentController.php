@@ -65,9 +65,7 @@ class ApartmentController extends Controller
         
         //dd($form_data);
 
-        if ($request->has('services')) {
-            $new_apartment->services()->attach($request->services);
-        }
+       
       
         $new_apartment->title = $form_data['title'];
         $new_apartment->user_id = Auth::id();
@@ -82,6 +80,10 @@ class ApartmentController extends Controller
         $new_apartment->address = $address;
         $new_apartment->save();
         //dd($new_apartment);
+
+        if ($request->has('services')) {
+            $new_apartment->services()->attach($request->services);
+        }
         
        /*  Apartment::create($form_data); */
         return redirect()->route('admin.apartments.index');
