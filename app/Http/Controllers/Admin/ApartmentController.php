@@ -107,10 +107,16 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
+<<<<<<< HEAD
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {
   /*  dd($request->input('deleted')); */
         $index = $request->input('deleted'); 
+=======
+    public function update(Request $request, Apartment $apartment)
+    {  
+       /*  dd($request->input('deleted')); */
+>>>>>>> parent of 5572cb9 (delete an image)
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -130,8 +136,6 @@ class ApartmentController extends Controller
         $longitude = $result['longitude'];
        
         $apartmentImage = json_decode($apartment->image);
-        array_splice($apartmentImage, $index, 1);
-        
         if ($request->hasFile('image')) {
             $imagePaths= [];
            foreach ($request->file('image') as $image){
