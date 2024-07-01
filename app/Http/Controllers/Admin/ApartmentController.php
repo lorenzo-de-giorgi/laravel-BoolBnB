@@ -61,6 +61,8 @@ class ApartmentController extends Controller
             $imagePaths[] = $path;
            }
            $new_apartment->image = json_encode($imagePaths);
+                      $path = Storage::put('post_images', $request->image);
+            $new_apartment->image = $path;
         }
         
         //dd($form_data);
@@ -86,8 +88,8 @@ class ApartmentController extends Controller
 /**
      * Display the specified resource.
      */
-    public function show(Apartment $apartment){
-      
+    public function show(Apartment $apartment)
+    {
         return view('admin.apartments.show', compact('apartment'));
     }
 
