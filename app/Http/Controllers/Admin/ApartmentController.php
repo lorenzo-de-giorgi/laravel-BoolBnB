@@ -8,6 +8,8 @@ use Illuminate\Auth\Console\ClearResetsCommand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreApartmentRequest;
+use App\Http\Requests\UpdateApartmentRequest;
 
 class ApartmentController extends Controller
 {
@@ -33,7 +35,7 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreApartmentRequest $request)
     {   
         $street = $request->input('street');
         $cap = $request->input('cap');
@@ -43,30 +45,21 @@ class ApartmentController extends Controller
         // array_push($addressArray, $street, $cap, $city, $province);
         // $address = implode(', ', $addressArray);
         $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
-        $form_data = $request->all();
+
+        $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
     
         $result = Apartment::getCoordinatesFromAddress($address);
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
-        $new_apartment = New Apartment();
-        if ($request->hasFile('image')) {
-            $imagePaths= [];
-           foreach ($request->file('image') as $image){
-            $path = Storage::put('apartment_images', $image);
-            $imagePaths[] = $path;
-           }
-           $new_apartment->image = json_encode($imagePaths);
-                      $path = Storage::put('post_images', $request->image);
-            $new_apartment->image = $path;
-        }
-        
+       
         //dd($form_data);
-      
+        $new_apartment = New Apartment();
         $new_apartment->title = $form_data['title'];
         $new_apartment->user_id = Auth::id();
         $new_apartment->slug = Apartment::generateSlug($form_data['title']);
+        $new_apartment->image = $form_data['image'];
         $new_apartment->beds_num = $form_data['beds_num'];
         $new_apartment->rooms_num = $form_data['rooms_num'];
         $new_apartment->bathrooms_num = $form_data['bathrooms_num'];
@@ -77,6 +70,11 @@ class ApartmentController extends Controller
         $new_apartment->address = $address;
         $new_apartment->save();
         //dd($new_apartment);
+
+        if ($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+            $data['image'] = $path;
+        }
         
        /*  Apartment::create($form_data); */
         return redirect()->route('admin.apartments.index');
@@ -87,7 +85,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        return view('admin.apartments.show', compact('apartment'));
+        
     }
 
     /**
@@ -104,20 +102,8 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-<<<<<<< HEAD
-<<<<<<< HEAD
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
-=======
-    public function update(Request $request, Apartment $apartment)
->>>>>>> parent of 42188f2 (created validation client & server side)
     {
-  /*  dd($request->input('deleted')); */
-        $index = $request->input('deleted'); 
-=======
-    public function update(Request $request, Apartment $apartment)
-    {  
-       /*  dd($request->input('deleted')); */
->>>>>>> parent of 5572cb9 (delete an image)
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -128,7 +114,7 @@ class ApartmentController extends Controller
         $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
         // $array = explode(',', $address);
         // dd($array);
-        $form_data = $request->all();
+        $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
     
@@ -136,24 +122,11 @@ class ApartmentController extends Controller
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
        
-        $apartmentImage = json_decode($apartment->image);
-        if ($request->hasFile('image')) {
-            $imagePaths= [];
-           foreach ($request->file('image') as $image){
-            $path = Storage::put('apartment_images', $image);
-            array_push($apartmentImage, $path);
-           
-           }
-         
-          /*  $newImage = json_decode($imagePaths); */
-         
-        }
-        $apartment->image = $apartmentImage;
         //dd($form_data)
         $apartment->title = $form_data['title'];
         $apartment->user_id = Auth::id();
         $apartment->slug = Apartment::generateSlug($form_data['title']);
-      
+        $apartment->image = $form_data['image'];
         $apartment->beds_num = $form_data['beds_num'];
         $apartment->rooms_num = $form_data['rooms_num'];
         $apartment->bathrooms_num = $form_data['bathrooms_num'];
@@ -165,12 +138,11 @@ class ApartmentController extends Controller
         $apartment->update();
         // dd($apartment);
 
-    /*     if ($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             $path = $request->file('image')->store('images', 'public');
             $data['image'] = $path;
-        } */
-      
-        return redirect()->route('admin.apartments.show', $apartment->slug);
+        }
+        return redirect()->route('admin.apartments.index', $apartment->slug);
     }
 
     /**
