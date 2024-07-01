@@ -105,6 +105,7 @@ class ApartmentController extends Controller
     public function update(Request $request, Apartment $apartment)
     {  
        /*  dd($request->input('deleted')); */
+        $index = $request->input('deleted'); 
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -124,6 +125,8 @@ class ApartmentController extends Controller
         $longitude = $result['longitude'];
        
         $apartmentImage = json_decode($apartment->image);
+        array_splice($apartmentImage, $index, 1);
+        
         if ($request->hasFile('image')) {
             $imagePaths= [];
            foreach ($request->file('image') as $image){

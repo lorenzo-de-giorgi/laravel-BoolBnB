@@ -74,16 +74,19 @@
         @php
             $images = json_decode($apartment->image, true);
         @endphp
+
+      
         @foreach ($images as $image)
+            @php $index = array_search($image, $images); @endphp
             <div class="d-flex">
                 <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento"
                     style="max-width: 50%; height: auto;">
-                    <button>delete</button>
+                    <input type="button" value="delete" class="deletedImages" id="{{$index}}">
             </div>
-            @php $index = array_search($image, $images); @endphp
-           <input type="number" value="{{$index}}" name="deleted">
+           
+       
         @endforeach
-        
+        <input type="number" value="" id="toDelete" name="deleted">
         <input type="text" value="{{$apartment->image}}" class="w-100">
 
         {{-- visibility --}}
