@@ -126,7 +126,7 @@ class ApartmentController extends Controller
         $apartment->title = $form_data['title'];
         $apartment->user_id = Auth::id();
         $apartment->slug = Apartment::generateSlug($form_data['title']);
-        $apartment->image = $form_data['image'];
+        // $apartment->image = $form_data['image'];
         $apartment->beds_num = $form_data['beds_num'];
         $apartment->rooms_num = $form_data['rooms_num'];
         $apartment->bathrooms_num = $form_data['bathrooms_num'];
