@@ -10,6 +10,7 @@ use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
+use App\Models\Service;
 
 class ApartmentController extends Controller
 {
@@ -29,7 +30,8 @@ class ApartmentController extends Controller
      */
     public function create()
     {
-        return view('admin.apartments.create');
+        $services = Service::all();
+        return view('admin.apartments.create', compact('services'));
     }
 
     /**
@@ -48,7 +50,6 @@ class ApartmentController extends Controller
         $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
-    
         $result = Apartment::getCoordinatesFromAddress($address);
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
@@ -63,6 +64,10 @@ class ApartmentController extends Controller
         }
         
         //dd($form_data);
+
+        if ($request->has('services')) {
+            $new_apartment->services()->attach($request->services);
+        }
       
         $new_apartment->title = $form_data['title'];
         $new_apartment->user_id = Auth::id();
@@ -95,10 +100,11 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {   
+        $services = Service::all();
         $address = $apartment->address;
         $array = explode(', ', $address, 4);
         // dd($array);
-        return view('admin.apartments.edit', compact('apartment', 'array'));
+        return view('admin.apartments.edit', compact('apartment', 'array', 'services'));
     }
 
     /**

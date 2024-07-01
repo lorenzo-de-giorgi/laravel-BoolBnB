@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Support\Str;
 use app\Models\Message;
-use app\Models\Service;
+use App\Models\Service;
 use app\Models\User;
 use app\Models\View;
 use app\Models\Sponsorship;

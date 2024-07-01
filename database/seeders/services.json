@@ -1,22 +1,27 @@
-/* [
+[
 {
-    "name": ,
-    "icon":
+    "name": "wifi",
+    "icon": "fa-solid fa-wifi"
 },
 {
-    "name": ,
-    "icon":
+    "name": "parking spot",
+    "icon": "fa-solid fa-square-parking"
 },
 {
-    "name": ,
-    "icon":
+    "name": "pool",
+    "icon": "fa-solid fa-water-ladder"
 },
 {
-    "name": ,
-    "icon":
+    "name": "reception",
+    "icon": "fa-solid fa-bell-concierge"
 },
 {
-    "name": ,
-    "icon":
+    "name": "sauna",
+    "icon": "fa-solid fa-hot-tub-person"
 },
-] */
+{
+    "name": "sea view",
+    "icon": "fa-solid fa-water"
+}
+
+]
