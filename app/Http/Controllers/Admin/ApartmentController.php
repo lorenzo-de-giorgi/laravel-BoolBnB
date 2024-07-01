@@ -114,8 +114,13 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {  
-       /*  dd($request->input('deleted')); */
-        $index = $request->input('deleted'); 
+        $apartmentImage = json_decode($apartment->image);
+      /*  dd($request->input('deleted')); */
+       if($request->input('deleted')){
+        $index = $request->input('deleted');
+       array_splice($apartmentImage, $index, 1);
+        $apartment->image = $apartmentImage;
+    };
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -133,22 +138,15 @@ class ApartmentController extends Controller
         $result = Apartment::getCoordinatesFromAddress($address);
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
-       
-        $apartmentImage = json_decode($apartment->image);
-        array_splice($apartmentImage, $index, 1);
-        
+          
         if ($request->hasFile('image')) {
             $imagePaths= [];
            foreach ($request->file('image') as $image){
             $path = Storage::put('apartment_images', $image);
             array_push($apartmentImage, $path);
-           
+            $apartment->image = $apartmentImage;
            }
-         
-          /*  $newImage = json_decode($imagePaths); */
-         
-        }
-        $apartment->image = $apartmentImage;
+           
         //dd($form_data)
         $apartment->title = $form_data['title'];
         $apartment->user_id = Auth::id();
@@ -163,20 +161,21 @@ class ApartmentController extends Controller
         $apartment->longitude = $longitude;
         $apartment->address = $address;
         $apartment->update();
-        // dd($apartment);
-
-    /*     if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-            $data['image'] = $path;
-        } */
+     
+        
+        if ($request->has('services')) {
+            $apartment->services()->sync($request->services);
+        } else {
+            $apartment->services()->sync([]);
+        }
       
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
-
+    }
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Apartment $apartment)
+     public function destroy(Apartment $apartment)
     {
         if ($apartment->image) {
             Storage::delete($apartment->image);

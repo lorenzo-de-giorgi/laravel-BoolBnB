@@ -15,7 +15,7 @@
                     style="max-width: 100%; height: auto;">
             </div>
         @endforeach
-        
+
         <div>
             <p>{{$apartment->address}}</p>
             <table class="table">
@@ -25,6 +25,7 @@
                         <th scope="col">number of beds</th>
                         <th scope="col">number of bathrooms</th>
                         <th scope="col">square meters</th>
+                        <th scope="col">services</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -33,12 +34,19 @@
                         <td>{{$apartment->beds_num}}</td>
                         <td>{{$apartment->bathrooms_num}}</td>
                         <td>{{$apartment->square_meters}}</td>
+                        <td>
+                        @if($apartment->services)
+                            @foreach ($apartment->services as $service)
+                                <span class="badge text-bg-danger">{{$service->name}}</span>
+                            @endforeach
+                        @endif
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    
+
 
 </section>
 
