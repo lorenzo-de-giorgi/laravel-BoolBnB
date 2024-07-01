@@ -53,13 +53,18 @@ class ApartmentController extends Controller
         $result = Apartment::getCoordinatesFromAddress($address);
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
-       
-        //dd($form_data);
         $new_apartment = New Apartment();
+        if ($request->hasFile('image')) {
+           
+            $path = Storage::put('post_images', $request->image);
+            $new_apartment->image = $path;
+        }
+        
+        //dd($form_data);
+      
         $new_apartment->title = $form_data['title'];
         $new_apartment->user_id = Auth::id();
         $new_apartment->slug = Apartment::generateSlug($form_data['title']);
-        $new_apartment->image = $form_data['image'];
         $new_apartment->beds_num = $form_data['beds_num'];
         $new_apartment->rooms_num = $form_data['rooms_num'];
         $new_apartment->bathrooms_num = $form_data['bathrooms_num'];
@@ -70,11 +75,6 @@ class ApartmentController extends Controller
         $new_apartment->address = $address;
         $new_apartment->save();
         //dd($new_apartment);
-
-        if ($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', 'public');
-            $data['image'] = $path;
-        }
         
        /*  Apartment::create($form_data); */
         return redirect()->route('admin.apartments.index');
@@ -85,7 +85,7 @@ class ApartmentController extends Controller
      */
     public function show(Apartment $apartment)
     {
-        
+        return view('admin.apartments.show', compact('apartment'));
     }
 
     /**
