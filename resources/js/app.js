@@ -54,15 +54,3 @@ if (image) {
         };
     });
 }
-
-let deletedImages = document.querySelectorAll('.deletedImages');
-let toDelete = document.getElementById('toDelete');
-deletedImages.forEach(function (deletedImage){
-    deletedImage.addEventListener('click', () =>{
-
-   /*  toDelete.value = deletedImage.id; */
-    let id = deletedImage.id;
-    toDelete.value = id; 
-    console.log(toDelete.value);
-    })
-});
