@@ -29,7 +29,7 @@ class UpdateApartmentRequest extends FormRequest
             'square_meters' => 'required|numeric',
             'address' => 'min:5|max:255',          
             'visibility' => 'required|boolean',
-            'image' => 'image|max:1024'
+            
         ];
     }
 
