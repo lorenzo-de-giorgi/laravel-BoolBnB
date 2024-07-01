@@ -11,9 +11,9 @@ class Service extends Model
 
     protected $fillable =
     [
-        'apartmen_id',
-        'service_id',
-        'available'
+        'name',
+        'icon',
+        'apartment_id'
     ];
 
     public function apartments()

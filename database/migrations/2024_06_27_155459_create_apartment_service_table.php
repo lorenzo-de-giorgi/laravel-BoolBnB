@@ -18,7 +18,7 @@ return new class extends Migration
             
             $table->unsignedBigInteger('apartment_id')->nullable();
             $table->foreign('apartment_id')->references('id')->on('apartments')->onDelete('cascade');
-            $table->boolean('available')->default(false);
+            $table->boolean('available')->default(1);
             $table->timestamps();
         });
     }
