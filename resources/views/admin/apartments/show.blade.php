@@ -15,7 +15,7 @@
                     style="max-width: 100%; height: auto;">
             </div>
         @endforeach
-        <img src="{{asset('storage/' . $apartment->image)}}" alt="{{$apartment->title}}">
+        
         <div>
             <p>{{$apartment->address}}</p>
             <table class="table">
