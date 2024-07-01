@@ -8,6 +8,8 @@ use Illuminate\Auth\Console\ClearResetsCommand;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AddressController;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreApartmentRequest;
+use App\Http\Requests\UpdateApartmentRequest;
 
 class ApartmentController extends Controller
 {
@@ -33,8 +35,8 @@ class ApartmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    { 
+    public function store(StoreApartmentRequest $request)
+    {   
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -43,7 +45,8 @@ class ApartmentController extends Controller
         // array_push($addressArray, $street, $cap, $city, $province);
         // $address = implode(', ', $addressArray);
         $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
-        $form_data = $request->all();
+
+        $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
     
@@ -102,9 +105,9 @@ class ApartmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Apartment $apartment)
-    {  
-       /*  dd($request->input('deleted')); */
+    public function update(UpdateApartmentRequest $request, Apartment $apartment)
+    {
+  /*  dd($request->input('deleted')); */
         $index = $request->input('deleted'); 
         $street = $request->input('street');
         $cap = $request->input('cap');
@@ -116,8 +119,8 @@ class ApartmentController extends Controller
         $address = $street . ', ' . $cap . ', ' . $city . ', ' . $province;
         // $array = explode(',', $address);
         // dd($array);
-        $form_data = $request->all();
-        $form_data['slug'] = Apartment::generateSlug($form_data['title']); 
+        $form_data = $request->validated();
+        $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
     
         $result = Apartment::getCoordinatesFromAddress($address);
