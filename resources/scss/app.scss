@@ -63,3 +63,14 @@ input:checked + .slider:before {
 .slider.round:before {
     border-radius: 50%;
 }
+
+input:valid {
+    border: none;
+    outline: 0.5px solid green;
+    border-radius: 5px;
+}
+input:invalid {
+    border: none;
+    outline: 0.5px solid red;
+    border-radius: 5px;
+}  

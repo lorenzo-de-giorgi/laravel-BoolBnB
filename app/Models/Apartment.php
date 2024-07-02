@@ -28,8 +28,8 @@ class Apartment extends Model
         'address', 
         'latitude',
         'longitude',
-       'image', 
-        'visibility',
+        'image', 
+        'visibility'
     ];    
 
     public function messages()

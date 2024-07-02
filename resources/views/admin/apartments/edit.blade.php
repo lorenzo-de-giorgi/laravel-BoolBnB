@@ -5,7 +5,7 @@
 @section('content')
 <section>
     <h2>Create a new Apartment</h2>
-    <form action="{{ route('admin.apartments.update', $apartment->slug) }}" method="POST" enctype="multipart/form-data">
+    <form id="update" action="{{ route('admin.apartments.update', $apartment->slug) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         {{-- title --}}
@@ -42,7 +42,7 @@
         <div class="mb-3">
             <label for="street" class="form-label">Address</label>
             <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address"
-                value="{{ old('address') }}">
+                value="{{ old('address', $apartment->address) }}">
         </div>
        
         {{-- image --}}
@@ -80,7 +80,7 @@
 
 
           {{--services--}}
-          @foreach ($services as $service)
+            @foreach ($services as $service)
                 <div>
                     <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input"
                     {{ $apartment->services->contains($service->id) ? 'checked' : '' }}>
@@ -88,19 +88,40 @@
                 </div>
             @endforeach
         {{-- visibility --}}
-        <div class="form-group mb-3">
+        {{-- <div class="form-group mb-3">
             <p>Visibility</p>
             <input type="radio" id="no" name="visibility" value="0">
             <label for="visibility">No</label><br>
             <input type="radio" id="yes" name="visibility" value="1">
             <label for="visibility">Yes</label><br>
+        </div> --}}
+
+        <div class="form-group mb-3">
+            <h5 class="mt-2">Visibility</h5>
+            <label class="switch">
+                <input id="visibility" name="visibility" type="checkbox" value="1" {{ $apartment->visibility == 0 ? '' : 'checked' }}>
+                <span class="slider round"></span>
+            </label>
         </div>
+
         {{-- buttons --}}
         <div class="mb-3 text-center">
             <button type="submit" class="btn btn-primary" id="resetDelete">update</button>
             <button type="reset" class="btn btn-danger">Svuota campi</button>
         </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('update');
+            form.addEventListener('submit', function() {
+                const checkbox = document.getElementById('visibility');
+                if (!checkbox.checked) {
+                    checkbox.checked = true;
+                    checkbox.value = 0;
+                }
+            });
+        });           
+    </script>
 </section>
 
 @endsection

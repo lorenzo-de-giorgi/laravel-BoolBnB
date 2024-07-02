@@ -20,7 +20,7 @@ class ApartmentController extends Controller
     public function index()
     {  
         $id = Auth::id();
-        $apartments = Apartment::where('user_id', $id)->paginate(3);
+        $apartments = Apartment::where('user_id', $id)->paginate(10);
         // $apartments = Apartment::all();
         return view('admin.apartments.index', compact('apartments'));
     }
@@ -56,6 +56,8 @@ class ApartmentController extends Controller
         }
         
         $form_data['user_id'] = Auth::id();
+
+        // dd($request);
        
         $new_apartment = Apartment::create($form_data);
 
@@ -114,13 +116,21 @@ class ApartmentController extends Controller
             }
             $form_data['image'] = json_encode($apartmentImage);
         }
- 
+        
         // Sincronizza i servizi
         if ($request->has('services')) {
             $apartment->services()->sync($request->services);
         } else {
             $apartment->services()->sync([]);
         }
+
+        if($form_data['visibility'] == null){
+            $form_data['visibility'] = 0;
+        }
+
+        $apartment->update($form_data);
+        
+        // dd($request);
         // Reindirizza alla vista di dettaglio dell'appartamento
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }

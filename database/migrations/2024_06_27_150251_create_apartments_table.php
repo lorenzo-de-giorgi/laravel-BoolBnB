@@ -23,7 +23,7 @@ return new class extends Migration
             $table->decimal('latitude', 12,10);
             $table->decimal('longitude', 12,10);
             $table->string('image', 255);
-            $table->boolean('visibility')->default(1);
+            $table->boolean('visibility')->default(0);
             $table->timestamps();
         });
     }
