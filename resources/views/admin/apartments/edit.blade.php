@@ -5,44 +5,39 @@
 @section('content')
 <section>
     <h2>Create a new Apartment</h2>
-    <form id="update" action="{{ route('admin.apartments.update', $apartment->slug) }}" method="POST" enctype="multipart/form-data">
+    <form id="update" action="{{ route('admin.apartments.update', $apartment->slug) }}" method="POST" enctype="multipart/form-data" onsubmit="return validaForm()">
         @csrf
         @method('PUT')
         {{-- title --}}
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
-            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title"
-                value="{{old('title', $apartment->title)}}" minlength="3" maxlength="200">
+            <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $apartment->title)}}" required minlength="5" maxlength="255">
         </div>
         {{-- beds_num --}}
         <div class="mb-3">
             <label for="beds_num" class="form-label">Number of Beds</label>
-            <input type="number" class="form-control" name="beds_num" value="{{old('beds_num', $apartment->beds_num)}}"
-                maxlength="255">
+            <input type="number" class="form-control" name="beds_num" value="{{old('beds_num', $apartment->beds_num)}}" required min="0" max="15">
         </div>
         {{-- rooms_num --}}
         <div class="mb-3">
             <label for="rooms_num" class="form-label">Number of rooms</label>
-            <input type="number" class="form-control" name="rooms_num"
-                value="{{ old('rooms_num', $apartment->rooms_num) }}" maxlength="255">
+            <input type="number" class="form-control" name="rooms_num" value="{{ old('rooms_num', $apartment->rooms_num) }}" required min="0" max="15">
         </div>
         {{-- bathrooms_num --}}
         <div class="mb-3">
             <label for="bathrooms_num" class="form-label">Number of Bathroom</label>
-            <input type="number" class="form-control" name="bathrooms_num"
-                value="{{ old('bathrooms_num', $apartment->bathrooms_num) }}" maxlength="255">
+            <input type="number" class="form-control" name="bathrooms_num" value="{{ old('bathrooms_num', $apartment->bathrooms_num) }}" required min="0" max="15">
         </div>
         {{-- square_meters --}}
         <div class="mb-3">
             <label for="square_meters" class="form-label">metri quadri</label>
             <input type="number" class="form-control" name="square_meters"
-                value="{{ old('square_meters', $apartment->square_meters) }}" maxlength="255">
+                value="{{ old('square_meters', $apartment->square_meters) }}" required min="0" max="1000">
         </div>
         {{-- address --}}
         <div class="mb-3">
             <label for="street" class="form-label">Address</label>
-            <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address"
-                value="{{ old('address', $apartment->address) }}">
+            <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $apartment->address) }}" required minlength="10" maxlength="255">
         </div>
        
         {{-- image --}}
@@ -72,8 +67,6 @@
                     style="max-width: 50%; height: auto;">
                     <input type="button" value="delete" class="deletedImages" id="{{$index}}">
             </div>
-           
-       
         @endforeach
         <input type="number" value="" id="toDelete" name="toDelete">
         <input type="text" value="{{$apartment->image}}" class="w-100 ">
@@ -106,8 +99,7 @@
 
         {{-- buttons --}}
         <div class="mb-3 text-center">
-            <button type="submit" class="btn btn-primary" id="resetDelete">update</button>
-            <button type="reset" class="btn btn-danger">Svuota campi</button>
+            <button type="submit" class="btn btn-primary" id="resetDelete">Update</button>
         </div>
     </form>
     <script>

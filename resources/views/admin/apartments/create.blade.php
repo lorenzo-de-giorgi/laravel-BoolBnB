@@ -12,7 +12,7 @@
                 <div class="mb-3">
                     <label for="title" class="form-label"><h5 class="mt-2">Title</h5></label>
                     <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required minlength="5" maxlength="255">
-                    <div id="titleHelp" class="form-text">Inserire minimo 5 caratteri e massimo 255</div>
+                    <div class="invalid-feedback" id="titleError"></div>
                     @error('title')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -21,7 +21,7 @@
                 <div class="mb-3">
                     <label for="beds_num" class="form-label"><h5 class="mt-2">Number of Beds</h5></label>
                     <input type="number"  class="form-control @error('beds_num') is-invalid @enderror" name="beds_num" value="{{ old('beds_num') }}" required min="0" max="15">
-                    <div id="titleHelp" class="form-text">Inserire un numero maggiore o uguale a 0</div>
+                    <div class="invalid-feedback" id="titleError"></div>
                     @error('beds_num')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -38,7 +38,7 @@
                 {{-- bathrooms_num --}}
                 <div class="mb-3">
                     <label for="bathrooms_num" class="form-label"><h5 class="mt-2">Number of Bathrooms</h5></label>
-                    <input type="number"  class="form-control @error('bathrooms_num') is-invalid @enderror" name="bathrooms_num" value="{{ old('bathrooms_num') }}" required min="0" max="10">
+                    <input type="number"  class="form-control @error('bathrooms_num') is-invalid @enderror" name="bathrooms_num" value="{{ old('bathrooms_num') }}" required min="0" max="15">
                     <div id="titleHelp" class="form-text">Inserire un numero maggiore o uguale a 0</div>
                     @error('bathrooms_num')
                         <div class="alert alert-danger">{{ $message }}</div>
@@ -112,3 +112,26 @@
     </section>
 
 @endsection
+
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+     const form = document.getElementById('myForm');
+     const submitButton = document.getElementById('submitButton');
+    const title = document.getElementById("title");
+    const titleError = document.getElementById("titleError");
+    title.addEventListener("input", (event) => {
+        if (title.value.length < 5) {
+            title.setCustomValidity("The title must be at least 5 characters long!");
+            title.classList.add('is-invalid');
+            titleError.textContent = "The title must be at least 5 characters long!";
+        } else {
+            title.setCustomValidity("");
+            title.classList.remove('is-invalid');
+            titleError.textContent = "";
+        }
+    });
+ })
+
+
+
+</script>
