@@ -6,6 +6,37 @@ import.meta.glob([
     '../img/**'
 ])
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('register-form');
+    const password = document.getElementById('password');
+    const passwordConfirm = document.getElementById('password-confirm');
+    const passwordMatchError = document.getElementById('password-match-error');
+    const birthday = document.getElementById('birthday');
+
+    form.addEventListener('submit', function (event) {
+        if (password.value !== passwordConfirm.value) {
+            event.preventDefault();
+            passwordMatchError.style.display = 'block';
+        } else {
+            passwordMatchError.style.display = 'none';
+        }
+    });
+
+    passwordConfirm.addEventListener('input', function () {
+        if (password.value !== passwordConfirm.value) {
+            passwordConfirm.classList.add('is-invalid');
+            passwordMatchError.style.display = 'block';
+        } else {
+            passwordConfirm.classList.remove('is-invalid');
+            passwordMatchError.style.display = 'none';
+        }
+    });
+
+    const today = new Date();
+    const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
+    birthday.max = maxDate.toISOString().split('T')[0];
+});
+
 const deleteSubmitButtons = document.querySelectorAll(".delete-button");
 
 deleteSubmitButtons.forEach((button) => {
