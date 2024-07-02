@@ -66,3 +66,8 @@ deletedImages.forEach(function (deletedImage){
     console.log(toDelete.value);
     })
 });
+
+let resetDelete = document.getElementById('resetDelete');
+resetDelete.addEventListener('click', () => {
+    toDelete.value = ''
+})

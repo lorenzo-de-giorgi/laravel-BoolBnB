@@ -60,14 +60,14 @@
                 <input type="file" accept="image/*" multiple="multiple" class="form-control @error('image') is-invalid @enderror" id="uploadImage"
                     name="image[]" maxlength="255">
             </div>
-{{--services--}}
+            {{--services--}}
             @foreach ($services as $service)
-                    <div>
-                        <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input"
-                            {{ in_array($service->id, old('service', [])) ? 'checked' : '' }}>
-                        <label for="" class="form-check-label">{{ $service->name }}</label>
-                    </div>
-                @endforeach
+                <div>
+                    <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input">
+                        
+                    <label for="" class="form-check-label">{{ $service->name }}</label>
+                </div>
+            @endforeach
 
             {{-- visibility --}}
             <div class="form-group mb-3">

@@ -89,6 +89,15 @@
         <input type="number" value="" id="toDelete" name="deleted ">
         <input type="text" value="{{$apartment->image}}" class="w-100 ">
 
+
+          {{--services--}}
+          @foreach ($services as $service)
+                <div>
+                    <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input"
+                    {{ $apartment->services->contains($service->id) ? 'checked' : '' }}>
+                    <label for="" class="form-check-label">{{ $service->name }}</label>
+                </div>
+            @endforeach
         {{-- visibility --}}
         <div class="form-group mb-3">
             <p>Visibility</p>
@@ -99,7 +108,7 @@
         </div>
         {{-- buttons --}}
         <div class="mb-3 text-center">
-            <button type="submit" class="btn btn-primary">update</button>
+            <button type="submit" class="btn btn-primary" id="resetDelete">update</button>
             <button type="reset" class="btn btn-danger">Svuota campi</button>
         </div>
     </form>
