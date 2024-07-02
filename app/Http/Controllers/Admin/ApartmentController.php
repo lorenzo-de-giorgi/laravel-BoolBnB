@@ -114,13 +114,14 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     {  
-        $apartmentImage = json_decode($apartment->image);
-      /*  dd($request->input('deleted')); */
-       if($request->input('deleted')){
-        $index = $request->input('deleted');
-       array_splice($apartmentImage, $index, 1);
-        $apartment->image = $apartmentImage;
-    };
+        $index = $request->input('deleted'); 
+    //     $apartmentImage = json_decode($apartment->image);
+      
+    //    if($request->input('deleted')){
+    //     $index = $request->input('deleted');
+    //    array_splice($apartmentImage, $index, 1);
+    //     $apartment->image = $apartmentImage;
+    // };
         $street = $request->input('street');
         $cap = $request->input('cap');
         $city = $request->input('city');
@@ -138,6 +139,9 @@ class ApartmentController extends Controller
         $result = Apartment::getCoordinatesFromAddress($address);
         $latitude = $result['latitude'];
         $longitude = $result['longitude'];
+
+        $apartmentImage = json_decode($apartment->image);
+        array_splice($apartmentImage, $index, 1);
           
         if ($request->hasFile('image')) {
             $imagePaths= [];
