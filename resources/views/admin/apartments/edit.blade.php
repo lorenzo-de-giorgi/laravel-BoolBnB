@@ -86,8 +86,8 @@
            
        
         @endforeach
-        <input type="number" value="" id="toDelete" name="deleted">
-        <input type="text" value="{{$apartment->image}}" class="w-100">
+        <input type="number" value="" id="toDelete" name="deleted ">
+        <input type="text" value="{{$apartment->image}}" class="w-100 ">
 
         {{-- visibility --}}
         <div class="form-group mb-3">
