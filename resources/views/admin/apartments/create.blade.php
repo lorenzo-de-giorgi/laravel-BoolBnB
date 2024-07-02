@@ -30,7 +30,8 @@
                 <div class="mb-3">
                     <label for="rooms_num" class="form-label"><h5 class="mt-2">Number of Rooms</h5></label>
                     <input type="number"  class="form-control @error('rooms_num') is-invalid @enderror" name="rooms_num" value="{{ old('rooms_num') }}" required min="0" max="15">
-                    <div id="titleHelp" class="form-text">Inserire un numero maggiore o uguale a 0</div>
+                    <div id="titleHelp" class="form-text">
+                    Enter a number greater than or equal to 0</div>
                     @error('rooms_num')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -39,7 +40,8 @@
                 <div class="mb-3">
                     <label for="bathrooms_num" class="form-label"><h5 class="mt-2">Number of Bathrooms</h5></label>
                     <input type="number"  class="form-control @error('bathrooms_num') is-invalid @enderror" name="bathrooms_num" value="{{ old('bathrooms_num') }}" required min="0" max="15">
-                    <div id="titleHelp" class="form-text">Inserire un numero maggiore o uguale a 0</div>
+                    <div id="titleHelp" class="form-text">
+                    Enter a number greater than or equal to 0</div>
                     @error('bathrooms_num')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror
@@ -48,7 +50,8 @@
                 <div class="mb-3">
                     <label for="square_meters" class="form-label"><h5 class="mt-2">Square Meters</h5></label>
                     <input type="number"  class="form-control @error('square_meters') is-invalid @enderror" name="square_meters" value="{{ old('square_meters') }}" required min="0" max="1000">
-                    <div id="titleHelp" class="form-text">Inserire un numero maggiore o uguale a 0</div>
+                    <div id="titleHelp" class="form-text">
+                    Enter a number greater than or equal to 0</div>
                     @error('square_meters')
                         <div class="alert alert-danger">{{ $message }}</div>
                     @enderror

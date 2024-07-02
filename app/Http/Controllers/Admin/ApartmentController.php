@@ -93,6 +93,7 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     { 
+        
         // Estrai l'indice dell'immagine da eliminare
         $index = $request->input('toDelete');
         
@@ -114,7 +115,8 @@ class ApartmentController extends Controller
                 $path = Storage::put('apartment_images', $image);
                 array_push($apartmentImage, $path);
             }
-            $form_data['image'] = json_encode($apartmentImage);
+             $form_data['image'] = json_encode($apartmentImage);
+            
         }
         
         // Sincronizza i servizi
