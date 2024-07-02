@@ -41,21 +41,10 @@
         {{-- address --}}
         <div class="mb-3">
             <label for="street" class="form-label">Address</label>
-            <input type="text" class="form-control  @error('street') is-invalid @enderror" id="street" name="street"
-                value="{{ old('street', $array[0]) }}">
+            <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address"
+                value="{{ old('address') }}">
         </div>
-        <div class="">
-            {{-- CAP --}}
-            <label for="cap" class="form-label">CAP</label>
-            <input type="number" class="form-control me-2" id="cap" name="cap" value="{{ old('cap', $array[1]) }}">
-            {{-- citta --}}
-            <label for="city" class="form-label">City</label>
-            <input type="text" class="form-control me-2" id="city" name="city" value="{{ old('city', $array[2]) }}">
-            {{-- Provincia --}}
-            <label for="province" class="form-label">Province</label>
-            <input type="text" maxlength="2" class="form-control me-2" id="province" name="province"
-                value="{{ old('street', $array[3]) }}">
-        </div>
+       
         {{-- image --}}
         <div class="mb-3">
             {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
@@ -86,7 +75,7 @@
            
        
         @endforeach
-        <input type="number" value="" id="toDelete" name="deleted ">
+        <input type="number" value="" id="toDelete" name="toDelete">
         <input type="text" value="{{$apartment->image}}" class="w-100 ">
 
 

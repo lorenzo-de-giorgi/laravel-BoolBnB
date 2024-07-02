@@ -25,10 +25,10 @@ class Apartment extends Model
         'rooms_num',
         'bathrooms_num',
         'square_meters',
-        /* 'address', */
+        'address', 
         'latitude',
         'longitude',
-      /*   'image', */
+       'image', 
         'visibility',
     ];    
 

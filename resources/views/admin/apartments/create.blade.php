@@ -40,19 +40,9 @@
             {{-- address --}}
             <div class="mb-3">
                 <label for="street" class="form-label">Address</label>
-                <input type="text" class="form-control  @error('street') is-invalid @enderror" id="street" name="street">{{ old('street') }}
+                <input type="text" class="form-control  @error('street') is-invalid @enderror" id="address" name="address">{{ old('address') }}
             </div>
-            <div class="d-flex">
-                {{-- CAP --}}
-                <label for="cap" class="form-label">CAP</label>
-                <input type="number" class="form-control me-2" id="cap" name="cap">
-                {{-- citta --}}
-                <label for="city" class="form-label">City</label>
-                <input type="text" class="form-control me-2" id="city" name="city">
-                {{-- Provincia --}}
-                <label for="province" class="form-label">Province</label>
-                <input type="text" maxlength="2" class="form-control me-2" id="province" name="province">
-            </div>
+            
             {{-- image --}}
             <div class="mb-3">
                 {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
