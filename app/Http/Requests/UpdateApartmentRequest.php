@@ -28,7 +28,7 @@ class UpdateApartmentRequest extends FormRequest
             'bathrooms_num' => 'required|numeric|min:0|max:15',
             'square_meters' => 'required|numeric|min:0|max:1000',
             'address' => 'required|min:10|max:255',
-            'image' => 'required',          
+                      
             'visibility' => 'required|boolean',
         ];
     }
