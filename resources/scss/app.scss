@@ -1,4 +1,4 @@
-@use './partials/_variables.scss' as *;
+@use "./partials/_variables.scss" as *;
 
 $fa-font-path: "../webfonts" !default;
 
@@ -8,6 +8,27 @@ $fa-font-path: "../webfonts" !default;
 @import "~@fortawesome/fontawesome-free/scss/brands.scss";
 @import "~bootstrap/scss/bootstrap.scss";
 
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
+
+body {
+    font-family: $basefont;
+}
+nav {
+    background-color: $primary-bg;
+    #adminLogo {
+        width: 200px;
+        img {
+            width: 100%;
+        }
+    }
+    a {
+        color: $secondary !important;
+        font-size: 1.2rem !important;
+    }
+}
+.navbar-toggler:focus {
+    box-shadow: 0px 0px 5px 0.25rem white;
+}
 // toggle button
 .switch {
     position: relative;
@@ -15,13 +36,13 @@ $fa-font-path: "../webfonts" !default;
     width: 60px;
     height: 34px;
 }
-  
-.switch input { 
+
+.switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-  
+
 .slider {
     position: absolute;
     cursor: pointer;
@@ -30,10 +51,10 @@ $fa-font-path: "../webfonts" !default;
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
-  
+
 .slider:before {
     position: absolute;
     content: "";
@@ -42,24 +63,24 @@ $fa-font-path: "../webfonts" !default;
     left: 4px;
     bottom: 4px;
     background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
 }
-  
+
 input:checked + .slider {
-    background-color: #2196F3;
+    background-color: #2196f3;
 }
- 
+
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-  
+
 .slider.round {
     border-radius: 34px;
 }
-  
+
 .slider.round:before {
     border-radius: 50%;
 }
@@ -73,4 +94,4 @@ input:invalid {
     border: none;
     outline: 0.5px solid red;
     border-radius: 5px;
-}  
+}
