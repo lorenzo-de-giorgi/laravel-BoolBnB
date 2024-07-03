@@ -64,6 +64,8 @@ class ApartmentController extends Controller
         if ($request->has('services')) {
             $new_apartment->services()->attach($request->services);
         }
+
+       
         
         return redirect()->route('admin.apartments.index');
     }
