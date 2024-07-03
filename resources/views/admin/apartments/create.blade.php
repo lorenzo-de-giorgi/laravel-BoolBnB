@@ -76,13 +76,23 @@
                 <label for="address" class="form-label">
                     <h5 class="mt-2">Address</h5>
                 </label>
-                <input type="text" class="form-control  @error('address') is-invalid @enderror" id="address"
+                <input list="locality"  class="form-control  @error('address') is-invalid @enderror" id="address"
                     name="address" required minlength="10" maxlength="255">{{ old('address') }}
-
+                    <datalist id="locality">
+                       
+                    </datalist>
+                    
+                    <div class="invalid-feedback" id="addressError"></div> 
                 @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
             </div>
+
+<!-- <input type="text" list="locality">
+<datalist id>
+    <option value="">ciao</option>
+</datalist> -->
+
             {{-- image --}}
             <div class="mb-3">
                 {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
@@ -90,7 +100,9 @@
                     <h5 class="mt-2">Image</h5>
                 </label>
                 <input type="file" accept="image/*" multiple="multiple"
-                    class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="image[]" required>
+                    class="form-control @error('image') is-invalid @enderror" id="uploadImage" name="image[]" required >
+                     <div class="invalid-feedback" id="imageError"></div> 
+                  
                 @error('image')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
@@ -331,5 +343,63 @@
    
 });
 
+    
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('myForm');
+    const submitButton = document.getElementById('submitButton');
+    const uploadImage = document.getElementById('uploadImage');
+    const imageError = document.getElementById('imageError');
+
+    function isImageUploaded() {
+        return uploadImage.files.length > 0;
+    }
+
+    submitButton.addEventListener("click", (event) => {
+        let formIsValid = true;
+
+        if (!isImageUploaded()) {
+            uploadImage.classList.add('is-invalid');
+            imageError.textContent = "You must select at least one image.";
+            imageError.style.display = 'block';
+            formIsValid = false;
+        } else {
+            uploadImage.classList.remove('is-invalid');
+            imageError.textContent = "";
+            imageError.style.display = 'none';
+        }
+
+        if (!formIsValid) {
+            event.preventDefault();
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+        const form = document.getElementById('myForm');
+        const submitButton = document.getElementById('submitButton');
+        const address = document.getElementById("address");
+        const addressError = document.getElementById("addressError");
+        address.addEventListener("input", (event) => {
+            if (address.value.length < 1) {
+                address.classList.add('is-invalid');
+                addressError.textContent = "you must insert an address!";
+            } else {
+               
+                address.classList.remove('is-invalid');
+                addressError.textContent = "";
+            }
+        });
+        submitButton.addEventListener("click", (event) => {
+            if (address.value.length < 1) {
+               
+                address.classList.add('is-invalid');
+                addressError.textContent = "you must insert an address!";
+            } else {
+               
+                address.classList.remove('is-invalid');
+                addressError.textContent = "";
+            }
+        })
+    })
 
 </script>

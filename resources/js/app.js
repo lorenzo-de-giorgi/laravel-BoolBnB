@@ -62,12 +62,12 @@ deleteSubmitButtons.forEach((button) => {
     });
 });
 
-// suggerimenti vie
+// suggerimenti vie vecchio
 const addressInput = document.getElementById('address');
-addressInput.addEventListener('input', function() {
+addressInput.addEventListener('input', function () {
     console.log('ciao');
     let address = addressInput.value;
-    let apiKey = 'hIVJ6KmFQZmgUkP1BtrGvGv1TDEXnA7G'; // Imposta la tua chiave API TomTom qui
+    let apiKey = 'zI80z8uIZLKAwkvTZwCt7WsvzqkwESGK'; // Imposta la tua chiave API TomTom qui
     const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${apiKey}`;
     console.log(url);
 
@@ -87,12 +87,42 @@ addressInput.addEventListener('input', function() {
             }
             console.log(myArray); // Mostra gli indirizzi nell'array
             // Puoi gestire il risultato qui, ad esempio aggiornando l'interfaccia utente
+            let datalist = document.getElementById('locality')
+            myArray.forEach((result, index) => {
+                let suggest = document.createElement('option');
+                if (result.streetName && result.municipality && result.postalCode) {
+                    suggest.value = `${result.streetName}, ${result.municipality}, ${result.postalCode}`;
+                } else if (result.streetName) {
+                    suggest.value = result.streetName;
+                } else if (result.municipality) {
+                    suggest.value = result.municipality;
+                }  else if (result.postalCode) {
+                    suggest.value = result.postalCode;
+                }
+                datalist.append(suggest);
+              
+
+            })
+
+
+            /*   let prova = document.getElementById('prova');
+              myArray.forEach((result) => {
+               let test = document.createElement('p');
+               test.innerText = 'ciao';
+               prova.appendChild(test);
+               
+              })
+ */
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             // Gestisci l'errore qui, ad esempio mostrando un messaggio di errore all'utente
         });
 });
+
+
+
+
 
 //prendo la casella di input file
 const image = document.getElementById("uploadImage");
@@ -122,20 +152,20 @@ if (image) {
 let arrayId = [];
 let deletedImages = document.querySelectorAll('.deletedImages');
 let toDelete = document.getElementById('toDelete');
-deletedImages.forEach(function (deletedImage){
-    deletedImage.addEventListener('click', () =>{
+deletedImages.forEach(function (deletedImage) {
+    deletedImage.addEventListener('click', () => {
         let id = deletedImage.id;
-    if (!(deletedImage.classList.contains('selected')))  {
-        arrayId.push(id);
-        deletedImage.classList.add('selected');
-    } else {
-        deletedImage.classList.remove('selected');
-        let index = arrayId.indexOf(id);
-        arrayId.splice(index, 1);
+        if (!(deletedImage.classList.contains('selected'))) {
+            arrayId.push(id);
+            deletedImage.classList.add('selected');
+        } else {
+            deletedImage.classList.remove('selected');
+            let index = arrayId.indexOf(id);
+            arrayId.splice(index, 1);
 
-    } 
-    
-    console.log(arrayId);
+        }
+
+        console.log(arrayId);
     })
 
 
@@ -143,6 +173,6 @@ deletedImages.forEach(function (deletedImage){
 
 let update = document.getElementById('update');
 update.addEventListener('click', () => {
-   let string = arrayId.join(' ');
-   toDelete.value = string;
+    let string = arrayId.join(' ');
+    toDelete.value = string;
 });
