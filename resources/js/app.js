@@ -86,19 +86,31 @@ if (image) {
     });
 }
 
+
+let arrayId = [];
 let deletedImages = document.querySelectorAll('.deletedImages');
 let toDelete = document.getElementById('toDelete');
 deletedImages.forEach(function (deletedImage){
     deletedImage.addEventListener('click', () =>{
+        let id = deletedImage.id;
+    if (!(deletedImage.classList.contains('selected')))  {
+        arrayId.push(id);
+        deletedImage.classList.add('selected');
+    } else {
+        deletedImage.classList.remove('selected');
+        let index = arrayId.indexOf(id);
+        arrayId.splice(index, 1);
 
-   /*  toDelete.value = deletedImage.id; */
-    let id = deletedImage.id;
-    toDelete.value = id; 
-    console.log(toDelete.value);
+    } 
+    
+    console.log(arrayId);
     })
+
+
 });
 
-let resetDelete = document.getElementById('resetDelete');
-resetDelete.addEventListener('click', () => {
-    toDelete.value = ''
-})
+let update = document.getElementById('update');
+update.addEventListener('click', () => {
+   let string = arrayId.join(' ');
+   toDelete.value = string;
+});

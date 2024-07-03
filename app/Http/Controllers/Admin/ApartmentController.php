@@ -93,9 +93,8 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     { 
-        
-        // Estrai l'indice dell'immagine da eliminare
-        $index = $request->input('toDelete');
+     /*  dd($request); */
+      $apartmentImage = json_decode($apartment->image, true);
         
         // Valida i dati del modulo
         $form_data = $request->validated();
@@ -106,34 +105,64 @@ class ApartmentController extends Controller
         $form_data['latitude'] = $result['latitude'];
         $form_data['longitude'] = $result['longitude'];
         // Gestisci le immagini dell'appartamento
-        $apartmentImage = json_decode($apartment->image, true);
-       
-            array_splice($apartmentImage, $index, 1);
+      
+        if(($request->input('toDelete') !== null) && $request->hasFile('image')) {
+           //prende una stringa di indici da request
+           $index = $request->input('toDelete');
+           //la trasforma in un array
+           $arrayIndex = explode( ' ' , $index );
+           $arrayImage = [];
+           //per ogni indice
+           foreach($arrayIndex as $index){
+           //prendo l'immagine  corrisponente all'indice e la pusho in un array
+              $image = $apartmentImage[$index];
+              array_push($arrayImage, $image);
+           }
+           //confronto i due array e li metto in un array definitivo :)
+           $array = array_diff($apartmentImage, $arrayImage);
+           $apartmentImage = $array;
+           /* dd($apartmentImage); */
+         foreach ($request->file('image') as $image) {
+                $path = Storage::put('apartment_images', $image);
+                array_push($apartmentImage, $path);
+            } 
+        }  
         
-        if ($request->hasFile('image')) {
+        if(($request->input('toDelete') !== null) && (!($request->hasFile('image'))) ){
+             //prende una stringa di indici da request
+             $index = $request->input('toDelete');
+             //la trasforma in un array
+             $arrayIndex = explode( ' ' , $index );
+             $arrayImage = [];
+             //per ogni indice
+             foreach($arrayIndex as $index){
+             //prendo l'immagine  corrisponente all'indice e la pusho in un array
+                $image = $apartmentImage[$index];
+                array_push($arrayImage, $image);
+             }
+             //confronto i due array e li metto in un array definitivo :)
+             $array = array_diff($apartmentImage, $arrayImage);
+             $apartmentImage = $array;
+            
+        }
+
+        if($request->hasFile('image') && ($request->input('toDelete') == null)  ){
             foreach ($request->file('image') as $image) {
                 $path = Storage::put('apartment_images', $image);
                 array_push($apartmentImage, $path);
             }
-             $form_data['image'] = json_encode($apartmentImage);
-            
         }
-        
-        // Sincronizza i servizi
+       
+        $form_data['image'] = json_encode($apartmentImage);
+     
+        $apartment->update($form_data);
+      
         if ($request->has('services')) {
             $apartment->services()->sync($request->services);
         } else {
             $apartment->services()->sync([]);
         }
-
-        if($form_data['visibility'] == null){
-            $form_data['visibility'] = 0;
-        }
-
-        $apartment->update($form_data);
-        
-        // dd($request);
-        // Reindirizza alla vista di dettaglio dell'appartamento
+       
         return redirect()->route('admin.apartments.show', $apartment->slug);
     }
     /**

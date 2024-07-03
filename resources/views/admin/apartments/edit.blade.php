@@ -83,13 +83,13 @@
         @foreach ($images as $image)
             @php $index = array_search($image, $images); @endphp
             <div class="d-flex">
-                <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento"
+                <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento" class="deletedImages" id="{{$index}}"
                     style="max-width: 50%; height: auto;">
-                    <input type="button" value="delete" class="deletedImages" id="{{$index}}">
+                    
             </div>
         @endforeach
-        <input type="number" value="" id="toDelete" name="toDelete">
-        <input type="text" value="{{$apartment->image}}" class="w-100 ">
+        <input type="text" value="" id="toDelete" name="toDelete">
+        
 
 
           {{--services--}}
