@@ -4,7 +4,7 @@ import '~icons/bootstrap-icons.scss';
 import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
-])
+]);
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('register-form');
@@ -60,6 +60,38 @@ deleteSubmitButtons.forEach((button) => {
             button.parentElement.submit();
         });
     });
+});
+
+// suggerimenti vie
+const addressInput = document.getElementById('address');
+addressInput.addEventListener('input', function() {
+    console.log('ciao');
+    let address = addressInput.value;
+    let apiKey = 'hIVJ6KmFQZmgUkP1BtrGvGv1TDEXnA7G'; // Imposta la tua chiave API TomTom qui
+    const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${apiKey}`;
+    console.log(url);
+
+    fetch(url)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Estrarre gli indirizzi dalla risposta
+            const myArray = [];
+            for (let i = 0; i < 10; i++) {
+                const address = data.results[i].address;
+                myArray.push(address);
+            }
+            console.log(myArray); // Mostra gli indirizzi nell'array
+            // Puoi gestire il risultato qui, ad esempio aggiornando l'interfaccia utente
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+            // Gestisci l'errore qui, ad esempio mostrando un messaggio di errore all'utente
+        });
 });
 
 //prendo la casella di input file

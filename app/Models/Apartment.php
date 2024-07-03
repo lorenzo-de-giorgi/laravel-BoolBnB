@@ -82,4 +82,30 @@ class Apartment extends Model
         $longitude = $data['results'][0]['position']['lon'];
         return compact('latitude', 'longitude');
     }
+
+    // public static function autoCompleteAddress(string $address): array
+    // {
+    //     https://api.tomtom.com/search/2/autocomplete/jim.json?key=<API KEY>&language=en-GB&limit=10;
+    //     $client = new \GuzzleHttp\Client([
+    //         'verify' => false,
+    //     ]);
+        
+    //     $response = $client->get('https://api.tomtom.com/search/2/search/%27.'.$address.'.%27.json', [
+    //         'query' => [
+    //             'key' => env('TOMTOM_API_KEY')
+    //         ]
+    //     ]);
+    //     dd($response);
+    //     $data = json_decode($response->getBody(), true);
+    //     dd($data['results'][0]['address']);
+    //     $myArray = [];
+    //     for($i = 0; $i < 10; $i++){
+    //         $address = $data['results'][$i]['address'];
+    //         $result = array_push($myArray, $address);
+    //     }
+    //     dd($myAutocomplete);
+    //     $autocomplete = $data['results'];
+    //     dd($autocomplete);
+    //     return compact('myArray');
+    // }
 }

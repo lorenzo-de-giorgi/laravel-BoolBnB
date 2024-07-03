@@ -43,6 +43,7 @@ class ApartmentController extends Controller
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
         $form_data['user_id'] = Auth::id();
         $result = Apartment::getCoordinatesFromAddress($form_data['address']);
+        $autocomplete = Apartment::autoCompleteAddress($form_data['address']);
         $form_data['latitude'] = $result['latitude'];
         $form_data['longitude'] = $result['longitude'];
       
@@ -65,7 +66,7 @@ class ApartmentController extends Controller
             $new_apartment->services()->attach($request->services);
         }
 
-       
+       // dd($autocomplete);
         
         return redirect()->route('admin.apartments.index');
     }
