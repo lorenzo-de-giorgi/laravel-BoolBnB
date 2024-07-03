@@ -75,7 +75,9 @@ class ApartmentController extends Controller
      * Display the specified resource.
      */
     public function show(Apartment $apartment){
-      
+        if(Auth::id() != $apartment->user_id){
+            abort(404);
+        }
         return view('admin.apartments.show', compact('apartment'));
     }
 
@@ -84,6 +86,9 @@ class ApartmentController extends Controller
      */
     public function edit(Apartment $apartment)
     {   
+        if(Auth::id() != $apartment->user_id){
+            abort(404);
+        }
         $services = Service::all();
         $address = $apartment->address;
         $array = explode(', ', $address, 4);
@@ -96,9 +101,8 @@ class ApartmentController extends Controller
      */
     public function update(UpdateApartmentRequest $request, Apartment $apartment)
     { 
-     /*  dd($request); */
-      $apartmentImage = json_decode($apartment->image, true);
-        
+        /*  dd($request); */
+        $apartmentImage = json_decode($apartment->image, true);
         // Valida i dati del modulo
         $form_data = $request->validated();
         $form_data['slug'] = Apartment::generateSlug($form_data['title']);
@@ -173,6 +177,9 @@ class ApartmentController extends Controller
      */
     public function destroy(Apartment $apartment)
     {
+        if(Auth::id() != $apartment->user_id){
+            abort(404);
+        }
         if ($apartment->image) {
             Storage::delete($apartment->image);
         }
