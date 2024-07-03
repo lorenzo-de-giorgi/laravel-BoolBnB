@@ -3,65 +3,62 @@
 
 @section('content')
 <section>
+  <div class="container vh-100 p-5">
     <div class="d-flex justify-content-between align-items-center py-4">
-        <h1>Apartments</h1>
-        <a href="{{route('admin.apartments.create')}}" class="btn btn-primary">Add new Apartment</a>
+      <h1 class="text-white">Apartments</h1>
+      <a href="{{route('admin.apartments.create')}}" class="btn btn-primary">Add new Apartment</a>
     </div>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-              <th scope="col">Id</th>
-              <th scope="col">user_id</th>
-              <th scope="col">slug</th>
-              <th scope="col">title</th>
-              <th scope="col">beds_num</th>
-              <th scope="col">rooms_num</th>
-              <th scope="col">bathrooms_num</th>
-              <th scope="col">square_meters</th>
-              <th scope="col">Address</th>
-              <th scope="col">latitude</th>
-              <th scope="col">longitude</th>
-              <th scope="col">image</th>
-              <th scope="col">visibility</th>
+      <div class="table100">
+        <table>
+          <thead>
+            <tr class="table100-head">
+              <th class="column1" scope="col">Title</th>
+              <th class="column2" scope="col">Beds Number</th>
+              <th class="column3" scope="col">Rooms Number</th>
+              <th class="column4" scope="col">Bathrooms Number</th>
+              <th class="column5" scope="col">Square Meters</th>
+              <th class="column6" scope="col">Address</th>
+              <!-- <th class="column7" scope="col">Image</th> -->
+              <th class="column8" scope="col">Visibility</th>
+              <th class="column9" scope="col">Created at</th>
+              <th class="column10" scope="col">Updated at</th>
+              <th class="column11" scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
             @foreach ($apartments as $apartment)
-            <tr>
-                <td>{{$apartment->id}}</td>
-                <td>{{$apartment->user_id}}</td>
-                <td>{{$apartment->slug}}</td>
-                <td>{{$apartment->title}}</td>
-                <td>{{$apartment->beds_num}}</td>
-                <td>{{$apartment->rooms_num}}</td>
-                <td>{{$apartment->bathrooms_num}}</td>
-                <td>{{$apartment->square_meters}}</td>
-                <td>{{$apartment->address}}</td>
-                <td>{{$apartment->latitude}}</td>
-                <td>{{$apartment->longitude}}</td>
-                <td>{{$apartment->image}}</td>
-                <td>{{$apartment->visibility}}</td>
-                <td>{{$apartment->created_at}}</td>
-                <td>{{$apartment->updated_at}}</td>
-                <td>
-                    <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
-                    <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
-                    <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST" class="d-inline-block">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="delete-button border-0 bg-transparent"  data-item-title="{{ $apartment->title }}">
-                        <i class="fa-solid fa-trash"></i>
-                      </button>
+        <tr>
 
-                    </form>
-                </td>
-              </tr>
-            @endforeach
+          <td class="column1">{{$apartment->title}}</td>
+          <td class="column2">{{$apartment->beds_num}}</td>
+          <td class="column3">{{$apartment->rooms_num}}</td>
+          <td class="column4">{{$apartment->bathrooms_num}}</td>
+          <td class="column5">{{$apartment->square_meters}}</td>
+          <td class="column6">{{$apartment->address}}</td>
+          <!-- <td class="column7">{{$apartment->image}}</td> -->
+          <td class="column8">{{$apartment->visibility}}</td>
+          <td class="column9">{{$apartment->created_at}}</td>
+          <td class="column10">{{$apartment->updated_at}}</td>
+          <td class="column11">
+          <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
+          <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
+          <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST"
+            class="d-inline-block">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-button border-0 bg-transparent"
+            data-item-title="{{ $apartment->title }}">
+            <i class="fa-solid fa-trash"></i>
+            </button>
 
-
+          </form>
+          </td>
+        </tr>
+      @endforeach
           </tbody>
-      </table>
+        </table>
+      </div>
+  </div>
 </section>
 @include('partials.modal-delete')
 @endsection
