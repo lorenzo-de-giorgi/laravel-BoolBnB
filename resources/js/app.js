@@ -5,6 +5,7 @@ import * as bootstrap from 'bootstrap';
 import.meta.glob([
     '../img/**'
 ]);
+import { TOMTOM_API_KEY } from '../../config';
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('register-form');
@@ -67,8 +68,7 @@ const addressInput = document.getElementById('address');
 addressInput.addEventListener('input', function () {
     console.log('ciao');
     let address = addressInput.value;
-    let apiKey = 'zI80z8uIZLKAwkvTZwCt7WsvzqkwESGK'; // Imposta la tua chiave API TomTom qui
-    const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${apiKey}`;
+    const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${TOMTOM_API_KEY}&countrySet=it-IT&limit=10`;
     console.log(url);
 
     fetch(url)
