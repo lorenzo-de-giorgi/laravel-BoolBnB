@@ -90,7 +90,7 @@
                         </div>
 
                         <span id="password-match-error" class="invalid-feedback" role="alert" style="display: none;">
-                            <strong>Le password non corrispondono.</strong>
+                            <strong>Password doesn't match.</strong>
                         </span>
 
                         <div class="mb-4 row mb-0">

@@ -22,7 +22,7 @@ class UpdateApartmentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:5|max:255|unique:App\Models\apartment,title',
+            'title' => 'required|min:5|max:255',
             'beds_num' => 'required|numeric|min:1|max:15',
             'rooms_num' => 'required|numeric|min:1|max:15',
             'bathrooms_num' => 'required|numeric|min:1|max:15',
