@@ -205,7 +205,7 @@ tbody tr:hover {
 
 @media screen and (max-width: 992px) {
     table {
-        display: block;
+         display: block;
     }
 
     table > *,
@@ -218,31 +218,36 @@ tbody tr:hover {
     table thead {
         display: none;
     }
-
-    table tbody tr {
-        height: auto;
-        padding: 37px 0;
+    table{
+        height: 500px;
     }
-
-    table tbody tr td {
-        padding-left: 40% !important;
-        margin-bottom: 24px;
+    table td{
+        display: flex;;
     }
+    // table tbody tr {
+    //     height: auto;
+    //     padding: 37px 0;
+    // }
 
-    table tbody tr td:last-child {
-        margin-bottom: 0;
-    }
+    // table tbody tr td {
+    //     padding-left: 40% !important;
+    //     margin-bottom: 24px;
+    // }
 
-    table tbody tr td:before {
-        font-size: 14px;
-        color: #999;
-        line-height: 1.2;
-        font-weight: unset;
-        position: absolute;
-        width: 40%;
-        left: 30px;
-        top: 0;
-    }
+    // table tbody tr td:last-child {
+    //     margin-bottom: 0;
+    // }
+
+    // table tbody tr td:before {
+    //     font-size: 14px;
+    //     color: #999;
+    //     line-height: 1.2;
+    //     font-weight: unset;
+    //     position: absolute;
+    //     width: 40%;
+    //     left: 30px;
+    //     top: 0;
+    // }
 }
 .asterisk-red {
     color: red;
