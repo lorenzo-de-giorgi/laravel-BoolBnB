@@ -3,7 +3,7 @@
 @section('title', 'Create Project')
 
 @section('content')
-<section>
+<section class="vh-100">
     <h2>{{$apartment->title}}</h2>
     <div class="d-flex">
         @php
