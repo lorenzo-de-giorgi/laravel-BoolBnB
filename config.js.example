@@ -1,3 +1,0 @@
-const TOMTOM_API_KEY = 'your-tomtom-api-key';
-
-export { TOMTOM_API_KEY };
