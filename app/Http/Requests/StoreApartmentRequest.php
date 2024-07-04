@@ -38,7 +38,7 @@ class StoreApartmentRequest extends FormRequest
     {
         return [
             'title.required' => 'Title field is required!',
-              'title.unique' => 'you cannot upload an apartment that already exist',
+            'title.unique' => 'you cannot upload an apartment that already exist',
             'title.min' => 'The length of the title must be at least :min characters!',
             'title.max' => 'The length of the title must not exceed :max characters!',
             'beds_num.required' => 'Number of Beds is required!',
