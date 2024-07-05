@@ -24,7 +24,7 @@
 
         <nav class="navbar navbar-expand-md navbar-light shadow-sm">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="{{ url('/') }}">
+                <a class="navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5173') }}">
                     <div id="adminLogo">
                         <img src="{{ asset('img/adminLogo.png') }}" alt="Admin Logo">                        
                     </div>

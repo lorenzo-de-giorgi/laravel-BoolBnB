@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     {{-- <title>{{ config('app.name', 'Boolpress') }}</title> --}}
-    <title>@yield('title', 'Boolpress')</title>
+    <title>@yield('title', 'BoolBnB')</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
