@@ -4,6 +4,10 @@ use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 use App\Models\ApartmentSponsorship;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Apartment;
+use App\Models\Sponsorship;
+use Carbon\Carbon;
 
 class ApartmentSponsorshipController extends Controller
 {
@@ -21,7 +25,11 @@ class ApartmentSponsorshipController extends Controller
      */
     public function create()
     {
-        //
+        $id = Auth::id();
+        $apartments = Apartment::where('user_id', $id)->get();
+        $sponsorships = Sponsorship::all();
+        // dd($apartments);
+        return view('admin.apartment_sponsorship.create', compact('apartments', 'sponsorships'));
     }
 
     /**
@@ -29,7 +37,20 @@ class ApartmentSponsorshipController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $apartmentSponsorship = ApartmentSponsorship::all();
+        // $sponsorships = Sponsorship::all();
+        // // dd($sponsorships);
+        // $apartments = Apartment::all();
+        // $currentTime = Carbon::now();
+        // $form_data = $request->all();
+        // $form_data['sponsorship_id'] = $sponsorships['id'];
+        // // $form_data['apartment_id'] = $apartments->first()->id;
+        // // $form_data['name'] = $sponsorships->first()->name;
+        // // $form_data['price'] = $sponsorships->first()->price;
+        // // $form_data['start_time'] = $currentTime;
+        // // $form_data['end_time'] = $currentTime->addHours($sponsorships->first()->duration);
+        // dd($form_data);
+        // ApartmentSponsorship::create($form_data);
     }
 
     /**

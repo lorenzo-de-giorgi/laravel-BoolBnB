@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Bronze",
+        "price": "2.99",
+        "duration": "24:00:00",
+        "badge": "badge"
+    },
+    {
+        "name": "Silver",
+        "price": "5.99",
+        "duration": "72:00:00",
+        "badge": "badge"
+    },
+    {
+        "name": "Gold",
+        "price": "9.99",
+        "duration": "144:00:00",
+        "badge": "badge"
+    }
+]
