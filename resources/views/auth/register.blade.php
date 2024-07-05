@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}" id="register-form">
+                    <form method="POST" action="{{ route('register') }}" id="register-form"  onsubmit="validateEmail(event)">
                         @csrf
 
                         <div class="mb-4 row">
@@ -64,6 +64,9 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
+                                <div id="emailError" class="text-danger d-none" role="alert">
+                                    <strong>The email format must be: <br>example@example.example</strong>
+                                </div>
                             </div>
                         </div>
 
@@ -107,3 +110,22 @@
     </div>
 </div>
 @endsection
+<script>
+    function validateEmail(event) {
+            event.preventDefault(); // Previene l'invio del modulo
+
+            const emailInput = document.getElementById('email');
+            const emailValue = emailInput.value;
+            const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            const emailError = document.getElementById("emailError");
+
+            if (!emailPattern.test(emailValue)) {
+                emailInput.classList.remove('error');
+                emailError.classList.remove('d-none')
+            } else {
+                emailInput.classList.remove('error');
+                // Se l'email è valida, puoi inviare il modulo
+                document.getElementById('register-form').submit();
+            }
+        }
+</script>
