@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\ApartmentController;
+use App\Http\Controllers\Admin\ApartmentSponsorshipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -23,6 +24,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
+    Route::resource('apartment_sponsorship', ApartmentSponsorshipController::class);
 });
 
 Route::middleware('auth')->group(function () {
