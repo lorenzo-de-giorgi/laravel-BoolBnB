@@ -10,7 +10,7 @@
         @method('PUT')
         {{-- title --}}
         <div class="mb-3">
-            <label for="title" class="form-label">Title</label>
+            <label for="title" class="form-label">Title *</label>
             <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{old('title', $apartment->title)}}" required minlength="5" maxlength="255">
             <div class="invalid-feedback" id="titleError"></div>
             @error('title')
@@ -19,7 +19,7 @@
         </div>
         {{-- beds_num --}}
         <div class="mb-3">
-            <label for="beds_num" class="form-label">Number of Beds</label>
+            <label for="beds_num" class="form-label">Number of Beds *</label>
             <input type="number" class="form-control" name="beds_num" value="{{old('beds_num', $apartment->beds_num)}}" required min="0" max="15" id="beds_num">
             <div class="invalid-feedback" id="bedsError"></div>
             @error('beds_num')
@@ -28,7 +28,7 @@
         </div>
         {{-- rooms_num --}}
         <div class="mb-3">
-            <label for="rooms_num" class="form-label">Number of rooms</label>
+            <label for="rooms_num" class="form-label">Number of rooms *</label>
             <input type="number" class="form-control" name="rooms_num" value="{{ old('rooms_num', $apartment->rooms_num) }}" required min="0" max="15"  id="rooms_num">
             <div class="invalid-feedback" id="roomsError"></div>
             @error('rooms_num')
@@ -37,7 +37,7 @@
         </div>
         {{-- bathrooms_num --}}
         <div class="mb-3">
-            <label for="bathrooms_num" class="form-label">Number of Bathroom</label>
+            <label for="bathrooms_num" class="form-label">Number of Bathroom *</label>
             <input type="number" class="form-control" name="bathrooms_num" value="{{ old('bathrooms_num', $apartment->bathrooms_num) }}" required min="0" max="15"  id="bathrooms_num">
             <div class="invalid-feedback" id="bathsError"></div>
             @error('bathrooms_num')
@@ -46,7 +46,7 @@
         </div>
         {{-- square_meters --}}
         <div class="mb-3">
-            <label for="square_meters" class="form-label">metri quadri</label>
+            <label for="square_meters" class="form-label">Square meters *</label>
             <input type="number" class="form-control" name="square_meters" value="{{ old('square_meters', $apartment->square_meters) }}" required min="0" max="1000" id="square_meters">
             <div class="invalid-feedback" id="metersError"></div>
             @error('square_meters')
@@ -55,7 +55,7 @@
         </div>
         {{-- address --}}
         <div class="mb-3">
-            <label for="address" class="form-label">Address</label>
+            <label for="address" class="form-label">Address *</label>
             <input list="locality" type="text" class="form-control  @error('address') is-invalid @enderror" id="address" name="address" value="{{ old('address', $apartment->address) }}" required minlength="10" maxlength="255">
             <datalist id="locality">
          </datalist>
@@ -68,7 +68,7 @@
         {{-- image --}}
         <div class="mb-3">
             {{-- <img id="uploadPreview" width="100" src="/images/placeholder.png"> --}}
-            <label for="image" class="form-label">Image</label>
+            <label for="image" class="form-label">Image *</label>
             <input type="file" multiple accept="image/*" class="form-control @error('image') is-invalid @enderror"
             id="uploadImage" name="image[]" value="{{ old('image', $apartment->image) }}" maxlength="255">
             <div class="media me-4">
@@ -102,6 +102,7 @@
 
 
           {{--services--}}
+          <h5 class="mt-2">Services *</h5>
             @foreach ($services as $service)
                 <div>
                     <input type="checkbox" name="services[]" value="{{ $service->id }}" class="form-check-input checkbox" 
@@ -121,7 +122,7 @@
         </div> --}}
 
         <div class="form-group mb-3">
-            <h5 class="mt-2">Visibility</h5>
+            <h5 class="mt-2">Visibility *</h5>
             <label class="switch">
                 <input id="visibility" name="visibility" type="checkbox" value="1" {{ $apartment->visibility == 0 ? '' : 'checked' }}>
                 <span class="slider round"></span>

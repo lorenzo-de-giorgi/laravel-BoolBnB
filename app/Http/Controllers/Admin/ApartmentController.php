@@ -68,7 +68,7 @@ class ApartmentController extends Controller
 
        // dd($autocomplete);
         
-        return redirect()->route('admin.apartments.index');
+       return redirect()->route('admin.apartments.show', $new_apartment->slug);
     }
 
 /**
