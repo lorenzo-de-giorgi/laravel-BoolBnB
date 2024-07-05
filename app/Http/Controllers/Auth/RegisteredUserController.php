@@ -34,7 +34,14 @@ class RegisteredUserController extends Controller
             'name' => ['nullable', 'string', 'max:255'],
             'surname' => [ 'string', 'max:255', 'nullable'],
             'birthday' => ['string', 'max:255', 'nullable'],
-            'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+            'email' => ['required', 'string', 'lowercase', 'email', 'max:255',
+            function($attribute, $value, $fail) {
+                // Controllo personalizzato per verificare il formato "example@example.example"
+                if (!preg_match('/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/', $value)) {
+                    $fail('The email format must be: example@example.example.');
+                }
+            },
+            'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
