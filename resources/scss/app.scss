@@ -14,20 +14,19 @@ body {
     font-family: $basefont;
 }
 #app {
-    background: linear-gradient(360deg, $primary-bg, $secondary, $white);
+    background: $lightgrey;
 }
-nav {
-    #adminLogo {
-        width: 200px;
-        img {
-            width: 100%;
-        }
-    }
-    a {
-        color: $secondary !important;
-        font-size: 1.2rem !important;
+
+#adminLogo {
+    width: 200px;
+    img {
+        width: 100%;
     }
 }
+a {
+    font-size: 1.2rem !important;
+}
+
 .navbar-toggler:focus {
     box-shadow: 0px 0px 5px 0.25rem white;
 }
@@ -187,12 +186,12 @@ tbody tr:hover {
     width: 120px;
     text-align: right;
 }
-.column6{
+.column6 {
     width: 300px;
     text-align: right;
 }
 .column9,
-.column10{
+.column10 {
     width: 150px;
     text-align: right;
     padding-left: 10px;
@@ -205,7 +204,7 @@ tbody tr:hover {
 
 @media screen and (max-width: 992px) {
     table {
-         display: block;
+        display: block;
     }
 
     table > *,
@@ -218,11 +217,11 @@ tbody tr:hover {
     table thead {
         display: none;
     }
-    table{
+    table {
         height: 500px;
     }
-    table td{
-        display: flex;;
+    table td {
+        display: flex;
     }
     // table tbody tr {
     //     height: auto;
@@ -251,4 +250,19 @@ tbody tr:hover {
 }
 .asterisk-red {
     color: red;
+}
+@media screen and (max-width: 576px) {
+    #adminLogo{
+        display: none;
+    }
+    #userName{
+        display: none;
+    }
+    h1{
+        display: flex;
+        flex-direction: column;
+    }
+    a{
+        font-size: 10px;
+    }
 }
