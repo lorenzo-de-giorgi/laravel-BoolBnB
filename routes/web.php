@@ -5,6 +5,8 @@ use App\Http\Controllers\Admin\ApartmentSponsorshipController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
+
+use App\Http\Controllers\Admin\BraintreeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AddressController;
 
@@ -25,6 +27,9 @@ Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
     Route::resource('apartment_sponsorship', ApartmentSponsorshipController::class);
+    Route::post('/braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
+    Route::get('/braintree/token', [BraintreeController::class, 'token'])->name('braintree.token');
+    Route::get('/admin/payment', [BraintreeController::class, 'index'])->name('payment');
 });
 
 Route::middleware('auth')->group(function () {

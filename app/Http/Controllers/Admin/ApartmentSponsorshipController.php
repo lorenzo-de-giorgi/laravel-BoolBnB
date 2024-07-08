@@ -60,7 +60,7 @@ class ApartmentSponsorshipController extends Controller
             $form_data['end_time'] = $end_time->addHours(144);
         }
         ApartmentSponsorship::create($form_data);
-        return redirect()->route('admin.apartment_sponsorship.index');
+        return redirect()->route('admin.payment');
     }
 
     /**

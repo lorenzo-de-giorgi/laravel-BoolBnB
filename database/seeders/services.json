@@ -1,26 +1,26 @@
 [
 {
-    "name": "wifi",
+    "name": "Wi-Fi",
     "icon": "fa-solid fa-wifi"
 },
 {
-    "name": "parking spot",
+    "name": "Parking spot",
     "icon": "fa-solid fa-square-parking"
 },
 {
-    "name": "pool",
+    "name": "Pool",
     "icon": "fa-solid fa-water-ladder"
 },
 {
-    "name": "reception",
+    "name": "Reception",
     "icon": "fa-solid fa-bell-concierge"
 },
 {
-    "name": "sauna",
+    "name": "Sauna",
     "icon": "fa-solid fa-hot-tub-person"
 },
 {
-    "name": "sea view",
+    "name": "Sea view",
     "icon": "fa-solid fa-water"
 }
 ]
