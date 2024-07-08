@@ -2,6 +2,7 @@
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
+use DateTime;
 use Illuminate\Http\Request;
 use App\Models\ApartmentSponsorship;
 use Illuminate\Support\Facades\Auth;
@@ -37,20 +38,29 @@ class ApartmentSponsorshipController extends Controller
      */
     public function store(Request $request)
     {
-        // $apartmentSponsorship = ApartmentSponsorship::all();
-        // $sponsorships = Sponsorship::all();
-        // // dd($sponsorships);
-        // $apartments = Apartment::all();
-        // $currentTime = Carbon::now();
-        // $form_data = $request->all();
-        // $form_data['sponsorship_id'] = $sponsorships['id'];
-        // // $form_data['apartment_id'] = $apartments->first()->id;
-        // // $form_data['name'] = $sponsorships->first()->name;
-        // // $form_data['price'] = $sponsorships->first()->price;
-        // // $form_data['start_time'] = $currentTime;
-        // // $form_data['end_time'] = $currentTime->addHours($sponsorships->first()->duration);
-        // dd($form_data);
-        // ApartmentSponsorship::create($form_data);
+        // defines the time of the zone
+        date_default_timezone_set('Europe/Rome');
+        $start_time = Carbon::now();
+        $end_time = Carbon::now();
+        $apartmentSponsorship = ApartmentSponsorship::all();
+        $sponsorships = Sponsorship::all();
+        $apartments = Apartment::all();
+        $form_data = $request->all();
+        $apartmentId = Apartment::findOrFail($form_data['apartment_id']);
+        $sponsorshipId = Sponsorship::findOrFail($form_data['sponsorship_id']);
+        $form_data['name'] = $sponsorshipId->name;
+        $form_data['price'] = $sponsorshipId->price;
+        $form_data['start_time'] = $start_time;
+        // add time to sponsorships
+        if($form_data['name'] == 'Bronze'){
+            $form_data['end_time'] = $end_time->addHours(24);
+        } elseif ($form_data['name'] == 'Silver'){
+            $form_data['end_time'] = $end_time->addHours(72);
+        } else {
+            $form_data['end_time'] = $end_time->addHours(144);
+        }
+        ApartmentSponsorship::create($form_data);
+        return redirect()->route('admin.apartment_sponsorship.index');
     }
 
     /**

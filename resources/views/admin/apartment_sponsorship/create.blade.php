@@ -12,12 +12,12 @@
             <h5 class="mt-2">Apartment *</h5>
             @foreach ($apartments as $apartment)
                 <div>
-                    <input type="checkbox" name="apartment" value="{{ $apartment->id }}" class="form-check-input checkbox">
-                    <label for="apartment" class="form-check-label">{{ $apartment->title }}</label>
+                    <input type="checkbox" name="apartment_id" value="{{ $apartment->id }}" class="form-check-input checkbox">
+                    <label for="apartment_id" class="form-check-label">{{ $apartment->title }}</label>
                 </div>
             @endforeach
             <div class="invalid-feedback" id="checkError"></div>
-            @error('apartment')
+            @error('apartment_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
@@ -25,12 +25,12 @@
             <h5 class="mt-2">Sponsorships *</h5>
             @foreach ($sponsorships as $sponsorship)
                 <div>
-                    <input type="checkbox" name="sponsorship" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
-                    <label for="sponsorship" class="form-check-label">{{ $sponsorship->name }}</label>
+                    <input type="checkbox" name="sponsorship_id" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
+                    <label for="sponsorship_id" class="form-check-label">{{ $sponsorship->name }}</label>
                 </div>
             @endforeach
             <div class="invalid-feedback" id="checkError"></div>
-            @error('sponsorship')
+            @error('sponsorship_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
