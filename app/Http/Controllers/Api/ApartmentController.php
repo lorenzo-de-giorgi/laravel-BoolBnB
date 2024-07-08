@@ -6,58 +6,58 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Builder;
 
 class ApartmentController extends Controller
 {
-    public function index(request $request)
+    public function index(Request $request)
     {
-        if ($request->query('beds_num')) {
-            $apartments = Apartment::with('services')->where('beds_num', $request->query('beds_num'))->get();
-        } else {
-            $apartments = Apartment::with('services')->get();
+        $services = $request->query('services');
+        $latitudeRef = $request->query('lat');
+        $longitudeRef = $request->query('lon');
+        $radius = $request->query('radius');
+        $minBeds = $request->query('minBeds');
+        $minRooms = $request->query('minRooms');
+    
+        $apartmentsQuery = Apartment::with('services');
+    
+        if ($services) {
+            $servicesArray = explode(',', $services);
+            $apartmentsQuery->whereHas('services', function (Builder $query) use ($servicesArray) {
+                $query->whereIn('services.id', $servicesArray);
+            }, '=', count($servicesArray));
         }
-        if ($request->query('lat') && $request->query('lon') && $request->query('radius')) {
-            //chatgpt
-            // Ottieni i parametri dalla richiesta
-            $latitudeRef = $request->input('lat');
-            $longitudeRef = $request->input('lon');
-            $radius = $request->input('radius');
-
-            // Verifica che i parametri siano forniti
-            // if (!$latitudeRef || !$longitudeRef || !$radius) {
-            //     return response()->json(['error' => 'Missing required parameters'], 400);
-            // }
-
-            // Query per filtrare gli appartamenti in base alla distanza
-            $apartments = DB::table('apartments')
-                ->select(
-                    '*',
-                    DB::raw("(6371 * acos(cos(radians($latitudeRef)) 
+    
+        if ($latitudeRef && $longitudeRef && $radius) {
+            $apartmentsQuery->select(
+                '*',
+                DB::raw("(6371 * acos(cos(radians($latitudeRef)) 
                  * cos(radians(latitude)) 
                  * cos(radians(longitude) - radians($longitudeRef)) 
                  + sin(radians($latitudeRef)) 
                  * sin(radians(latitude)))) AS distance")
-                )
-                ->having('distance', '<', $radius)
-                ->orderBy('distance')
-                ->get();
-
-
-            // dd($apartments);
-            return response()->json([
-                'status' => 'success',
-                'message' => 'ok',
-                'results' => $apartments
-            ], 200);
-        } else {
-            $apartments = Apartment::all();
-            return response()->json([
-                'status' => 'success',
-                'message' => 'ok',
-                'results' => $apartments
-            ], 200);
+            )
+            ->having('distance', '<', $radius)
+            ->orderBy('distance');
         }
+    
+        if ($minBeds) {
+            $apartmentsQuery->where('beds_num', '>=', $minBeds);
+        }
+    
+        if ($minRooms) {
+            $apartmentsQuery->where('rooms_num', '>=', $minRooms);
+        }
+    
+        $apartments = $apartmentsQuery->get();
+    
+        return response()->json([
+            'status' => 'success',
+            'message' => 'ok',
+            'results' => $apartments
+        ], 200);
     }
+    
 
     public function show($slug)
     {
