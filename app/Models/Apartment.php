@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use app\Models\Message;
 use App\Models\Service;
-use app\Models\User;
-use app\Models\View;
-use app\Models\Sponsorship;
+use App\Models\User;
+use App\Models\View;
+use App\Models\Sponsorship;
 
 class Apartment extends Model
 {

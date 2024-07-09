@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class ApartmentSponsorship extends Pivot
 {
     use HasFactory;
-    protected $table = 'apartment_sponsorships';
+    protected $table = 'apartment_sponsorship';
     protected $fillable = ['id', 'apartment_id', 'sponsorship_id', 'name', 'price', 'start_time', 'end_time'];
 
     public function apartment(){
