@@ -1,4 +1,5 @@
 @use "./partials/_variables.scss" as *;
+@use "./loader.scss";
 
 $fa-font-path: "../webfonts" !default;
 
@@ -192,7 +193,6 @@ tbody tr:hover {
     width: 200px;
     text-align: center;
 }
-
 .column3,
 .column4 {
     width: 50px;
