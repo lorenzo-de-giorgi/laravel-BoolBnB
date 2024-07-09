@@ -65,11 +65,13 @@ deleteSubmitButtons.forEach((button) => {
 
 // suggerimenti vie vecchio
 const addressInput = document.getElementById('address');
+const autocompleteError = document.getElementById('autocompleteError');
+const addressForm = document.getElementById('addressForm');
+let selectedAddress = false;
+
 addressInput.addEventListener('input', function () {
-    console.log('ciao');
     let address = addressInput.value;
     const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${TOMTOM_API_KEY}&countrySet=it-IT&limit=10`;
-    console.log(url);
 
     fetch(url)
         .then(response => {
@@ -79,43 +81,77 @@ addressInput.addEventListener('input', function () {
             return response.json();
         })
         .then(data => {
-            // Estrarre gli indirizzi dalla risposta
-            const myArray = [];
-            for (let i = 0; i < 10; i++) {
+            let datalist = document.getElementById('locality');
+            datalist.innerHTML = ''; // Svuota la datalist
+
+            // Utilizza un Set per tenere traccia degli indirizzi aggiunti
+            const addedAddresses = new Set();
+
+            for (let i = 0; i < Math.min(10, data.results.length); i++) {
                 const address = data.results[i].address;
-                myArray.push(address);
-            }
-            console.log(myArray); // Mostra gli indirizzi nell'array
-            // Puoi gestire il risultato qui, ad esempio aggiornando l'interfaccia utente
-            let datalist = document.getElementById('locality')
-            myArray.forEach((result, index) => {
-                let suggest = document.createElement('option');
-                if (result.streetName && result.municipality && result.postalCode) {
-                    suggest.value = `${result.streetName}, ${result.municipality}, ${result.postalCode}`;
-                } else if (result.streetName) {
-                    suggest.value = result.streetName;
-                } else if (result.municipality) {
-                    suggest.value = result.municipality;
-                }  else if (result.postalCode) {
-                    suggest.value = result.postalCode;
+                let addressString = '';
+
+                if (address.streetName && address.municipality && address.postalCode) {
+                    addressString = `${address.streetName}, ${address.municipality}, ${address.postalCode}`;
+                } else if (address.streetName) {
+                    addressString = address.streetName;
+                } else if (address.municipality) {
+                    addressString = address.municipality;
+                } else if (address.postalCode) {
+                    addressString = address.postalCode;
                 }
-                datalist.append(suggest);
-            })
 
-
-            /*   let prova = document.getElementById('prova');
-              myArray.forEach((result) => {
-               let test = document.createElement('p');
-               test.innerText = 'ciao';
-               prova.appendChild(test);
-               
-              })
- */
+                // Aggiungi solo indirizzi unici
+                if (addressString && !addedAddresses.has(addressString)) {
+                    addedAddresses.add(addressString);
+                    let suggest = document.createElement('option');
+                    suggest.value = addressString;
+                    datalist.appendChild(suggest);
+                }
+            }
         })
         .catch(error => {
             console.error('Error fetching data:', error);
             // Gestisci l'errore qui, ad esempio mostrando un messaggio di errore all'utente
+            selectedAddress = false;
         });
+
+    addressInput.addEventListener('change', function() {
+        const options = Array.from(datalist.options);
+        selectedAddress = options.some(option => option.value === addressInput.value);
+
+        if (selectedAddress) {
+            addressInput.classList.remove('is-invalid');
+            autocompleteError.textContent = '';
+        }
+    });
+});
+
+addressInput.addEventListener('blur', function() {
+    const options = Array.from(document.getElementById('locality').options);
+    selectedAddress = options.some(option => option.value === addressInput.value);
+
+    if (!selectedAddress) {
+        addressInput.classList.add('is-invalid');
+        autocompleteError.textContent = 'you must select a suggest address';
+    } else {
+        addressInput.classList.remove('is-invalid');
+        autocompleteError.textContent = '';
+    }
+});
+
+addressForm.addEventListener('submit', function(event) {
+    const options = Array.from(document.getElementById('locality').options);
+    selectedAddress = options.some(option => option.value === addressInput.value);
+
+    if (!selectedAddress) {
+        addressInput.classList.add('is-invalid');
+        autocompleteError.textContent = 'you must select a suggest address';
+        event.preventDefault(); // Impedisce l'invio del modulo
+    } else {
+        addressInput.classList.remove('is-invalid');
+        autocompleteError.textContent = '';
+    }
 });
 
 
