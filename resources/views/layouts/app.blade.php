@@ -34,35 +34,30 @@
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                             id="menu">
-                            
-                                
-                                
-                                    <li class="w-100">
-                                        <a href="{{url('/') }}" class="nav-link px-0 link-light">
-                                            <i class="fa-solid fa-house"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Home') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="w-100">
-                                        <a href="{{url('admin/apartments') }}" class="nav-link px-0 link-light">
-                                            <i class="fa-solid fa-building ms-1"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Apartments') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="w-100">
-                                        <a href="{{url('admin/apartment_sponsorship') }}" class="nav-link px-0 link-light">
-                                            <i class="ms-1 fa-solid fa-file-invoice-dollar"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Sponsorship') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                
-                            
+                            <li class="w-100">
+                                <a href="{{url('/') }}" class="nav-link px-0 link-light">
+                                    <i class="fa-solid fa-house"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Home') }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="w-100">
+                                <a href="{{url('admin/apartments') }}" class="nav-link px-0 link-light">
+                                    <i class="fa-solid fa-building ms-1"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Apartments') }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="w-100">
+                                <a href="{{url('admin/apartment_sponsorship') }}" class="nav-link px-0 link-light">
+                                    <i class="ms-1 fa-solid fa-file-invoice-dollar"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Sponsorship') }}
+                                    </span>
+                                </a>
+                            </li>
                         </ul>
                         <hr>
                         @guest
