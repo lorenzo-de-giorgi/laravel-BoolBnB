@@ -29,7 +29,7 @@ Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
     Route::resource('apartment_sponsorship', ApartmentSponsorshipController::class);
     Route::post('/braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
     Route::get('/braintree/token', [BraintreeController::class, 'token'])->name('braintree.token');
-    Route::get('/admin/payment', [BraintreeController::class, 'index'])->name('payment');
+    Route::get('/admin/payment/{id}', [BraintreeController::class, 'confirmPayment'])->name('payment');
 });
 
 Route::middleware('auth')->group(function () {
