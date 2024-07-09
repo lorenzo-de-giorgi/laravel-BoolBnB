@@ -6,8 +6,7 @@
 <section>
     <div class="container">
         <h2>Create New Apartment</h2>
-        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data"
-            onsubmit="return validaForm()">
+        <form action="{{ route('admin.apartments.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             {{-- title --}}
             <div class="mb-3">
