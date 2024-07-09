@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@extends('layouts.loader')
 @section('title', 'Create Project')
 
 @section('content')
