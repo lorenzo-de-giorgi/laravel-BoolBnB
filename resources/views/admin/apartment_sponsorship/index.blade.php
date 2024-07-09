@@ -5,7 +5,7 @@
 <section>
   <div class="container vh-100 p-5">
     <div class="d-flex justify-content-between align-items-center py-4">
-      <h1 class="text-white">Apartment Sponsorship</h1>
+      <h1>Apartment Sponsorship</h1>
       <a href="{{route('admin.apartment_sponsorship.create')}}" class="btn btn-primary">Add new Sponsorship</a>
     </div>
       <div class="table100">

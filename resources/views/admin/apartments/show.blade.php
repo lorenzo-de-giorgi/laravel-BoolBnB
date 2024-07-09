@@ -46,8 +46,26 @@
             </table>
         </div>
     </div>
-
-
+    <h3>Messages</h3>
+    <table class="table">
+        <thead>
+            <tr> 
+                <th>name</th>
+                <th>surname</th>
+                <th>email</th>
+                <th>content</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach ($messages as $message)
+    <tr>
+        <td> {{$message->name}}</td>
+        <td> {{$message->surname}}</td>
+        <td> {{$message->email}}</td>
+        <td> {{$message->content}}</td>    
+    </tr>
+@endforeach
+</tbody>
 </section>
 
 @endsection

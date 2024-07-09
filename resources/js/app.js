@@ -100,8 +100,6 @@ addressInput.addEventListener('input', function () {
                     suggest.value = result.postalCode;
                 }
                 datalist.append(suggest);
-              
-
             })
 
 

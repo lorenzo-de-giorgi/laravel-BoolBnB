@@ -17,7 +17,9 @@ class ApartmentSponsorshipController extends Controller
      */
     public function index()
     {
-        $apartmentSponsorship = ApartmentSponsorship::all();
+        $id = Auth::id();
+        $ownapartment = Apartment::where('user_id', $id)->pluck('id');
+        $apartmentSponsorship = ApartmentSponsorship::whereIn('apartment_id', $ownapartment)->get();
         return view('admin.apartment_sponsorship.index', compact('apartmentSponsorship'));
     }
 

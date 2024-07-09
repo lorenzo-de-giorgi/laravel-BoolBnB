@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreApartmentRequest;
 use App\Http\Requests\UpdateApartmentRequest;
 use App\Models\Service;
+use App\Models\Message;
 
 class ApartmentController extends Controller
 {
@@ -78,7 +79,10 @@ class ApartmentController extends Controller
         if(Auth::id() != $apartment->user_id){
             abort(404);
         }
-        return view('admin.apartments.show', compact('apartment'));
+        $messages = Message::where('apartment_id', $apartment->id)->get(); 
+        return view('admin.apartments.show', compact('apartment', 'messages'));
+
+       
     }
 
     /**
