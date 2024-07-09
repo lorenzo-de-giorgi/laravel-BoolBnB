@@ -63,11 +63,4 @@
   </div>
 </section>
 @include('partials.modal-delete')
-<script>
-  // Nascondi il loader e mostra il contenuto della pagina quando tutto è caricato
-  window.addEventListener('load', function () {
-    document.getElementById('loader').style.display = 'none';
-    document.getElementById('app').style.display = 'block';
-  });
-</script>
 @endsection
