@@ -19,8 +19,7 @@
 </head>
 
 <body>
-    <div id="app">
-
+    <div id="app" style="display: none;">
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <div class="col-auto px-sm-2 px-0 bg-dark">
