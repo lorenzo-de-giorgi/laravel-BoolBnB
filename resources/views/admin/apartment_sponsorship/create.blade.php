@@ -36,7 +36,7 @@
 
             {{-- buttons --}}
             <div class="mb-3 text-center">
-                <button type="button" class="btn btn-primary" id="submitButton">Crea</button>
+                <button type="submit" class="btn btn-primary" id="submitButton">Crea</button>
             </div>
         </form>
     </div>
