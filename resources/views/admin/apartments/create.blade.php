@@ -72,7 +72,8 @@
                 @enderror
             </div>
             {{-- address --}}
-            <div class="mb-3">
+           
+            <div class="mb-3" id="adressform">
                 <label for="address" class="form-label">
                     <h5 class="mt-2">Address *</h5>
                 </label>
@@ -81,7 +82,7 @@
                     <datalist id="locality">
                        
                     </datalist>
-                    
+                    <div id="autocompleteError" class="text-danger"></div>
                     <div class="invalid-feedback" id="addressError"></div> 
                 @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>

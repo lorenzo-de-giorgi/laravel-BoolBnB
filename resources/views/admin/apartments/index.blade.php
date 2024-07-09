@@ -2,6 +2,7 @@
 @section('title', 'Apartments')
 
 @section('content')
+
 <section>
   <div class="container p-5">
     <div class="d-flex justify-content-between align-items-center py-4">
@@ -24,7 +25,6 @@
         <td class="column7">{{$apartment->image}}</td>
         <td class="column1">{{$apartment->title}}</td>
         <td class="column8">{{$apartment->visibility}}</td>
-        <td class="column8">{{$apartment->sponsorhips}}</td>
         <td class="column11">
           <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
           <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
@@ -37,9 +37,9 @@
             <i class="fa-solid fa-trash"></i>
           </button>
 
-          </form>
-        </td>
-        </tr>
+              </form>
+            </td>
+            </tr>
       @endforeach
         </tbody>
       </table>
