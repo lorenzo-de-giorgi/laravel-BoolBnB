@@ -12,7 +12,7 @@
             <h5 class="mt-2">Apartment *</h5>
             @foreach ($apartments as $apartment)
                 <div>
-                    <input type="checkbox" name="apartment_id" value="{{ $apartment->id }}" class="form-check-input checkbox">
+                    <input type="radio" name="apartment_id" value="{{ $apartment->id }}" class="form-check-input checkbox">
                     <label for="apartment_id" class="form-check-label">{{ $apartment->title }}</label>
                 </div>
             @endforeach
@@ -25,7 +25,7 @@
             <h5 class="mt-2">Sponsorships *</h5>
             @foreach ($sponsorships as $sponsorship)
                 <div>
-                    <input type="checkbox" name="sponsorship_id" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
+                    <input type="radio" name="sponsorship_id" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
                     <label for="sponsorship_id" class="form-check-label">{{ $sponsorship->name }}</label>
                 </div>
             @endforeach
