@@ -20,8 +20,8 @@ return new class extends Migration
             $table->foreign('sponsorship_id')->references('id')->on('sponsorships')->onDelete('cascade');
             
             $table->string('name', 255);
-            $table->date('start_time');
-            $table->date('end_time');
+            $table->dateTime('start_time');
+            $table->dateTime('end_time');
             $table->decimal('price', 4, 2);
             $table->timestamps();
         });
