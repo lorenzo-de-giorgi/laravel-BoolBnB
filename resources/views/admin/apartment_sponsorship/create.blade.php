@@ -36,8 +36,7 @@
 
             {{-- buttons --}}
             <div class="mb-3 text-center">
-                <a href="{{ route('payment', ['sponsorship_id' => $sponsorship->id, 'apartment_id' => $apartment->id]) }}" class="btn btn-primary" id="submitButton">Crea</a>
-                {{-- <button href="{{ route('payment', ['sponsorship_id' => $sponsorship->id]) }}" type="button" class="btn btn-primary" id="submitButton">Crea</button> --}}
+                <button type="submit" class="btn btn-primary" id="submitButton">Crea</button>
             </div>
         </form>
     </div>

@@ -12,10 +12,10 @@
         <div class="loader"></div>
             <div class="card mb-3" style="max-width: 30%; margin: 0 auto; margin-top:10px; margin-bottom:10px; padding: 20px;">
                 <div>
-                    {{-- <h6>Price:</h6>
+                    <h6>Price:</h6>
                     <p>{{$sponsorship->price}}</p>
                     <h6>Type of Sponsorship:</h6>
-                    <p>{{$sponsorship->name}}</p> --}}
+                    <p>{{$sponsorship->name}}</p>
                 </div>
                 <div style="width: 100%; margin: 0 auto;">
                     <div id="dropin-container"></div>
@@ -51,7 +51,7 @@
                                 },
                                 body: JSON.stringify({
                                     payment_method_nonce: payload.nonce,
-                                    amount: '5' // Cambia l'importo a seconda delle tue necessità
+                                    amount: '{{$sponsorship->price}}' // Cambia l'importo a seconda delle tue necessità
                                 })
                             }).then(response => response.json())
                               .then(data => {

@@ -23,7 +23,6 @@ return new class extends Migration
             $table->dateTime('start_time');
             $table->dateTime('end_time');
             $table->decimal('price', 4, 2);
-            $table->string('status')->default('pending');
             $table->timestamps();
         });
     }

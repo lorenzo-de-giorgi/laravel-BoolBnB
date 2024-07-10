@@ -25,7 +25,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::post('/braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
 Route::get('/braintree/token', [BraintreeController::class, 'token'])->name('braintree.token');
-Route::get('/payment', [BraintreeController::class, 'confirmPayment'])->name('payment');
+Route::get('/payment/{id}', [BraintreeController::class, 'confirmPayment'])->name('payment');
 
 Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
