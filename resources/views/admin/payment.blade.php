@@ -1,3 +1,5 @@
+@extends('layouts.admin')
+@section('content')
 <html>
     <head>
         <meta charset="UTF-8">
@@ -7,14 +9,28 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
     <body>
-        <div id="dropin-container"></div>
-        <button id="submit-button">Pay</button>
+        <div class="loader"></div>
+            <div class="card mb-3" style="max-width: 30%; margin: 0 auto; margin-top:10px; margin-bottom:10px; padding: 20px;">
+                <div>
+                    <h6>Price:</h6>
+                    <p>{{$sponsorship->price}}</p>
+                    <h6>Type of Sponsorship:</h6>
+                    <p>{{$sponsorship->name}}</p>
+                </div>
+                <div style="width: 100%; margin: 0 auto;">
+                    <div id="dropin-container"></div>
+                    <div class="d-flex justify-content-center">
+                        <button id="submit-button" class="button button--small button--green">Pay</button>
+                    </div>
+                </div>
+        </div>
     </body>
     <script>
-        fetch('/admin/braintree/token')
+        fetch('/braintree/token')
             .then(response => response.json())
             .then(data => {
                 braintree.dropin.create({
+                    vaultManager: true,
                     authorization: data.token,
                     container: '#dropin-container'
                 }, (error, dropinInstance) => {
@@ -27,7 +43,7 @@
                                 return;
                             }
 
-                            fetch('/admin/braintree/checkout', {
+                            fetch('/braintree/checkout', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -35,7 +51,7 @@
                                 },
                                 body: JSON.stringify({
                                     payment_method_nonce: payload.nonce,
-                                    amount: '10.00' // Cambia l'importo a seconda delle tue necessità
+                                    amount: '{{$sponsorship->price}}' // Cambia l'importo a seconda delle tue necessità
                                 })
                             }).then(response => response.json())
                               .then(data => {
@@ -51,3 +67,4 @@
             });
     </script>
 </html>
+@endsection

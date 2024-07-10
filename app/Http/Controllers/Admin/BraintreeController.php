@@ -1,7 +1,10 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\ApartmentSponsorship;
+use App\Models\Admin;
 
+use App\Models\Sponsorship;
 use Braintree\Gateway;
 
 use Illuminate\Http\Request;
@@ -18,6 +21,19 @@ class BraintreeController extends Controller
             'publicKey' => config('services.braintree.public_key'),
             'privateKey' => config('services.braintree.private_key'),
         ]);
+    }
+
+    // public function index($id){
+    //     $sponsorships = ApartmentSponsorship::findOrFail($id);
+    //     return view('admin.payment', compact('sponsorships'));
+    // }
+    public function confirmPayment($id)
+    {
+        // Trova la sponsorizzazione per ID
+        $sponsorship = Sponsorship::findOrFail($id);
+
+        // Passa i dettagli della sponsorizzazione alla vista
+        return view('admin.payment', compact('sponsorship'));
     }
 
     public function token(){
@@ -43,9 +59,5 @@ class BraintreeController extends Controller
         } else {
             return response()->json(['success' => false, 'error' => $result->message]);
         }
-    }
-
-    public function index(){
-        return view('admin.payment');
     }
 }

@@ -61,8 +61,8 @@ class ApartmentSponsorshipController extends Controller
         } else {
             $form_data['end_time'] = $end_time->addHours(144);
         }
-        ApartmentSponsorship::create($form_data);
-        return redirect()->route('admin.payment');
+        $new_sponsorship = ApartmentSponsorship::create($form_data);
+        return redirect()->route('payment', ['id' => $new_sponsorship->sponsorship_id]);
     }
 
     /**
