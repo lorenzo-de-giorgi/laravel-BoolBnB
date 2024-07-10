@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Apartment;
 use Illuminate\Support\Facades\DB;
@@ -48,6 +49,15 @@ class ApartmentController extends Controller
         if ($minRooms) {
             $apartmentsQuery->where('rooms_num', '>=', $minRooms);
         }
+
+        $today = Carbon::now();
+
+        $apartmentsQuery->leftJoin('apartment_sponsorship', function($join) use ($today) {
+            $join->on('apartments.id', '=', 'apartment_sponsorship.apartment_id')
+                 ->where('apartment_sponsorship.end_time', '>', $today);
+        })
+        ->orderByRaw('apartment_sponsorship.end_time IS NOT NULL DESC')
+        ->orderBy('apartment_sponsorship.end_time', 'DESC');
     
         $apartments = $apartmentsQuery->get();
     
@@ -58,7 +68,6 @@ class ApartmentController extends Controller
         ], 200);
     }
     
-
     public function show($slug)
     {
         $apartment = Apartment::where('slug', $slug)->with('services')->first();
