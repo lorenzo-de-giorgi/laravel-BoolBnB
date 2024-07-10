@@ -41,28 +41,28 @@ class ApartmentSponsorshipController extends Controller
     public function store(Request $request)
     {
         // defines the time of the zone
-        date_default_timezone_set('Europe/Rome');
-        $start_time = Carbon::now();
-        $end_time = Carbon::now();
-        $apartmentSponsorship = ApartmentSponsorship::all();
-        $sponsorships = Sponsorship::all();
-        $apartments = Apartment::all();
-        $form_data = $request->all();
-        $apartmentId = Apartment::findOrFail($form_data['apartment_id']);
-        $sponsorshipId = Sponsorship::findOrFail($form_data['sponsorship_id']);
-        $form_data['name'] = $sponsorshipId->name;
-        $form_data['price'] = $sponsorshipId->price;
-        $form_data['start_time'] = $start_time;
-        // add time to sponsorships
-        if($form_data['name'] == 'Bronze'){
-            $form_data['end_time'] = $end_time->addHours(24);
-        } elseif ($form_data['name'] == 'Silver'){
-            $form_data['end_time'] = $end_time->addHours(72);
-        } else {
-            $form_data['end_time'] = $end_time->addHours(144);
-        }
-        $new_sponsorship = ApartmentSponsorship::create($form_data);
-        return redirect()->route('admin.payment', ['id' => $new_sponsorship->sponsorship_id]);
+        // date_default_timezone_set('Europe/Rome');
+        // $start_time = Carbon::now();
+        // $end_time = Carbon::now();
+        // $apartmentSponsorship = ApartmentSponsorship::all();
+        // $sponsorships = Sponsorship::all();
+        // $apartments = Apartment::all();
+        // $form_data = $request->all();
+        // $apartmentId = Apartment::findOrFail($form_data['apartment_id']);
+        // $sponsorshipId = Sponsorship::findOrFail($form_data['sponsorship_id']);
+        // $form_data['name'] = $sponsorshipId->name;
+        // $form_data['price'] = $sponsorshipId->price;
+        // $form_data['start_time'] = $start_time;
+        // // add time to sponsorships
+        // if($form_data['name'] == 'Bronze'){
+        //     $form_data['end_time'] = $end_time->addHours(24);
+        // } elseif ($form_data['name'] == 'Silver'){
+        //     $form_data['end_time'] = $end_time->addHours(72);
+        // } else {
+        //     $form_data['end_time'] = $end_time->addHours(144);
+        // }
+        // $new_sponsorship = ApartmentSponsorship::create($form_data);
+        // return redirect()->route('payment', ['id' => $new_sponsorship->sponsorship_id]);
     }
 
     /**
