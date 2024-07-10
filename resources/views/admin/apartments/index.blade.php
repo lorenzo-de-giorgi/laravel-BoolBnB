@@ -39,21 +39,21 @@
             <td class="column2">{{$apartment->title}}</td>
             <td class="column3">{{$apartment->visibility}}</td>
             <td class="column4">
-
+              badge
             </td>
             <td class="column5">
+              <div class="d-flex justify-content-end">
               <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
               <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
-              <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST"
-              class="d-inline-block">
-              @csrf
-              @method('DELETE')
-              <button type="submit" class="delete-button border-0 bg-transparent"
+              <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button border-0 bg-transparent"
                 data-item-title="{{ $apartment->title }}">
                 <i class="fa-solid fa-trash"></i>
-              </button>
-
+                </button>
               </form>
+              </div>
             </td>
             </tr>
       @endforeach

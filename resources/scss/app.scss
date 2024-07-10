@@ -24,9 +24,6 @@ body {
         width: 100%;
     }
 }
-a {
-    font-size: 1.2rem !important;
-}
 
 .navbar-toggler:focus {
     box-shadow: 0px 0px 5px 0.25rem white;
@@ -137,21 +134,6 @@ table tbody tr:last-child {
     border: 0;
 }
 
-table td.l,
-table th.l {
-    text-align: right;
-}
-
-table td.c,
-table th.c {
-    text-align: center;
-}
-
-table td.r,
-table th.r {
-    text-align: center;
-}
-
 .table100-head th {
     font-size: 18px;
     color: $secondary;
@@ -179,7 +161,7 @@ tbody tr:hover {
 }
 .column1body {
     width: 100px;
-    height: 190px;
+    height: max-content 190px;
     img {
         width: 100%;
         height: 100%;
@@ -202,6 +184,22 @@ tbody tr:hover {
     width: 30px;
     text-align: right;
     padding-right: 2rem;
+}
+.column5 a, .column5 button {
+    font-size: 1.2rem !important;
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.3);
+    color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
+    }
 }
 
 @media screen and (max-width: 992px) {
