@@ -79,7 +79,7 @@ class ApartmentController extends Controller
         if(Auth::id() != $apartment->user_id){
             abort(404);
         }
-        $messages = Message::where('apartment_id', $apartment->id)->get(); 
+        $messages = Message::where('apartment_id', $apartment->id)->orderBy('created_at', 'desc')->get(); 
         return view('admin.apartments.show', compact('apartment', 'messages'));
 
        

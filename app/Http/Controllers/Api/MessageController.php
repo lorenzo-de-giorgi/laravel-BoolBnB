@@ -14,6 +14,7 @@ class MessageController extends Controller
         $data = $request->all();
 
         $new_messsage = new Message();
+        date_default_timezone_set('Europe/Rome');
         $new_messsage->fill($data);
         $new_messsage->save();
 

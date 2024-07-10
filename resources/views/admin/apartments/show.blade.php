@@ -54,6 +54,7 @@
                 <th>surname</th>
                 <th>email</th>
                 <th>content</th>
+                <th>date</th>
             </tr>
         </thead>
         <tbody>
@@ -62,7 +63,8 @@
         <td> {{$message->name}}</td>
         <td> {{$message->surname}}</td>
         <td> {{$message->email}}</td>
-        <td> {{$message->content}}</td>    
+        <td> {{$message->content}}</td>
+        <td> {{$message->created_at}}</td>   
     </tr>
 @endforeach
 </tbody>
