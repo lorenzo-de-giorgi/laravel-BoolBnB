@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Log; 
 
 
 use Illuminate\Support\Str;
@@ -55,8 +56,10 @@ class Apartment extends Model
     }
 
     public function sponsorhips(){
-        return $this->belongsToMany(Sponsorship::class);
-   }
+        return $this->belongsToMany(Sponsorship::class)
+            ->withPivot('start_time', 'end_time', 'price', 'name')
+            ->withTimestamps();
+    }
      
    public static function generateSlug($title)
     {

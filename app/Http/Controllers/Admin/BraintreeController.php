@@ -1,12 +1,14 @@
 <?php
 namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
+use App\Models\Apartment;
 use App\Models\ApartmentSponsorship;
 use App\Models\Admin;
 
 use App\Models\Sponsorship;
 use Braintree\Gateway;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class BraintreeController extends Controller
@@ -23,17 +25,13 @@ class BraintreeController extends Controller
         ]);
     }
 
-    // public function index($id){
-    //     $sponsorships = ApartmentSponsorship::findOrFail($id);
-    //     return view('admin.payment', compact('sponsorships'));
-    // }
-    public function confirmPayment($id)
+    public function confirmPayment(Request $request)
     {
-        // Trova la sponsorizzazione per ID
-        $sponsorship = Sponsorship::findOrFail($id);
+        $apartment = Apartment::findOrFail($request->input('apartment_id'));
+        $sponsorship = Sponsorship::where('id', $request->input('sponsorship_id'))->first();
 
         // Passa i dettagli della sponsorizzazione alla vista
-        return view('admin.payment', compact('sponsorship'));
+        return view('admin.payment', compact('sponsorship', 'apartment'));
     }
 
     public function token(){
@@ -44,7 +42,12 @@ class BraintreeController extends Controller
     public function checkout(Request $request)
     {
         $nonce = $request->input('payment_method_nonce');
-        $amount = $request->input('amount');
+
+        $apartment = Apartment::findOrFail($request->input('apartment_id'));
+
+        $sponsorship = Sponsorship::findOrFail($request->input('sponsorship_id'));
+
+        $amount = $sponsorship->price;
 
         $result = $this->gateway->transaction()->sale([
             'amount' => $amount,
@@ -55,9 +58,32 @@ class BraintreeController extends Controller
         ]);
 
         if ($result->success) {
-            return response()->json(['success' => true]);
+            $currentDateTime = Carbon::now();
+            list($hours, $minutes, $seconds) = explode(':', $sponsorship->duration);
+            // Aggiungiamo la durata alla data e ora corrente
+            $endDateTime = $currentDateTime->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+
+            $existingSponsorship = $apartment->sponsorhips()
+                ->where('sponsorship_id', $sponsorship->id)
+                ->where('end_time', '>', $currentDateTime)
+                ->first();
+            if ($existingSponsorship) {
+                $existingSponsorship->pivot->end_time = Carbon::parse($existingSponsorship->pivot->end_time)->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
+                $existingSponsorship->pivot->save();
+            } else {
+                //Se lo sponsor non esiste, lo aggiungiamo
+                $apartment->sponsorhips()->attach($sponsorship->id, [
+                    'start_time' => $currentDateTime,
+                    'end_time' => $endDateTime,
+                    'price' => $sponsorship->price,
+                    'name' => $sponsorship->name,
+                ]);
+            }
+            return redirect()->route('admin.apartments.show', $apartment->slug)
+                             ->with('success', 'Pagamento avvenuto con successo');
         } else {
-            return response()->json(['success' => false, 'error' => $result->message]);
+            return redirect()->route('admin.apartments.show', $apartment->slug)
+                             ->withErrors('Errore nella transazione: ' . $result->message);
         }
     }
 }
