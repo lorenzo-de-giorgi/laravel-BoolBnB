@@ -40,13 +40,17 @@
             <td class="column2">{{$apartment->title}}</td>
             <td class="column3">{{$apartment->visibility}}</td>
             <td class="column4">
-              badge
+              @if($apartment->sponsorhips)
+          @foreach ($apartment->sponsorhips as $sponsorship)
+        <span>{{$sponsorship->name}}</span>
+      @endforeach
+        @endif
             </td>
             <td class="column5">
               <div class="d-flex justify-content-end">
-                <a href="{{route('admin.apartment_sponsorship.create')}}"><i class="fa-brands fa-space-awesome"></i></a>
-                <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
-                <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
+              <a href="{{route('admin.apartment_sponsorship.create')}}"><i class="fa-brands fa-space-awesome"></i></a>
+              <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
+              <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
               <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
                 @csrf
                 @method('DELETE')
