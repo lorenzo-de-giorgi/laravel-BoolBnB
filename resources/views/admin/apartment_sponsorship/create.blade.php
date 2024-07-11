@@ -6,7 +6,7 @@
 <section>
     <div class="container">
         <h2>Create New Apartment</h2>
-        <form action="{{ route('admin.apartment_sponsorship.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.payment') }}" method="GET">
             @csrf
 
             <h5 class="mt-2">Apartment *</h5>
