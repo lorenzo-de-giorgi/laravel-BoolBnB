@@ -1,42 +1,6 @@
 @extends('layouts.admin')
 @section('content')
 <html>
-<<<<<<< HEAD
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Sponsorship Payment</title>
-        <script src="https://js.braintreegateway.com/web/dropin/1.42.0/js/dropin.js"></script>
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-    </head>
-    <body>
-        <div class="loader"></div>
-            <div class="card mb-3" style="max-width: 30%; margin: 0 auto; margin-top:10px; margin-bottom:10px; padding: 20px;">
-                <div>
-                    <h6>Price:</h6>
-                    <p>{{$sponsorship->price}}</p>
-                    <h6>Type of Sponsorship:</h6>
-                    <p>{{$sponsorship->name}}</p>
-                </div>
-                <div style="width: 100%; margin: 0 auto;">
-                    <div id="dropin-container"></div>
-                    <div class="d-flex justify-content-center">
-                        <button id="submit-button" class="button button--small button--green">Pay</button>
-                    </div>
-                </div>
-        </div>
-    </body>
-    <script>
-        fetch('/braintree/token')
-            .then(response => response.json())
-            .then(data => {
-                braintree.dropin.create({
-                    vaultManager: true,
-                    authorization: data.token,
-                    container: '#dropin-container'
-                }, (error, dropinInstance) => {
-                    if (error) console.error(error);
-=======
 
 <head>
     <meta charset="UTF-8">
@@ -53,7 +17,8 @@
             height: var(--height-of-loader);
             border-radius: 30px;
             background-color: rgba(0, 0, 0, 0.2);
-            position: fixed; /* changed to fixed */
+            position: fixed;
+            /* changed to fixed */
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
@@ -91,13 +56,19 @@
 
     <!-- Contenuto della pagina -->
     <div id="content" style="display: none;">
-        <div id="dropin-container"></div>
-        <button id="submit-button">Pay</button>
+        <div class="card mb-3"
+            style="max-width: 30%; margin: 0 auto; margin-top:10px; margin-bottom:10px; padding: 20px;">
+            <div style="width: 100%; margin: 0 auto;">
+                <div id="dropin-container"></div>
+                <div class="d-flex justify-content-center">
+                    <button id="submit-button" class="button button--small button--green">Pay</button>
+                </div>
+            </div>
+        </div>
     </div>
-
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            fetch('/admin/braintree/token')
+        document.addEventListener('DOMContentLoaded', function () {
+            fetch('/braintree/token')
                 .then(response => response.json())
                 .then(data => {
                     braintree.dropin.create({
@@ -108,32 +79,11 @@
                             console.error(error);
                             return;
                         }
->>>>>>> 11-fix-laravel-graphics
 
                         // Hide loader and show content
                         document.getElementById('loader').style.display = 'none';
                         document.getElementById('content').style.display = 'block';
 
-<<<<<<< HEAD
-                            fetch('/braintree/checkout', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({
-                                    payment_method_nonce: payload.nonce,
-                                    amount: '{{$sponsorship->price}}' // Cambia l'importo a seconda delle tue necessità
-                                })
-                            }).then(response => response.json())
-                              .then(data => {
-                                  if (data.success) {
-                                      alert('Payment successful!');
-                                  } else {
-                                      alert('Payment failed: ' + data.error);
-                                  }
-                              });
-=======
                         document.getElementById('submit-button').addEventListener('click', () => {
                             dropinInstance.requestPaymentMethod((error, payload) => {
                                 if (error) {
@@ -141,7 +91,7 @@
                                     return;
                                 }
 
-                                fetch('/admin/braintree/checkout', {
+                                fetch('/braintree/checkout', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json',
@@ -149,7 +99,7 @@
                                     },
                                     body: JSON.stringify({
                                         payment_method_nonce: payload.nonce,
-                                        amount: '10.00' // Cambia l'importo a seconda delle tue necessità
+                                        amount: '{{$sponsorship->price}}' // Cambia l'importo a seconda delle tue necessità
                                     })
                                 }).then(response => response.json())
                                     .then(data => {
@@ -160,7 +110,6 @@
                                         }
                                     });
                             });
->>>>>>> 11-fix-laravel-graphics
                         });
                     });
                 }).catch(error => {
@@ -169,11 +118,7 @@
                 });
         });
     </script>
-<<<<<<< HEAD
-</html>
-@endsection
-=======
 </body>
 
 </html>
->>>>>>> 11-fix-laravel-graphics
+@endsection

@@ -23,36 +23,6 @@
         </thead>
         <tbody>
           @foreach ($apartments as $apartment)
-<<<<<<< HEAD
-          @php
-          $imageArray = json_decode($apartment->image, true);
-          $image = '';
-          if (!empty($imageArray)) {
-          foreach ($imageArray as $key => $value) {
-            if (!empty($value)) {
-            $image = $value;
-            break;
-            }
-          }
-          }
-        @endphp
-              <tr>
-              <td class="column7"><img src="{{asset('storage/' . $image)}}" alt=""></td>
-              <td class="column1">{{$apartment->title}}</td>
-              <td class="column8">{{$apartment->visibility}}</td>
-              <td class="column11">
-                <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
-                <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
-                <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST"
-                class="d-inline-block">
-                @csrf
-                @method('DELETE')
-                <button type="submit" class="delete-button border-0 bg-transparent"
-                  data-item-title="{{ $apartment->title }}">
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-              </form>
-=======
             @php
         $imageArray = json_decode($apartment->image, true);
         $image = '';
@@ -85,7 +55,6 @@
                 </button>
               </form>
               </div>
->>>>>>> 11-fix-laravel-graphics
             </td>
             </tr>
       @endforeach
