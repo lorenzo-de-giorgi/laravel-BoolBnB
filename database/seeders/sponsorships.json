@@ -3,18 +3,18 @@
         "name": "Bronze",
         "price": "2.99",
         "duration": "24:00:00",
-        "badge": "badge"
+        "badge": "bronze.png"
     },
     {
         "name": "Silver",
         "price": "5.99",
         "duration": "72:00:00",
-        "badge": "badge"
+        "badge": "silver.png"
     },
     {
         "name": "Gold",
         "price": "9.99",
         "duration": "144:00:00",
-        "badge": "badge"
+        "badge": "gold.png"
     }
 ]
