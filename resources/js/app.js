@@ -7,6 +7,60 @@ import.meta.glob([
 ]);
 import { TOMTOM_API_KEY } from '../../config';
 
+//prendo la casella di input file
+const image = document.getElementById("uploadImage");
+
+//se esiste nella pagina
+if (image) {
+    image.addEventListener("change", () => {
+        //console.log(image.files[0]);
+        //prendo l'elemento ing dove voglio la preview
+        const preview = document.getElementById("uploadPreview");
+
+        //creo nuoco oggetto file reader
+        const oFReader = new FileReader();
+
+        //uso il metodo readAsDataURL dell'oggetto creato per leggere il file
+        oFReader.readAsDataURL(image.files[0]);
+
+        //al termine della lettura del file
+        oFReader.onload = function (event) {
+            //metto nel src della preview l'immagine
+            preview.src = event.target.result;
+        };
+    });
+}
+
+
+let arrayId = [];
+let deletedImages = document.querySelectorAll('.deletedImages');
+let toDelete = document.getElementById('toDelete');
+deletedImages.forEach(function (deletedImage) {
+    deletedImage.addEventListener('click', () => {
+        let id = deletedImage.id;
+        if (!(deletedImage.classList.contains('selected'))) {
+            arrayId.push(id);
+            deletedImage.classList.add('selected');
+        } else {
+            deletedImage.classList.remove('selected');
+            let index = arrayId.indexOf(id);
+            arrayId.splice(index, 1);
+
+        }
+
+        console.log(arrayId);
+    })
+
+
+});
+
+let update = document.getElementById('update');
+update.addEventListener('click', () => {
+    let string = arrayId.join(' ');
+    toDelete.value = string;
+});
+
+
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('register-form');
     const password = document.getElementById('password');
@@ -158,55 +212,3 @@ addressForm.addEventListener('submit', function(event) {
 
 
 
-//prendo la casella di input file
-const image = document.getElementById("uploadImage");
-
-//se esiste nella pagina
-if (image) {
-    image.addEventListener("change", () => {
-        //console.log(image.files[0]);
-        //prendo l'elemento ing dove voglio la preview
-        const preview = document.getElementById("uploadPreview");
-
-        //creo nuoco oggetto file reader
-        const oFReader = new FileReader();
-
-        //uso il metodo readAsDataURL dell'oggetto creato per leggere il file
-        oFReader.readAsDataURL(image.files[0]);
-
-        //al termine della lettura del file
-        oFReader.onload = function (event) {
-            //metto nel src della preview l'immagine
-            preview.src = event.target.result;
-        };
-    });
-}
-
-
-let arrayId = [];
-let deletedImages = document.querySelectorAll('.deletedImages');
-let toDelete = document.getElementById('toDelete');
-deletedImages.forEach(function (deletedImage) {
-    deletedImage.addEventListener('click', () => {
-        let id = deletedImage.id;
-        if (!(deletedImage.classList.contains('selected'))) {
-            arrayId.push(id);
-            deletedImage.classList.add('selected');
-        } else {
-            deletedImage.classList.remove('selected');
-            let index = arrayId.indexOf(id);
-            arrayId.splice(index, 1);
-
-        }
-
-        console.log(arrayId);
-    })
-
-
-});
-
-let update = document.getElementById('update');
-update.addEventListener('click', () => {
-    let string = arrayId.join(' ');
-    toDelete.value = string;
-});
