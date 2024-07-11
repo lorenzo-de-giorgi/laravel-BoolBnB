@@ -4,8 +4,8 @@
 
 @section('content')
 <section class="container bg-white p-5 my-5 rounded">
-    <div class="d-flex">
-        <div id="showimage">
+    <div class="row">
+        <div id="showimage" class="col-12 mb-3 col-xl">
             @php
                 $images = json_decode($apartment->image, true);
             @endphp
@@ -15,71 +15,69 @@
                 </div>
             @endforeach
         </div>
-        <div class="px-5 py-2">
+        <div class="col-6 col-xl w-100">
             <h2>{{$apartment->title}}</h2>
             <h5>{{$apartment->address}}</h5>
+            <div class="card mt-3 p-3">
+                <h4>Available Services</h4>
+                <div>
+                    @if($apartment->services)
+                        @foreach ($apartment->services as $service)
+                            <span class="badge text-bg-primary m-1">{{$service->name}}</span>
+                        @endforeach
+                    @endif
+                </div>
+            </div>
         </div>
-        <div class="px-5 py-2">
-            <h5>Services</h5>
-            <div class="serviceCard">
-                @if($apartment->services)
-                @foreach ($apartment->services as $service)
-                <span class="badge text-bg-danger">{{$service->name}}</span>
-                @endforeach
-                @endif
+        <div class="col-6 col-xl mt-3 w-100">
+            <div class="card p-3">
+                <h4>Appartment Details</h4>
+                <hr>
+                <ul class="list-unstyled">
+                    <li>Number of rooms: {{$apartment->rooms_num}}</li>
+                    <li>Number of beds: {{$apartment->beds_num}}</li>
+
+                    <li>Number of bathrooms: {{$apartment->bathrooms_num}}</li>
+                    <li>Square meters: {{$apartment->square_meters}}</li>
+                </ul>
             </div>
         </div>
     </div>
-    <!-- <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">number of rooms</th>
-                        <th scope="col">number of beds</th>
-                        <th scope="col">number of bathrooms</th>
-                        <th scope="col">square meters</th>
-                        <th scope="col">services</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">{{$apartment->rooms_num}}</th>
-                        <td>{{$apartment->beds_num}}</td>
-                        <td>{{$apartment->bathrooms_num}}</td>
-                        <td>{{$apartment->square_meters}}</td>
-                        <td>
-                        @if($apartment->services)
-                            @foreach ($apartment->services as $service)
-                                <span class="badge text-bg-danger">{{$service->name}}</span>
-                            @endforeach
+    <div class="mt-3">
+        <div class="card p-3">
+            <div class="">
+                <h4>Client's messages</h4>
+                <hr>
+                <ul class="list-unstyled">
+                    @foreach ($messages as $message)
+                        <li>
+                            <strong>Name: </strong>
+                            {{$message->name}} {{$message->surname}}
+                        </li>
+                        <li>
+                            <strong>Email: </strong>
+                            {{$message->email}}
+                        </li>
+                        <li class="card my-2 p-3">
+                            <strong>Message: </strong>
+                            <br>
+                            {{$message->content}}
+                        </li>
+                        <li>
+                            <strong>Sended: </strong>
+                            {{$message->created_at}}
+                        </li>
+                        @if ($message->update_at)
+                            <li>
+                                <strong>Last update: </strong>
+                                {{$message->update_at}}
+                            </li>
                         @endif
-                        </td>
-                    </tr>
-                </tbody>
-            </table> -->
+                    @endforeach
+                </ul>
+            </div>
+        </div>
     </div>
-    </div>
-    <!-- <h3>Messages</h3>
-    <table class="table">
-        <thead>
-            <tr> 
-                <th>name</th>
-                <th>surname</th>
-                <th>email</th>
-                <th>content</th>
-                <th>date</th>
-            </tr>
-        </thead>
-        <tbody>
-    @foreach ($messages as $message)
-    <tr>
-        <td> {{$message->name}}</td>
-        <td> {{$message->surname}}</td>
-        <td> {{$message->email}}</td>
-        <td> {{$message->content}}</td>
-        <td> {{$message->created_at}}</td>   
-    </tr>
-@endforeach
-</tbody> -->
 </section>
 
 @endsection
