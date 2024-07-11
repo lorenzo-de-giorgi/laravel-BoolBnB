@@ -157,7 +157,7 @@ tbody tr:hover {
     background-color: #f5f5f5;
     cursor: pointer;
 }
-.column1{
+.column1 {
     padding-left: 2rem;
 }
 .column1body {
@@ -186,7 +186,8 @@ tbody tr:hover {
     text-align: right;
     padding-right: 2rem;
 }
-.column5 a, .column5 button {
+.column5 a,
+.column5 button {
     font-size: 1.2rem !important;
     text-decoration: none;
     margin: 0 10px 0 10px;
@@ -199,10 +200,45 @@ tbody tr:hover {
     justify-content: center;
     align-items: center;
     &:hover {
-    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
+        box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
     }
 }
 
+.asterisk-red {
+    color: red;
+}
+
+.button {
+    cursor: pointer;
+    font-weight: 500;
+    left: 3px;
+    line-height: inherit;
+    position: relative;
+    text-decoration: none;
+    text-align: center;
+    border-style: solid;
+    border-width: 1px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.button--small {
+    padding: 10px 20px;
+    font-size: 0.875rem;
+}
+
+.button--green {
+    outline: none;
+    background-color: #64d18a;
+    border-color: #64d18a;
+    color: white;
+    transition: all 200ms ease;
+}
+
+.button--green:hover {
+    background-color: #8bdda8;
+    color: white;
+}
 @media screen and (max-width: 992px) {
     table {
         display: block;
@@ -224,33 +260,6 @@ tbody tr:hover {
     table td {
         display: flex;
     }
-    // table tbody tr {
-    //     height: auto;
-    //     padding: 37px 0;
-    // }
-
-    // table tbody tr td {
-    //     padding-left: 40% !important;
-    //     margin-bottom: 24px;
-    // }
-
-    // table tbody tr td:last-child {
-    //     margin-bottom: 0;
-    // }
-
-    // table tbody tr td:before {
-    //     font-size: 14px;
-    //     color: #999;
-    //     line-height: 1.2;
-    //     font-weight: unset;
-    //     position: absolute;
-    //     width: 40%;
-    //     left: 30px;
-    //     top: 0;
-    // }
-}
-.asterisk-red {
-    color: red;
 }
 @media screen and (max-width: 576px) {
     #adminLogo {
@@ -266,36 +275,4 @@ tbody tr:hover {
     a {
         font-size: 10px;
     }
-}
-
-.button {
-    cursor: pointer;
-    font-weight: 500;
-    left: 3px;
-    line-height: inherit;
-    position: relative;
-    text-decoration: none;
-    text-align: center;
-    border-style: solid;
-    border-width: 1px;
-    border-radius: 3px;
-    display: inline-block;
-}
-
-.button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
-}
-
-.button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
-}
-
-.button--green:hover {
-  background-color: #8bdda8;
-  color: white;
 }
