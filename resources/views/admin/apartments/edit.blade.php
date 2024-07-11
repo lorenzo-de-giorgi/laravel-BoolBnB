@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@extends('layouts.loader')
+
 @section('title', 'Create Project')
 
+<div id="loader">
 @section('content')
 <section>
     <h2>Create a new Apartment</h2>
@@ -153,7 +154,7 @@
 </section>
 
 @endsection
-
+</div>
 <script>
 // STAMPA DEGLI ERRORI
 

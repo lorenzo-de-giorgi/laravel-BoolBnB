@@ -1,7 +1,8 @@
 @extends('layouts.app')
-@extends('layouts.loader')
+
 @section('title', 'Create Apartment')
 
+<div id="loader">
 @section('content')
 <section>
     <div class="container">
@@ -86,6 +87,8 @@
                 @error('address')
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
+
+                <div id="ciao">ciao</div>
             </div>
 
 <!-- <input type="text" list="locality">
@@ -151,8 +154,9 @@
 </section>
 
 @endsection
-
+</div>
 <script>
+
 
     // STAMPA DEGLI ERRORI
 
@@ -401,5 +405,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
     })
+
 
 </script>

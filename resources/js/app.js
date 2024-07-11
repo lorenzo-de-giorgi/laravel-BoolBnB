@@ -7,6 +7,12 @@ import.meta.glob([
 ]);
 import { TOMTOM_API_KEY } from '../../config';
 
+window.addEventListener('load', function () {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  });
+
+
 //prendo la casella di input file
 const image = document.getElementById("uploadImage");
 
@@ -54,6 +60,7 @@ deletedImages.forEach(function (deletedImage) {
 
 });
 
+
 let update = document.getElementById('update');
 update.addEventListener('click', () => {
     let string = arrayId.join(' ');
@@ -62,22 +69,15 @@ update.addEventListener('click', () => {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('register-form');
+    
     const password = document.getElementById('password');
     const passwordConfirm = document.getElementById('password-confirm');
     const passwordMatchError = document.getElementById('password-match-error');
     const birthday = document.getElementById('birthday');
 
-    form.addEventListener('submit', function (event) {
-        if (password.value !== passwordConfirm.value) {
-            event.preventDefault();
-            passwordMatchError.style.display = 'block';
-        } else {
-            passwordMatchError.style.display = 'none';
-        }
-    });
 
-    passwordConfirm.addEventListener('input', function () {
+    if(password){
+        passwordConfirm.addEventListener('input', function () {
         if (password.value !== passwordConfirm.value) {
             passwordConfirm.classList.add('is-invalid');
             passwordMatchError.style.display = 'block';
@@ -90,6 +90,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const today = new Date();
     const maxDate = new Date(today.getFullYear() - 18, today.getMonth(), today.getDate());
     birthday.max = maxDate.toISOString().split('T')[0];
+    }
+    
 });
 
 const deleteSubmitButtons = document.querySelectorAll(".delete-button");
@@ -194,19 +196,7 @@ addressInput.addEventListener('blur', function() {
     }
 });
 
-addressForm.addEventListener('submit', function(event) {
-    const options = Array.from(document.getElementById('locality').options);
-    selectedAddress = options.some(option => option.value === addressInput.value);
 
-    if (!selectedAddress) {
-        addressInput.classList.add('is-invalid');
-        autocompleteError.textContent = 'you must select a suggest address';
-        event.preventDefault(); // Impedisce l'invio del modulo
-    } else {
-        addressInput.classList.remove('is-invalid');
-        autocompleteError.textContent = '';
-    }
-});
 
 
 
