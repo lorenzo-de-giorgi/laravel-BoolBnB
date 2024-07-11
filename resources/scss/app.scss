@@ -1,5 +1,6 @@
 @use "./partials/_variables.scss" as *;
 @use "./loader.scss";
+@use "./slider.scss";
 
 $fa-font-path: "../webfonts" !default;
 
@@ -99,7 +100,7 @@ input:invalid {
     opacity: 0.4;
 }
 
-//*! Table styles */
+//*! Table styles in Apartments page */
 table {
     border-spacing: 1;
     border-collapse: collapse;
