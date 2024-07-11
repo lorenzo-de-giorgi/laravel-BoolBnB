@@ -1,24 +1,36 @@
 @extends('layouts.app')
-
+@extends('layouts.loader')
 @section('title', 'Create Project')
 
 @section('content')
-<section class="vh-100">
-    <h2>{{$apartment->title}}</h2>
+<section class="container bg-white p-5 my-5 rounded">
     <div class="d-flex">
-        @php
-            $images = json_decode($apartment->image, true);
-        @endphp
-        @foreach ($images as $image)
-            <div>
-                <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento"
-                    style="max-width: 100%; height: auto;">
+        <div id="showimage">
+            @php
+                $images = json_decode($apartment->image, true);
+            @endphp
+            @foreach ($images as $image)
+                <div>
+                    <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento">
+                </div>
+            @endforeach
+        </div>
+        <div class="px-5 py-2">
+            <h2>{{$apartment->title}}</h2>
+            <h5>{{$apartment->address}}</h5>
+        </div>
+        <div class="px-5 py-2">
+            <h5>Services</h5>
+            <div class="serviceCard">
+                @if($apartment->services)
+                @foreach ($apartment->services as $service)
+                <span class="badge text-bg-danger">{{$service->name}}</span>
+                @endforeach
+                @endif
             </div>
-        @endforeach
-
-        <div>
-            <p>{{$apartment->address}}</p>
-            <table class="table">
+        </div>
+    </div>
+    <!-- <table class="table">
                 <thead>
                     <tr>
                         <th scope="col">number of rooms</th>
@@ -43,10 +55,10 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>
-        </div>
+            </table> -->
     </div>
-    <h3>Messages</h3>
+    </div>
+    <!-- <h3>Messages</h3>
     <table class="table">
         <thead>
             <tr> 
@@ -67,7 +79,7 @@
         <td> {{$message->created_at}}</td>   
     </tr>
 @endforeach
-</tbody>
+</tbody> -->
 </section>
 
 @endsection

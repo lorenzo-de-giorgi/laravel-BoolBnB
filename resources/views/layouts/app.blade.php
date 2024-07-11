@@ -17,10 +17,8 @@
     <!-- Usando Vite -->
     @vite(['resources/js/app.js'])
 </head>
-
 <body>
-    <div id="app">
-
+    <div id="app" style="display: none;">
         <div class="container-fluid">
             <div class="row flex-nowrap">
                 <div class="col-auto px-sm-2 px-0 bg-dark">
@@ -34,40 +32,29 @@
                         </a>
                         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start"
                             id="menu">
-                            <li>
-                                <a href="#submenu1" data-bs-toggle="collapse"
-                                    class="nav-link px-0 align-middle link-light">
-                                    <i class="fs-4 bi-speedometer2 ms-1"></i>
+                            <li class="w-100">
+                                <a href="{{url('/') }}" class="nav-link px-0 link-light">
+                                    <i class="fa-solid fa-house"></i>
                                     <span class="ms-1 d-none d-sm-inline">
-                                        Admin Dashboard
+                                        {{ __('Home') }}
                                     </span>
                                 </a>
-                                <ul class="collapse nav flex-column ms-1" id="submenu1" data-bs-parent="#menu">
-                                    <li class="w-100">
-                                        <a href="{{url('/') }}" class="nav-link px-0 link-light">
-                                            <i class="fa-solid fa-house"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Home') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="w-100">
-                                        <a href="{{url('admin/apartments') }}" class="nav-link px-0 link-light">
-                                            <i class="fa-solid fa-building ms-1"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Apartments') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li class="w-100">
-                                        <a href="{{url('admin/apartment_sponsorship') }}" class="nav-link px-0 link-light">
-                                            <i class="ms-1 fa-solid fa-file-invoice-dollar"></i>
-                                            <span class="ms-1 d-none d-sm-inline">
-                                                {{ __('Sponsorship') }}
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
+                            </li>
+                            <li class="w-100">
+                                <a href="{{url('admin/apartments') }}" class="nav-link px-0 link-light">
+                                    <i class="fa-solid fa-building ms-1"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Apartments') }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="w-100">
+                                <a href="{{url('admin/apartment_sponsorship') }}" class="nav-link px-0 link-light">
+                                    <i class="ms-1 fa-solid fa-file-invoice-dollar"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Sponsorship') }}
+                                    </span>
+                                </a>
                             </li>
                         </ul>
                         <hr>
@@ -118,5 +105,11 @@
         </div>
     </div>
 </body>
-
+<script>
+  // Nascondi il loader e mostra il contenuto della pagina quando tutto è caricato
+  window.addEventListener('load', function () {
+    document.getElementById('loader').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+  });
+</script>
 </html>

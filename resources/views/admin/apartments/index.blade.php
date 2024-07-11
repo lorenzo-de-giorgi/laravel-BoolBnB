@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.loader')
 @section('title', 'Apartments')
 
 @section('content')
@@ -13,14 +14,16 @@
       <table>
         <thead>
           <tr class="table100-head">
-            <th class="column7" scope="col">Image</th>
-            <th class="column1" scope="col">Title</th>
-            <th class="column8" scope="col">Visibility</th>
-            <th class="column11" scope="col">Actions</th>
+            <th class="column1" scope="col">Image</th>
+            <th class="column2" scope="col">Title</th>
+            <th class="column3" scope="col">Visibility</th>
+            <th class="column4" scope="col">Sponsorship</th>
+            <th class="column5" scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
           @foreach ($apartments as $apartment)
+<<<<<<< HEAD
           @php
           $imageArray = json_decode($apartment->image, true);
           $image = '';
@@ -49,6 +52,40 @@
                   <i class="fa-solid fa-trash"></i>
                 </button>
               </form>
+=======
+            @php
+        $imageArray = json_decode($apartment->image, true);
+        $image = '';
+        if (!empty($imageArray)) {
+        foreach ($imageArray as $key => $value) {
+          if (!empty($value)) {
+          $image = $value;
+          break;
+          }
+        }
+        }
+        @endphp
+            <tr>
+            <td class="column1body"><img src="{{asset('storage/' . $image)}}" alt="{{$apartment->title}}"></td>
+            <td class="column2">{{$apartment->title}}</td>
+            <td class="column3">{{$apartment->visibility}}</td>
+            <td class="column4">
+              badge
+            </td>
+            <td class="column5">
+              <div class="d-flex justify-content-end">
+              <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
+              <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
+              <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="delete-button border-0 bg-transparent"
+                data-item-title="{{ $apartment->title }}">
+                <i class="fa-solid fa-trash"></i>
+                </button>
+              </form>
+              </div>
+>>>>>>> 11-fix-laravel-graphics
             </td>
             </tr>
       @endforeach

@@ -1,4 +1,6 @@
 @use "./partials/_variables.scss" as *;
+@use "./loader.scss";
+@use "./slider.scss";
 
 $fa-font-path: "../webfonts" !default;
 
@@ -22,9 +24,6 @@ body {
     img {
         width: 100%;
     }
-}
-a {
-    font-size: 1.2rem !important;
 }
 
 .navbar-toggler:focus {
@@ -86,14 +85,14 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-input:valid {
+.form-control:valid {
     border: none;
-    outline: 0.5px solid green;
+    box-shadow: 0 0 0 0.25rem rgba(0, 128, 0, 0.25);
     border-radius: 5px;
 }
 input:invalid {
     border: none;
-    outline: 0.5px solid red;
+    // outline: 0.5px solid red;
     border-radius: 5px;
 }
 
@@ -101,7 +100,7 @@ input:invalid {
     opacity: 0.4;
 }
 
-//*! Table styles */
+//*! Table styles in Apartments page */
 table {
     border-spacing: 1;
     border-collapse: collapse;
@@ -136,23 +135,8 @@ table tbody tr:last-child {
     border: 0;
 }
 
-table td.l,
-table th.l {
-    text-align: right;
-}
-
-table td.c,
-table th.c {
-    text-align: center;
-}
-
-table td.r,
-table th.r {
-    text-align: center;
-}
-
 .table100-head th {
-    font-size: 16px;
+    font-size: 18px;
     color: $secondary;
     line-height: 1.2;
 }
@@ -162,10 +146,10 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr {
-    font-size: 15px;
+    font-size: 18px;
     color: gray;
     line-height: 1.2;
-    // font-weight: unset;
+    font-weight: 600;
 }
 
 tbody tr:hover {
@@ -173,33 +157,50 @@ tbody tr:hover {
     background-color: #f5f5f5;
     cursor: pointer;
 }
-
-.column1 {
-    width: 300px;
-    padding-left: 30px;
+.column1{
+    padding-left: 2rem;
 }
-.column2,
+.column1body {
+    width: 100px;
+    height: max-content 190px;
+    img {
+        width: 100%;
+        height: 100%;
+        margin: 2rem;
+        border-radius: 5px;
+        box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
+        object-fit: cover;
+    }
+}
+.column2 {
+    width: 200px;
+    text-align: center;
+}
 .column3,
-.column4,
-.column5,
-.column8 {
-    width: 120px;
-    text-align: right;
+.column4 {
+    width: 50px;
+    text-align: center;
 }
-.column6 {
-    width: 300px;
+.column5 {
+    width: 30px;
     text-align: right;
+    padding-right: 2rem;
 }
-.column9,
-.column10 {
-    width: 150px;
-    text-align: right;
-    padding-left: 10px;
-}
-.column11 {
-    width: 120px;
-    text-align: right;
-    padding-right: 30px;
+.column5 a, .column5 button {
+    font-size: 1.2rem !important;
+    text-decoration: none;
+    margin: 0 10px 0 10px;
+    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.3);
+    color: black;
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
+    }
 }
 
 @media screen and (max-width: 992px) {
@@ -252,20 +253,21 @@ tbody tr:hover {
     color: red;
 }
 @media screen and (max-width: 576px) {
-    #adminLogo{
+    #adminLogo {
         display: none;
     }
-    #userName{
+    #userName {
         display: none;
     }
-    h1{
+    h1 {
         display: flex;
         flex-direction: column;
     }
-    a{
+    a {
         font-size: 10px;
     }
 }
+<<<<<<< HEAD
 
 .button {
     cursor: pointer;
@@ -298,3 +300,5 @@ tbody tr:hover {
   background-color: #8bdda8;
   color: white;
 }
+=======
+>>>>>>> 11-fix-laravel-graphics

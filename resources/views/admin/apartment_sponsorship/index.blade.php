@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.loader')
 @section('title', 'Apartments')
 
 @section('content')
