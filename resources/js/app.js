@@ -125,7 +125,7 @@ let selectedAddress = false;
 
 addressInput.addEventListener('input', function () {
     let address = addressInput.value;
-    const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${TOMTOM_API_KEY}&countrySet=it-IT&limit=10`;
+    const url = `https://api.tomtom.com/search/2/search/${encodeURIComponent(address)}.json?key=${TOMTOM_API_KEY}&countrySet=IT&limit=10`;
 
     fetch(url)
         .then(response => {
