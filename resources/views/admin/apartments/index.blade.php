@@ -40,9 +40,11 @@
             <td class="column2">{{$apartment->title}}</td>
             <td class="column3">{{$apartment->visibility}}</td>
             <td class="column4">
-              @if($apartment->sponsorhips)
-          @foreach ($apartment->sponsorhips as $sponsorship)
-        <span>{{$sponsorship->name}}</span>
+              @if ($apartment->sponsorships)
+          @foreach ($apartment->sponsorships as $sponsorship)
+        @if ($sponsorship->pivot->end_time > now())
+      <span>{{$sponsorship->badge}}</span>
+    @endif
       @endforeach
         @endif
             </td>
