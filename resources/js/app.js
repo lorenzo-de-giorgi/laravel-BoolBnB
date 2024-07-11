@@ -59,13 +59,16 @@ deletedImages.forEach(function (deletedImage) {
 
 
 });
-
-
-let update = document.getElementById('update');
+ 
+    let update = document.getElementById('update');
+    if(update) {
 update.addEventListener('click', () => {
     let string = arrayId.join(' ');
     toDelete.value = string;
 });
+ }
+
+
 
 
 document.addEventListener('DOMContentLoaded', function () {
