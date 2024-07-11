@@ -43,7 +43,7 @@
               @if ($apartment->sponsorships)
           @foreach ($apartment->sponsorships as $sponsorship)
         @if ($sponsorship->pivot->end_time > now())
-      <span>{{$sponsorship->badge}}</span>
+      <img src="/img/{{$sponsorship->badge}}" alt="" style="width: 60px; height: 60px;">
     @endif
       @endforeach
         @endif
