@@ -30,6 +30,7 @@ Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
     Route::post('/braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
     Route::get('/braintree/token', [BraintreeController::class, 'token'])->name('braintree.token');
     Route::get('/payment', [BraintreeController::class, 'confirmPayment'])->name('payment');
+    Route::get('apartments/{apartment}/receipt', [BraintreeController::class, 'receipt'])->name('apartments.receipt');
 });
 
 Route::middleware('auth')->group(function () {

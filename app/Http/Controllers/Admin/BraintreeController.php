@@ -73,15 +73,26 @@ class BraintreeController extends Controller
                                      ->with('error', 'Sponsorship already active, ends in: ' . $remainingTime);
                 } else {
                 //Se lo sponsor non esiste, lo aggiungiamo
-                $apartment->sponsorships()->attach($sponsorship->id, [
-                    'start_time' => $currentDateTime,
-                    'end_time' => $endDateTime,
-                    'price' => $sponsorship->price,
-                    'name' => $sponsorship->name,
-                ]);
-            }
-            return redirect()->route('admin.payment_success', $apartment->slug)
-                             ->with('success', 'Payment successful');
+                    $apartment->sponsorships()->attach($sponsorship->id, [
+                        'start_time' => $currentDateTime,
+                        'end_time' => $endDateTime,
+                        'price' => $sponsorship->price,
+                        'name' => $sponsorship->name,
+                    ]);
+                // Passa i dati della ricevuta alla vista
+                    $receiptData = [
+                        'apartment' => $apartment,
+                        'sponsorship' => $sponsorship,
+                        'transactionId' => $result->transaction->id,
+                        'amount' => $amount,
+                        'start_time' => $currentDateTime,
+                        'end_time' => $endDateTime,
+                    ];  
+                    return view('admin.receipt', $receiptData);
+                }
+                // return redirect()->route('admin.payment_success', $apartment->slug)
+                //              ->with('success', 'Payment successful');
+            
         } else {
             return redirect()->route('admin.apartments.show', $apartment->slug)
                              ->withErrors('Errore nella transazione: ' . $result->message);
