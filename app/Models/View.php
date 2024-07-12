@@ -11,7 +11,7 @@ class View extends Model
     use HasFactory;
     protected $fillable = 
     [
-        'aparment_id',
+        'apartment_id',
         'ip_address',
         'date',
     ];

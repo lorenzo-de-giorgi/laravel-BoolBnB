@@ -11,10 +11,14 @@ class ViewController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        /* $new_view = new View();
+        $ipAddress = $request->ip();
+        $new_view = new View();
+        $new_view->date = now();
+       $new_view->ip_address=$ipAddress;
+        
+        
         $new_view->fill($data);
-        $new_view->save(); */
+        $new_view->save();
 
         return response()->json([
             'status' => 'success',

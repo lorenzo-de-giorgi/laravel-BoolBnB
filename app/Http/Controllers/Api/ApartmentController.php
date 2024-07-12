@@ -21,6 +21,7 @@ class ApartmentController extends Controller
         $minRooms = $request->query('minRooms');
     
         $apartmentsQuery = Apartment::with('services');
+        $apartmentsQuery->select('apartments.*');
     
         if ($services) {
             $servicesArray = explode(',', $services);
