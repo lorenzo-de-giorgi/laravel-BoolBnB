@@ -41,6 +41,14 @@
                                 </a>
                             </li>
                             <li class="w-100">
+                                <a href="{{url('/dashboard') }}" class="nav-link px-0 link-light">
+                                <i class="fa-solid fa-chart-simple"></i>
+                                    <span class="ms-1 d-none d-sm-inline">
+                                        {{ __('Dashboard') }}
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="w-100">
                                 <a href="{{url('admin/apartments') }}" class="nav-link px-0 link-light">
                                     <i class="fa-solid fa-building ms-1"></i>
                                     <span class="ms-1 d-none d-sm-inline">

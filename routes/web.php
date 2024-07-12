@@ -24,7 +24,7 @@ use App\Http\Controllers\AddressController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->name('admin.')->prefix('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('apartments', ApartmentController::class)->parameters(['apartments' => 'apartment:slug']);
     Route::resource('apartment_sponsorship', ApartmentSponsorshipController::class);
     Route::post('/braintree/checkout', [BraintreeController::class, 'checkout'])->name('braintree.checkout');
