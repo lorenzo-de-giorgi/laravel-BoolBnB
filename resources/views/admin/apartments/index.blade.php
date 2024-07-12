@@ -40,11 +40,11 @@
             <td class="column2">{{$apartment->title}}</td>
             <td class="column3">
               @if ($apartment->visibility == 1)
-          Visible
-        @else
-        Not Visible
-      @endif</
-            td>
+                Visible
+              @else
+              Not Visible
+              @endif
+              </td>
             <td class="column4">
               @if ($apartment->sponsorships)
           @foreach ($apartment->sponsorships as $sponsorship)

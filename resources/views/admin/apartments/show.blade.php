@@ -97,10 +97,19 @@
         </div>
     </div>
     <div class="mt-3">
+    @if($messages->isEmpty())
         <div class="card p-3">
             <h4>Client's messages</h4>
             <hr>
-            <ul id="messages" class="list-unstyled vh-100 overflow-y-scroll">
+            <div class="card p-3 my-3 mx-3">
+                <strong>You have no messages for this apartment.</strong>
+            </div>
+        </div>
+    @else
+        <div class="card p-3">
+            <h4>Client's messages</h4>
+            <hr>
+            <ul id="messages" class="list-unstyled {{ $messages->count() >= 3 ? 'vh-100' : '' }} overflow-y-scroll">
                 @foreach ($messages as $message)
                     <div class="card p-3 my-3 mx-3">
                         <li>
@@ -130,7 +139,8 @@
                 @endforeach
             </ul>
         </div>
-    </div>
+    @endif
+</div>
     <div class="mt-3 mb-3 d-flex justify-content-end">
         <div>
             <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
