@@ -65,12 +65,12 @@
                     <input type="hidden" name="sponsorship_id" value="{{ $sponsorship->id }}">
                     
                     <div class="form-group">
-                        <label>Appartamento: </label>
+                        <label>Apartment: </label>
                         <p>{{ $apartment->title }}</p>
                     </div>
                     
                     <div class="form-group">
-                        <label>Sponsorizzazione: </label>
+                        <label>Sponsorship: </label>
                         <p>{{ $sponsorship->name }} - €{{ $sponsorship->price }} per {{ $sponsorship->duration }} ore</p>
                     </div>
                     
