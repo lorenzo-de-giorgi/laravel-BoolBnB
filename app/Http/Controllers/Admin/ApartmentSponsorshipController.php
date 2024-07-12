@@ -26,13 +26,22 @@ class ApartmentSponsorshipController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
+        $queryString = $request->getQueryString();
+        $slug = rtrim($queryString, '=');
+
+        // dd($slug);
+
         $id = Auth::id();
-        $apartments = Apartment::where('user_id', $id)->get();
+        // $apartment = Apartment::where('user_id', $id)->get();
+        // dd($apartment);
+        $apartment = Apartment::where('slug', $slug)->where('user_id', $id)->first();
+        // dd($apartment);
+
         $sponsorships = Sponsorship::all();
         // dd($apartments);
-        return view('admin.apartment_sponsorship.create', compact('apartments', 'sponsorships'));
+        return view('admin.apartment_sponsorship.create', compact('apartment', 'sponsorships'));
     }
 
     /**

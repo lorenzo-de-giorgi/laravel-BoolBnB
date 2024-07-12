@@ -9,13 +9,10 @@
         <form action="{{ route('admin.payment') }}" method="GET">
             @csrf
 
-            <h5 class="mt-2">Apartment *</h5>
-            @foreach ($apartments as $apartment)
-                <div>
-                    <input type="radio" name="apartment_id" value="{{ $apartment->id }}" class="form-check-input checkbox">
-                    <label for="apartment_id" class="form-check-label">{{ $apartment->title }}</label>
-                </div>
-            @endforeach
+            <h5 class="mt-2">Apartment: {{ $apartment->title }}</h5>
+            <div>
+                <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
+            </div>
             <div class="invalid-feedback" id="checkError"></div>
             @error('apartment_id')
                 <div class="alert alert-danger">{{ $message }}</div>
