@@ -24,14 +24,31 @@
     @endif
     <div class="row">
         <div id="showimage" class="col-12 mb-3 col-xl">
-            @php
-                $images = json_decode($apartment->image, true);
-            @endphp
-            @foreach ($images as $image)
-                <div>
-                    <img src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento">
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    @php
+                        $images = json_decode($apartment->image, true);
+                        $first = true; // Flag per identificare la prima immagine
+                    @endphp
+                    @foreach ($images as $image)
+                        <div class="carousel-item {{ $first ? 'active' : '' }}">
+                            <img src="{{ asset('storage/' . $image) }}" class="d-block w-100"
+                                alt="Immagine dell'appartamento">
+                        </div>
+                        @php    $first = false; @endphp
+                    @endforeach
                 </div>
-            @endforeach
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
         </div>
         <div class="col-6 col-xl ">
             <h2>{{$apartment->title}}</h2>
@@ -50,7 +67,6 @@
                     <div class="rounded-pill text-bg-success">
                         @if($apartment->sponsorships->isNotEmpty())
                             @foreach($apartment->sponsorships as $sponsorship)
-
                                 <span class="p-2">{{ $sponsorship->name }}</span>
                             @endforeach
                         @else
