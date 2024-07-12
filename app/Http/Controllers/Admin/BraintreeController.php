@@ -80,7 +80,7 @@ class BraintreeController extends Controller
                 ]);
             }
             return redirect()->route('admin.apartments.show', $apartment->slug)
-                             ->with('success', 'Pagamento avvenuto con successo');
+                             ->with('success', 'Payment successful');
         } else {
             return redirect()->route('admin.apartments.show', $apartment->slug)
                              ->withErrors('Errore nella transazione: ' . $result->message);

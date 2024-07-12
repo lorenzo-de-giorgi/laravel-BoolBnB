@@ -14,7 +14,9 @@ class ApartmentSponsorship extends Pivot
     protected $fillable = ['id', 'apartment_id', 'sponsorship_id', 'name', 'price', 'start_time', 'end_time'];
 
     public function apartment(){
-        return $this->belongsToMany(Apartment::class);
+        return $this->belongsToMany(Apartment::class)
+            ->withPivot('start_time', 'end_time', 'price', 'name')
+            ->withTimestamps();
     }
     public function sponsorship(){
         return $this->belongsToMany(Sponsorship::class);

@@ -4,6 +4,11 @@
 
 @section('content')
 <section class="container bg-white p-5 my-5 rounded">
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
     <div class="row">
         <div id="showimage" class="col-12 mb-3 col-xl">
             @php
@@ -78,6 +83,21 @@
             </div>
         </div>
     </div>
+    <div class="mt-3 mb-3 d-flex justify-content-center align-content-center">
+        <div>
+            <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug )}}" class="btn btn-success me-2"><i class="fa-brands fa-space-awesome"></i> Sponsor</a>
+            <a href="{{route('admin.apartments.edit', $apartment->slug )}}" class="btn btn-primary me-2"><i class="fa-solid fa-pen"></i> Edit</a>
+        </div>
+        <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="delete-button border-0 bg-transparent"
+            data-item-title="{{ $apartment->title }}">
+            <a class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+            </button>
+        </form>
+    </div>
+    @include('partials.modal-delete')
 </section>
 
 @endsection
