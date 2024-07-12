@@ -3,8 +3,13 @@
 @section('title', 'Create Project')
 
 @section('content')
-<div class="p-4">
+<div class="container d-flex justify-content-between align-items-center p-4">
     <a href="{{ route('admin.apartments.index') }}"><i class="fa-solid fa-arrow-left"></i></a>
+    <div>
+        <h4>Want more visibility?</h4>
+        <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
+        class="fa-brands fa-space-awesome"></i> Sponsor</a>
+    </div>
 </div>
 <section class="container bg-white p-5 my-3 rounded">
     @if(session('success'))
@@ -23,10 +28,10 @@
                 </div>
             @endforeach
         </div>
-        <div class="col-6 col-xl w-100">
+        <div class="col-6 col-xl ">
             <h2>{{$apartment->title}}</h2>
             <h5>{{$apartment->address}}</h5>
-            <div class="card mt-3 p-3">
+            <div id="services" class="card mt-3 p-3">
                 <h4>Available Services</h4>
                 <div>
                     @if($apartment->services)
@@ -34,6 +39,13 @@
                             <span class="badge text-bg-primary m-1">{{$service->name}}</span>
                         @endforeach
                     @endif
+                </div>
+                <div id="sponsorship" class="card mt-2 p-2 d-flex justify-content-center align-items-center">
+                    <h6 class="text-left fw-bolder">Status Sponsorship</h6>
+                    <div class="rounded-pill text-bg-success">
+                        <span class="p-2">sponsorized</span>
+                        <span class="p-2">expire in: DATA</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,15 +100,17 @@
     </div>
     <div class="mt-3 mb-3 d-flex justify-content-center align-content-center">
         <div>
-            <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug )}}" class="btn btn-success me-2"><i class="fa-brands fa-space-awesome"></i> Sponsor</a>
-            <a href="{{route('admin.apartments.edit', $apartment->slug )}}" class="btn btn-primary me-2"><i class="fa-solid fa-pen"></i> Edit</a>
+            <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
+                    class="fa-brands fa-space-awesome"></i> Sponsor</a>
+            <a href="{{route('admin.apartments.edit', $apartment->slug)}}" class="btn btn-primary me-2"><i
+                    class="fa-solid fa-pen"></i> Edit</a>
         </div>
         <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
             @csrf
             @method('DELETE')
             <button type="submit" class="delete-button border-0 bg-transparent"
-            data-item-title="{{ $apartment->title }}">
-            <a class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i> Delete</a>
+                data-item-title="{{ $apartment->title }}">
+                <a class="btn btn-danger me-2"><i class="fa-solid fa-trash"></i> Delete</a>
             </button>
         </form>
     </div>
