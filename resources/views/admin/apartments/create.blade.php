@@ -165,7 +165,7 @@
         const submitButton = document.getElementById('submitButton');
         const title = document.getElementById("title");
         const titleError = document.getElementById("titleError");
-        title.addEventListener("input", (event) => {
+        title.addEventListener("blur", (event) => {
             if (title.value.length < 5) {
                 title.classList.add('is-invalid');
                 titleError.textContent = "The title must be at least 5 characters long!";
