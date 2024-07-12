@@ -42,9 +42,7 @@ class BraintreeController extends Controller
     public function checkout(Request $request)
     {
         $nonce = $request->input('payment_method_nonce');
-
         $apartment = Apartment::findOrFail($request->input('apartment_id'));
-
         $sponsorship = Sponsorship::findOrFail($request->input('sponsorship_id'));
 
         $amount = $sponsorship->price;
@@ -56,21 +54,24 @@ class BraintreeController extends Controller
                 'submitForSettlement' => true
             ]
         ]);
-
         if ($result->success) {
             $currentDateTime = Carbon::now();
             list($hours, $minutes, $seconds) = explode(':', $sponsorship->duration);
-            // Aggiungiamo la durata alla data e ora corrente
             $endDateTime = $currentDateTime->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
 
             $existingSponsorship = $apartment->sponsorships()
-                ->where('sponsorship_id', $sponsorship->id)
-                ->where('end_time', '>', $currentDateTime)
+                ->wherePivot('end_time', '>', $currentDateTime)
+                // ->where('sponsorship_id', $sponsorship->id)
+                // ->where('end_time', '>', $currentDateTime)
                 ->first();
-            if ($existingSponsorship) {
-                $existingSponsorship->pivot->end_time = Carbon::parse($existingSponsorship->pivot->end_time)->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
-                $existingSponsorship->pivot->save();
-            } else {
+                if ($existingSponsorship) {
+                    $endDateTimeExisting = Carbon::parse($existingSponsorship->pivot->end_time);
+                    $diff = $currentDateTime->diff($endDateTimeExisting);
+                    $remainingTime = $diff->format('%d days, %h hours, %i minutes e %s seconds');
+    
+                    return redirect()->route('admin.apartments.show', $apartment->slug)
+                                     ->with('error', 'Sponsorship already active, ends in: ' . $remainingTime);
+                } else {
                 //Se lo sponsor non esiste, lo aggiungiamo
                 $apartment->sponsorships()->attach($sponsorship->id, [
                     'start_time' => $currentDateTime,
@@ -79,7 +80,7 @@ class BraintreeController extends Controller
                     'name' => $sponsorship->name,
                 ]);
             }
-            return redirect()->route('admin.apartments.show', $apartment->slug)
+            return redirect()->route('admin.payment_success', $apartment->slug)
                              ->with('success', 'Payment successful');
         } else {
             return redirect()->route('admin.apartments.show', $apartment->slug)
