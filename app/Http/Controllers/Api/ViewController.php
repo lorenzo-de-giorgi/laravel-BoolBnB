@@ -12,9 +12,9 @@ class ViewController extends Controller
     {
         $data = $request->all();
 
-        $new_view = new View();
+        /* $new_view = new View();
         $new_view->fill($data);
-        $new_view->save();
+        $new_view->save(); */
 
         return response()->json([
             'status' => 'success',
