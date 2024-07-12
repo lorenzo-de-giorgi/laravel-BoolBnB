@@ -3,7 +3,10 @@
 @section('title', 'Create Project')
 
 @section('content')
-<section class="container bg-white p-5 my-5 rounded">
+<div class="p-4">
+    <a href="{{ route('admin.apartments.index') }}"><i class="fa-solid fa-arrow-left"></i></a>
+</div>
+<section class="container bg-white p-5 my-3 rounded">
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
