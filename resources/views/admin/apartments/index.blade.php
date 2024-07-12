@@ -40,9 +40,9 @@
             <td class="column2">{{$apartment->title}}</td>
             <td class="column3">
               @if ($apartment->visibility == 1)
-                Visible
+              <i class="fa-solid fa-check" style="color: #4ca456;"></i>
               @else
-              Not Visible
+              <i class="fa-solid fa-check" style="color: #4ca456;"></i>
               @endif
               </td>
             <td class="column4">
