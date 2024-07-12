@@ -8,13 +8,18 @@
     <div>
         <h4>Want more visibility?</h4>
         <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
-        class="fa-brands fa-space-awesome"></i> Sponsor</a>
+                class="fa-brands fa-space-awesome"></i> Sponsor</a>
     </div>
 </div>
 <section class="container bg-white p-5 my-3 rounded">
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
     @endif
     <div class="row">
@@ -43,9 +48,22 @@
                 <div id="sponsorship" class="card mt-2 p-2 d-flex justify-content-center align-items-center">
                     <h6 class="text-left fw-bolder">Status Sponsorship</h6>
                     <div class="rounded-pill text-bg-success">
-                        <span class="p-2">sponsorized</span>
-                        <span class="p-2">expire in: DATA</span>
+                        @if($apartment->sponsorships->isNotEmpty())
+                            @foreach($apartment->sponsorships as $sponsorship)
+
+                                <span class="p-2">{{ $sponsorship->name }}</span>
+                            @endforeach
+                        @else
+                            not sponsored
+                        @endif
                     </div>
+                    <span class="p-2">
+                        <strong>Expire at:</strong>
+                        <br>
+                        @foreach($apartment->sponsorships as $sponsorship)
+                            {{ $sponsorship->duration }}
+                        @endforeach
+                    </span>
                 </div>
             </div>
         </div>
@@ -54,22 +72,21 @@
                 <h4>Appartment Details</h4>
                 <hr>
                 <ul class="list-unstyled">
-                    <li>Number of rooms: {{$apartment->rooms_num}}</li>
-                    <li>Number of beds: {{$apartment->beds_num}}</li>
-
-                    <li>Number of bathrooms: {{$apartment->bathrooms_num}}</li>
-                    <li>Square meters: {{$apartment->square_meters}}</li>
+                    <li><strong>Number of rooms:</strong> {{$apartment->rooms_num}}</li>
+                    <li><strong>Number of beds:</strong> {{$apartment->beds_num}}</li>
+                    <li><strong>Number of bathrooms:</strong> {{$apartment->bathrooms_num}}</li>
+                    <li><strong>Square meters:</strong> {{$apartment->square_meters}}</li>
                 </ul>
             </div>
         </div>
     </div>
     <div class="mt-3">
         <div class="card p-3">
-            <div class="">
-                <h4>Client's messages</h4>
-                <hr>
-                <ul class="list-unstyled">
-                    @foreach ($messages as $message)
+            <h4>Client's messages</h4>
+            <hr>
+            <ul id="messages" class="list-unstyled vh-100 overflow-y-scroll">
+                @foreach ($messages as $message)
+                    <div class="card p-3 my-3 mx-3">
                         <li>
                             <strong>Name: </strong>
                             {{$message->name}} {{$message->surname}}
@@ -93,12 +110,12 @@
                                 {{$message->update_at}}
                             </li>
                         @endif
-                    @endforeach
-                </ul>
-            </div>
+                    </div>
+                @endforeach
+            </ul>
         </div>
     </div>
-    <div class="mt-3 mb-3 d-flex justify-content-center align-content-center">
+    <div class="mt-3 mb-3 d-flex justify-content-end">
         <div>
             <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
                     class="fa-brands fa-space-awesome"></i> Sponsor</a>
