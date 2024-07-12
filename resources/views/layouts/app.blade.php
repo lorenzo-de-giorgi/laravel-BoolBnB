@@ -48,14 +48,6 @@
                                     </span>
                                 </a>
                             </li>
-                            <li class="w-100">
-                                <a href="{{url('admin/apartment_sponsorship') }}" class="nav-link px-0 link-light">
-                                    <i class="ms-1 fa-solid fa-file-invoice-dollar"></i>
-                                    <span class="ms-1 d-none d-sm-inline">
-                                        {{ __('Sponsorship') }}
-                                    </span>
-                                </a>
-                            </li>
                         </ul>
                         <hr>
                         @guest
