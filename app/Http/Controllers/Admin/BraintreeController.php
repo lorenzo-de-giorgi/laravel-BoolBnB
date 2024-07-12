@@ -63,7 +63,7 @@ class BraintreeController extends Controller
             // Aggiungiamo la durata alla data e ora corrente
             $endDateTime = $currentDateTime->copy()->addHours($hours)->addMinutes($minutes)->addSeconds($seconds);
 
-            $existingSponsorship = $apartment->sponsorhips()
+            $existingSponsorship = $apartment->sponsorships()
                 ->where('sponsorship_id', $sponsorship->id)
                 ->where('end_time', '>', $currentDateTime)
                 ->first();
@@ -72,7 +72,7 @@ class BraintreeController extends Controller
                 $existingSponsorship->pivot->save();
             } else {
                 //Se lo sponsor non esiste, lo aggiungiamo
-                $apartment->sponsorhips()->attach($sponsorship->id, [
+                $apartment->sponsorships()->attach($sponsorship->id, [
                     'start_time' => $currentDateTime,
                     'end_time' => $endDateTime,
                     'price' => $sponsorship->price,
