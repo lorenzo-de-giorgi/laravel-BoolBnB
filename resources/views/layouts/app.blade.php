@@ -65,8 +65,7 @@
                                 <li class="dropdown pb-4 list-unstyled">
                                     <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                         data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                        <img src="https://cdn.noitatnemucod.net/avatar/100x100/one_piece/user-08.jpeg"
-                                            alt="One Piece - Luffy" width="30" height="30" class="rounded-circle">
+                                        <i class="fa-solid fa-user"></i>
                                         <span id="userName">
                                             {{ Auth::user()->name }}
                                         </span>
