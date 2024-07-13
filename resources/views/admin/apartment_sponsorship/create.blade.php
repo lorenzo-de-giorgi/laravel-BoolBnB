@@ -5,11 +5,11 @@
 @section('content')
 <section>
     <div class="container">
-        <h2>Create New Apartment</h2>
-        <form action="{{ route('admin.payment') }}" method="GET">
+        
+        <form action="{{ route('admin.payment') }}" method="GET" id="sponsorshipForm">
             @csrf
 
-            <h5 class="mt-2">Apartment: {{ $apartment->title }}</h5>
+            <h3 class="mt-2 text-center mb-5 mt-3">choose a sponsorship for {{ $apartment->title }}</h3>
             <div>
                 <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
             </div>
@@ -18,16 +18,24 @@
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
 
-            {{--sponsorships--}}
-            <h5 class="mt-2">Sponsorships *</h5>
-            @foreach ($sponsorships as $sponsorship)
-                <div>
-                    <input type="radio" name="sponsorship_id" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
-                    <label for="sponsorship_id" class="form-check-label">
-                        {{ $sponsorship->name }}: {{ $sponsorship->price }}€: {{ explode(':', $sponsorship->duration)[0] }} hours
-                    </label>
-                </div>
-            @endforeach
+            {{-- sponsorships --}}
+            
+            <div class="card-container">
+                @foreach ($sponsorships as $sponsorship)
+                    @php
+                        $class = '';
+                        if ($sponsorship->name == 'Bronze') $class = 'bronze-card';
+                        if ($sponsorship->name == 'Silver') $class = 'silver-card';
+                        if ($sponsorship->name == 'Gold') $class = 'gold-card';
+                    @endphp
+                    <div class="{{ $class }} card" data-id="{{ $sponsorship->id }}">
+                        <label for="sponsorship_id" class="form-check-label">
+                            {{ $sponsorship->name }}: {{ $sponsorship->price }}€: {{ explode(':', $sponsorship->duration)[0] }} hours
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+            <input type="hidden" name="sponsorship_id" id="selectedSponsorshipId">
             <div class="invalid-feedback" id="checkError"></div>
             @error('sponsorship_id')
                 <div class="alert alert-danger">{{ $message }}</div>
@@ -35,10 +43,22 @@
 
             {{-- buttons --}}
             <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-primary" id="submitButton">Crea</button>
+                <button type="submit" class="btn btn-primary mt-5" id="submitButton">Add Sponsorship</button>
             </div>
         </form>
     </div>
 </section>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', function () {
+                cards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                document.getElementById('selectedSponsorshipId').value = this.getAttribute('data-id');
+            });
+        });
+    });
+</script>
 @endsection
