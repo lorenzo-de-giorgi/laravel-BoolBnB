@@ -15,8 +15,12 @@
         <p>{{$view->ip_address}}</p>
         
         @endforeach
+        <div style="width: 75%;">
+    {!! $chartjs->render() !!}
+</div>
     </main>
 </div>
 </div>
 @endsection
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
