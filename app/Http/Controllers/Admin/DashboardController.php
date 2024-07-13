@@ -13,14 +13,14 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
 
-        $views = View::select('apartment_id', DB::raw('DATE(date) as date'), DB::raw('count(*) as view_count'))
-            ->whereHas('apartment', function ($query) use ($userId) {
-                $query->where('user_id', $userId);
-            })
-            ->groupBy('apartment_id', DB::raw('DATE(date)'))
-            ->get();
+        $views = View::select('apartment_id', 'date', DB::raw('count(*) as view_count'))
+        ->whereHas('apartment', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })
+        ->groupBy('apartment_id', 'date')
+        ->get();
 
-        $randomColor = sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 1);
+      /*   $randomColor = sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 1); */
         $labels = $views->pluck('date')->unique()->values()->toArray();
         $datasets = [];
         foreach ($views->groupBy('apartment_id') as $apartmentId => $viewGroup) {
