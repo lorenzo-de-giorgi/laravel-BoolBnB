@@ -84,11 +84,12 @@
                                 ->first();
                             if ($existingSponsorship) {
                                 $endDateTimeExisting = Carbon::parse($existingSponsorship->pivot->end_time);
-                                $diff = $currentDateTime->diff($endDateTimeExisting);
-                                 $remainingTime = $diff->format('%d days, %h hours, %i minutes e %s seconds');
+                                $diffInSeconds = $endDateTimeExisting->diffInSeconds($currentDateTime);
+                            } else {
+                                $diffInSeconds = 0; // in case no sponsorship active
                             }
                         ?>
-                        {{$remainingTime}}
+                         <span id="countdown"></span>
                     </span>
                 </div>
             </div>
@@ -167,7 +168,29 @@
             </button>
         </form>
     </div>
+    <script>
+        function startCountdown(seconds) {
+            function updateCountdown() {
+                let days = Math.floor(seconds / (24 * 60 * 60));
+                let hours = Math.floor((seconds % (24 * 60 * 60)) / (60 * 60));
+                let minutes = Math.floor((seconds % (60 * 60)) / 60);
+                let remainingSeconds = seconds % 60;
+                document.getElementById('countdown').innerHTML = `${days} days, ${hours} hours, ${minutes} minutes e ${remainingSeconds} seconds`;
+                if (seconds > 0) {
+                    seconds--;
+                } else {
+                    clearInterval(interval);
+                    document.getElementById('countdown').innerHTML = "Expired";
+                }
+            }
+            updateCountdown();
+            var interval = setInterval(updateCountdown, 1000);
+        }
+
+        // Inizializza il countdown con il valore calcolato in PHP
+        let initialSeconds = <?php echo $diffInSeconds; ?>;
+        startCountdown(initialSeconds);
+    </script>
     @include('partials.modal-delete')
 </section>
-
 @endsection
