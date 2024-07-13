@@ -73,12 +73,22 @@
                             not sponsored
                         @endif
                     </div>
-                    <span class="p-2">
-                        <strong>Expire at:</strong>
+                    <span class="p-2 text-center">
+                        <strong>Expire in:</strong>
                         <br>
-                        @foreach($apartment->sponsorships as $sponsorship)
-                            {{ $sponsorship->duration }}
-                        @endforeach
+                        <?php
+                            use Carbon\Carbon;
+                            $currentDateTime = Carbon::now();
+                            $existingSponsorship = $apartment->sponsorships()
+                                ->wherePivot('end_time', '>', $currentDateTime)
+                                ->first();
+                            if ($existingSponsorship) {
+                                $endDateTimeExisting = Carbon::parse($existingSponsorship->pivot->end_time);
+                                $diff = $currentDateTime->diff($endDateTimeExisting);
+                                 $remainingTime = $diff->format('%d days, %h hours, %i minutes e %s seconds');
+                            }
+                        ?>
+                        {{$remainingTime}}
                     </span>
                 </div>
             </div>
