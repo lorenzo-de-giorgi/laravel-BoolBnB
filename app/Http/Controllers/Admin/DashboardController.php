@@ -20,7 +20,7 @@ class DashboardController extends Controller
             ->groupBy('apartment_id', DB::raw('DATE(date)'))
             ->get();
 
-        // Prepara i dati per Chart.js
+        $randomColor = sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 1);
         $labels = $views->pluck('date')->unique()->values()->toArray();
         $datasets = [];
         foreach ($views->groupBy('apartment_id') as $apartmentId => $viewGroup) {
@@ -29,13 +29,17 @@ class DashboardController extends Controller
                 $view = $viewGroup->firstWhere('date', $label);
                 $data[] = $view ? $view->view_count : 0;
             }
+
+            $randomColor = $this->random_color();
             $datasets[] = [
                 'label' => "Apartment $apartmentId",
-                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                'backgroundColor' =>  $randomColor,
+                'borderColor' =>  $randomColor,
                 'data' => $data,
             ];
         }
+
+       
 
         $chartjs = app()->chartjs
             ->name('lineChart')
@@ -46,5 +50,11 @@ class DashboardController extends Controller
             ->options([]);
 
         return view('admin.dashboard', compact('chartjs'));
+ 
+    }
+
+
+    private function random_color() {
+        return sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 0.6);
     }
 }
