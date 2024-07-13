@@ -10,12 +10,13 @@
         
     </nav>
    
-    <main>
-        ciao
-       
-        <div style="width: 75%;">
-    {!! $chartjs->render() !!}
-</div>
+    <main class="container">
+   
+    @foreach ($charts as $apartmentId => $chart)
+        <h2>Apartment {{ $apartmentId }}</h2>
+        {!! $chart->render() !!}
+    @endforeach
+   
     </main>
 </div>
 </div>
