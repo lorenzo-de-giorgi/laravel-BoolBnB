@@ -1,52 +1,50 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
+
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\View;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
     public function index()
     {
         $userId = Auth::id();
-        $views = View::whereHas('apartment', function($query) use ($userId){
-            $query->where('user_id', $userId);
-        })->get();
+
+        $views = View::select('apartment_id', DB::raw('DATE(date) as date'), DB::raw('count(*) as view_count'))
+            ->whereHas('apartment', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->groupBy('apartment_id', DB::raw('DATE(date)'))
+            ->get();
+
+        // Prepara i dati per Chart.js
+        $labels = $views->pluck('date')->unique()->values()->toArray();
+        $datasets = [];
+        foreach ($views->groupBy('apartment_id') as $apartmentId => $viewGroup) {
+            $data = [];
+            foreach ($labels as $label) {
+                $view = $viewGroup->firstWhere('date', $label);
+                $data[] = $view ? $view->view_count : 0;
+            }
+            $datasets[] = [
+                'label' => "Apartment $apartmentId",
+                'backgroundColor' => "rgba(38, 185, 154, 0.31)",
+                'borderColor' => "rgba(38, 185, 154, 0.7)",
+                'data' => $data,
+            ];
+        }
 
         $chartjs = app()->chartjs
-            ->name('lineChartTest')
+            ->name('lineChart')
             ->type('line')
             ->size(['width' => 400, 'height' => 200])
-            ->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July'])
-            ->datasets([
-                [
-                    "label" => "My First dataset",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => [120, 59, 80, 81, 56, 55, 40],
-                ],
-                [
-                    "label" => "My Second dataset",
-                    'backgroundColor' => "rgba(38, 185, 154, 0.31)",
-                    'borderColor' => "rgba(38, 185, 154, 0.7)",
-                    "pointBorderColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointBackgroundColor" => "rgba(38, 185, 154, 0.7)",
-                    "pointHoverBackgroundColor" => "#fff",
-                    "pointHoverBorderColor" => "rgba(220,220,220,1)",
-                    'data' => [12, 33, 44, 44, 55, 23, 40],
-                ]
-            ])
+            ->labels($labels)
+            ->datasets($datasets)
             ->options([]);
-        return view('admin.dashboard', compact('views', 'chartjs'));
 
-        
+        return view('admin.dashboard', compact('chartjs'));
     }
-
-    
 }

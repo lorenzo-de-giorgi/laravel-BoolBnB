@@ -9,12 +9,10 @@
     <nav>
         
     </nav>
+   
     <main>
         ciao
-        @foreach ($views as $view )
-        <p>{{$view->ip_address}}</p>
-        
-        @endforeach
+       
         <div style="width: 75%;">
     {!! $chartjs->render() !!}
 </div>
