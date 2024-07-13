@@ -11,11 +11,17 @@
         </div>
 
         @auth
-        <h1 class="display-5 fw-bold">
-            Benvenuto, {{ Auth::user()->name }}! 
+        <h1 class="display-5 fw-bold text-center">
+            Welcome {{ Auth::user()->name }}! 
         </h1>
+        <div class="text-center">
+        <a href="{{route('admin.apartments.index')}}" class="btn btn-primary">go to yours apartments</a>
+        </div>
         @endauth
 
+        <div class="text-center mt-5 ">
+            <a href="http://localhost:5174/" class="btn btn-Warning">go back to boolbnb</a>
+        </div>
     </div>
 </div>
 @endsection

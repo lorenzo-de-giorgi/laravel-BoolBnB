@@ -24,4 +24,5 @@ class Sponsorship extends Model
         return $this->belongsToMany(Apartment::class);
     }
 
+  
 }

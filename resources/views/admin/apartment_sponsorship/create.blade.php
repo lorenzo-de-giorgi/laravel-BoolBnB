@@ -23,7 +23,9 @@
             @foreach ($sponsorships as $sponsorship)
                 <div>
                     <input type="radio" name="sponsorship_id" value="{{ $sponsorship->id }}" class="form-check-input checkbox">
-                    <label for="sponsorship_id" class="form-check-label">{{ $sponsorship->name }}: {{ $sponsorship->price }}</label>
+                    <label for="sponsorship_id" class="form-check-label">
+                        {{ $sponsorship->name }}: {{ $sponsorship->price }}€: {{ explode(':', $sponsorship->duration)[0] }} hours
+                    </label>
                 </div>
             @endforeach
             <div class="invalid-feedback" id="checkError"></div>

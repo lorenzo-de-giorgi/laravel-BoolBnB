@@ -109,7 +109,7 @@
         <div class="card p-3">
             <h4>Client's messages</h4>
             <hr>
-            <ul id="messages" class="list-unstyled {{ $messages->count() >= 3 ? 'vh-100' : '' }} overflow-y-scroll">
+            <ul id="messages" class="list-unstyled {{ $messages->count() >= 3 ? 'vh-100' : '' }}  {{ $messages->count() >= 3 ? 'overflow-y-scroll' : '' }}">
                 @foreach ($messages as $message)
                     <div class="card p-3 my-3 mx-3">
                         <li>
