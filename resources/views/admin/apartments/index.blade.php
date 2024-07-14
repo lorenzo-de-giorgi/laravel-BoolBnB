@@ -49,12 +49,14 @@
             <tr>
             <th class="column4" scope="row">Sponsorship</th>
             <td>
-              @if ($apartment->sponsorships)
+              @if ($apartment->sponsorships->isNotEmpty())
           @foreach ($apartment->sponsorships as $sponsorship)
         @if ($sponsorship->pivot->end_time > now())
-      <img src="/img/{{$sponsorship->badge}}" alt="" style="width: 60px; height: 60px;">
+      <img src="/img/{{$sponsorship->badge}}" alt="Sponsorship Badge" style="width: 60px; height: 60px;">
     @endif
       @endforeach
+    @else
+    <div class="rounded-pill text-bg-success p-1">Not Sponsored</div>
         @endif
             </td>
             </tr>

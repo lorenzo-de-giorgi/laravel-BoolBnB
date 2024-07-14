@@ -70,7 +70,7 @@
                                 <span class="p-2">{{ $sponsorship->name }}</span>
                             @endforeach
                         @else
-                            not sponsored
+                            Not Sponsored
                         @endif
                     </div>
                     <span class="p-2 text-center">
