@@ -14,12 +14,12 @@ class DashboardController extends Controller
         $userId = Auth::id();
 
         // Recupera le visualizzazioni raggruppate per apartment_id e data
-        $views = View::select('apartment_id', 'date', DB::raw('count(*) as view_count'))
-        ->join('apartments', 'views.apartment_id', '=', 'apartments.id')
+        $views = View::select('apartment_id', 'date', DB::raw('count(*) as view_count'), 'apartments.title')
+            ->join('apartments', 'views.apartment_id', '=', 'apartments.id')
             ->whereHas('apartment', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })
-            ->groupBy('apartment_id', 'date')
+            ->groupBy('apartment_id', 'date', 'apartments.title')
             ->get();
 
         // Inizializza l'array per i grafici
@@ -29,12 +29,12 @@ class DashboardController extends Controller
         foreach ($views->groupBy('apartment_id') as $apartmentId => $viewGroup) {
             // Ottieni le date uniche come etichette
             $labels = $viewGroup->pluck('date')->unique()->values()->toArray();
-            
+            $title = $viewGroup->first()->title;
             // Inizializza l'array dei dati
             $data = [];
             foreach ($labels as $label) {
                 $view = $viewGroup->firstWhere('date', $label);
-                $data[] = $view ? $view->view_count : 0;
+                $data[] = $view ? intval($view->view_count) : 0;
             }
 
             // Genera un colore casuale per il grafico
@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
             // Crea il dataset per il grafico corrente
             $dataset = [
-                'label' => "Apartment $apartmentId",
+                'label' => $title,
                 'backgroundColor' =>  $randomColor,
                 'borderColor' =>  $randomColor,
                 'data' => $data,
@@ -55,7 +55,32 @@ class DashboardController extends Controller
                 ->size(['width' => 400, 'height' => 200])
                 ->labels($labels)
                 ->datasets([$dataset])
-                ->options([]);
+                ->options([
+                    'plugins' => [
+                        'legend' => [
+                            'display' => true,
+                            
+                            'title' => [
+                                'align' => 'end',
+                                'color'=> $randomColor,
+                                'text' => $title,
+                                'display' => true,
+                                'font' => [
+                                    'size' => 40
+                                ]
+
+                            ],
+                            'labels' => [
+                                'color'=> $randomColor,
+                                'font' => [
+                                    'weight' => 'bolder',
+                                ]
+                                
+                                
+                            ],
+                        ],
+                    ],
+                ]);
 
             // Aggiungi il grafico all'array dei grafici
             $charts[$apartmentId] = $chart;
@@ -67,6 +92,6 @@ class DashboardController extends Controller
 
     private function random_color()
     {
-        return sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 0.6);
+        return sprintf('rgba(%d, %d, %d, %f)', rand(0, 255), rand(0, 255), rand(0, 255), 1);
     }
 }
