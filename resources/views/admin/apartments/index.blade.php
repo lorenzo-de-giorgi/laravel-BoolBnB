@@ -30,7 +30,7 @@
 
         <!-- COL-5 -->
 
-        <div class="col-sm-12 col-md-5">
+        <div class="col-sm-6 col-md-5 ">
         <h2>{{ $apartment->title }}</h2>
         <p> visibility
            @if ($apartment->visibility == 1)
@@ -53,7 +53,7 @@
         </div>
 
         <!-- COL-4 -->
-        <div class="col-sm-12 col-md-2">
+        <div class="col-sm-6 col-md-2cha">
         <div class="d-flex align-items-center">
           <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
           <a href="{{route('admin.apartments.edit', $apartment->slug)}}"><i class="fa-solid fa-pen"></i></a>
