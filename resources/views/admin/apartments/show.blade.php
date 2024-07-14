@@ -64,7 +64,7 @@
                 </div>
                 <div id="sponsorship" class="card mt-2 p-2 d-flex justify-content-center align-items-center">
                     <h6 class="text-left fw-bolder">Status Sponsorship</h6>
-                    <div class="rounded-pill text-bg-success">
+                    <div class="rounded-pill text-bg-success p-1">
                         @if($apartment->sponsorships->isNotEmpty())
                             @foreach($apartment->sponsorships as $sponsorship)
                                 <span class="p-2">{{ $sponsorship->name }}</span>
