@@ -262,3 +262,37 @@ table th {
         border-bottom: 0;
     }
 }
+
+
+//SPONSORSHIP
+/* Add these styles to your CSS file */
+.bronze-card, .silver-card, .gold-card {
+    color: #fff;
+    padding: 20px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.bronze-card {
+    background-color: #cd7f32;
+}
+
+.silver-card {
+    background-color: #c0c0c0;
+}
+
+.gold-card {
+    background-color: #ffd700;
+}
+
+.card-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.selected {
+    border-color: #000;
+}

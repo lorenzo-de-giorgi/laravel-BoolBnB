@@ -1,0 +1,237 @@
+[
+    {
+        "apartment_id": "1",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "2",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "4",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "6",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "7",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "7",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "7",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "8",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "9",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-12"
+    },
+    {
+        "apartment_id": "1",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "1",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "1",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "2",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "2",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "2",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "3",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "4",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "4",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "5",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "6",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "7",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "7",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "8",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "8",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "8",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "9",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "9",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "9",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    },
+    {
+        "apartment_id": "10",
+        "ip_address": "127.0.0.1",
+        "date": "2024-07-13"
+    }
+]

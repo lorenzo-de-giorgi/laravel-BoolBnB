@@ -40,15 +40,12 @@
             <th class="column3" scope="row">Visibility</th>
             <td>
               @if ($apartment->visibility == 1)
-          Visible
-        @else
-        Not Visible
-      @endif
-            </td>
-            </tr>
-            <tr>
-            <th class="column4" scope="row">Sponsorship</th>
-            <td>
+              <i class="fa-solid fa-check" style="color: #4ca456;"></i>
+              @else
+              <i class="fa-solid fa-check" style="color: #4ca456;"></i>
+              @endif
+              </td>
+            <td class="column4">
               @if ($apartment->sponsorships)
           @foreach ($apartment->sponsorships as $sponsorship)
         @if ($sponsorship->pivot->end_time > now())
