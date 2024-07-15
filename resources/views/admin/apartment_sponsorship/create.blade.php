@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.loader')
-@section('title', 'Create Apartment')
+@section('title', 'Add Sponsorship')
 
 @section('content')
 <section>
