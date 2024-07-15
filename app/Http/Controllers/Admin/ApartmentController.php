@@ -21,7 +21,7 @@ class ApartmentController extends Controller
     public function index()
     {  
         $id = Auth::id();
-        $apartments = Apartment::where('user_id', $id)->paginate(10);
+        $apartments = Apartment::where('user_id', $id)->get();
         // $apartments = Apartment::all();
         return view('admin.apartments.index', compact('apartments'));
     }
