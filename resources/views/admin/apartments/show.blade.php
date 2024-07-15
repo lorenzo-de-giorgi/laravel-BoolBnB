@@ -23,7 +23,7 @@
         </div>
     @endif
     <div class="row">
-        <div id="showimage" class="col-12 mb-3 col-xl">
+        <div class="col-12 mb-3 col-xl">
             <div id="carouselExample" class="carousel slide">
                 <div class="carousel-inner">
                     @php
@@ -32,8 +32,7 @@
                     @endphp
                     @foreach ($images as $image)
                         <div class="carousel-item {{ $first ? 'active' : '' }}">
-                            <img src="{{ asset('storage/' . $image) }}" class="d-block w-100"
-                                alt="Immagine dell'appartamento">
+                            <img id="showApartment" src="{{ asset('storage/' . $image) }}" alt="Immagine dell'appartamento">
                         </div>
                         @php    $first = false; @endphp
                     @endforeach
@@ -77,19 +76,20 @@
                         <strong>Expire in:</strong>
                         <br>
                         <?php
-                            use Carbon\Carbon;
-                            $currentDateTime = Carbon::now();
-                            $existingSponsorship = $apartment->sponsorships()
-                                ->wherePivot('end_time', '>', $currentDateTime)
-                                ->first();
-                            if ($existingSponsorship) {
-                                $endDateTimeExisting = Carbon::parse($existingSponsorship->pivot->end_time);
-                                $diffInSeconds = $endDateTimeExisting->diffInSeconds($currentDateTime);
-                            } else {
-                                $diffInSeconds = 0; // in case no sponsorship active
-                            }
+use Carbon\Carbon;
+
+$currentDateTime = Carbon::now();
+$existingSponsorship = $apartment->sponsorships()
+    ->wherePivot('end_time', '>', $currentDateTime)
+    ->first();
+if ($existingSponsorship) {
+    $endDateTimeExisting = Carbon::parse($existingSponsorship->pivot->end_time);
+    $diffInSeconds = $endDateTimeExisting->diffInSeconds($currentDateTime);
+} else {
+    $diffInSeconds = 0; // in case no sponsorship active
+}
                         ?>
-                         <span id="countdown"></span>
+                        <span id="countdown"></span>
                     </span>
                 </div>
             </div>
@@ -108,57 +108,61 @@
         </div>
     </div>
     <div class="mt-3">
-    @if($messages->isEmpty())
-        <div class="card p-3">
-            <h4>Client's messages</h4>
-            <hr>
-            <div class="card p-3 my-3 mx-3">
-                <strong>You have no messages for this apartment.</strong>
+        @if($messages->isEmpty())
+            <div class="card p-3">
+                <h4>Client's messages</h4>
+                <hr>
+                <div class="card p-3 my-3 mx-3">
+                    <strong>You have no messages for this apartment.</strong>
+                </div>
             </div>
-        </div>
-    @else
-        <div class="card p-3">
-            <h4>Client's messages</h4>
-            <hr>
-            <ul id="messages" class="list-unstyled {{ $messages->count() >= 3 ? 'vh-100' : '' }}  {{ $messages->count() >= 3 ? 'overflow-y-scroll' : '' }}">
-                @foreach ($messages as $message)
-                    <div class="card p-3 my-3 mx-3">
-                        <li>
-                            <strong>Name: </strong>
-                            {{$message->name}} {{$message->surname}}
-                        </li>
-                        <li>
-                            <strong>Email: </strong>
-                            {{$message->email}}
-                        </li>
-                        <li class="card my-2 p-3">
-                            <strong>Message: </strong>
-                            <br>
-                            {{$message->content}}
-                        </li>
-                        <li>
-                            <strong>Sended: </strong>
-                            {{$message->created_at}}
-                        </li>
-                        @if ($message->update_at)
+        @else
+            <div class="card p-3">
+                <h4>Client's messages</h4>
+                <hr>
+                <ul id="messages"
+                    class="list-unstyled {{ $messages->count() >= 3 ? 'vh-100' : '' }}  {{ $messages->count() >= 3 ? 'overflow-y-scroll' : '' }}">
+                    @foreach ($messages as $message)
+                        <div class="card p-3 my-3 mx-3">
                             <li>
-                                <strong>Last update: </strong>
-                                {{$message->update_at}}
+                                <strong>Name: </strong>
+                                {{$message->name}} {{$message->surname}}
                             </li>
-                        @endif
-                    </div>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-</div>
-    <div class="mt-3 mb-3 d-flex justify-content-end">
+                            <li>
+                                <strong>Email: </strong>
+                                {{$message->email}}
+                            </li>
+                            <li class="card my-2 p-3">
+                                <strong>Message: </strong>
+                                <br>
+                                {{$message->content}}
+                            </li>
+                            <li>
+                                <strong>Sended: </strong>
+                                {{$message->created_at}}
+                            </li>
+                            @if ($message->update_at)
+                                <li>
+                                    <strong>Last update: </strong>
+                                    {{$message->update_at}}
+                                </li>
+                            @endif
+                        </div>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
+    <div id="show-buttons" class="mt-3 mb-3">
         <div>
             <a href="{{route('admin.apartment_sponsorship.create', $apartment->slug)}}" class="btn btn-success me-2"><i
                     class="fa-brands fa-space-awesome"></i> Sponsor</a>
+        </div>
+        <div>
             <a href="{{route('admin.apartments.edit', $apartment->slug)}}" class="btn btn-primary me-2"><i
                     class="fa-solid fa-pen"></i> Edit</a>
         </div>
+
         <form action="{{route('admin.apartments.destroy', $apartment->slug)}}" method="POST">
             @csrf
             @method('DELETE')

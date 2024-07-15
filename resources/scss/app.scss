@@ -99,28 +99,30 @@ input:invalid {
 .selected {
     opacity: 0.4;
 }
-.column1body {
-    width: 150px;
-    height: 150px;
-    img {
-        width: 100%;
-        height: 100%;
-        border-radius: 5px;
-        box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
-        object-fit: cover;
-    }
+#showApartment {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+}
+#show-buttons{
+    display: flex;
+    justify-content: end;
+}
+.imgApartment {
+    aspect-ratio: 1 / 1;
+    border-radius: 5px;
+    box-shadow: 0 0 0 0.3rem rgba($secondary, 0.7);
 }
 
 .column5 a,
 .column5 button {
-    font-size: 1.2rem !important;
+    font-size: 1.7rem !important;
     text-decoration: none;
-    margin: 0 5px 0 10px;
-    padding: 5px;
+    margin: 0 0.5em 0 0.5em;
+    padding: 0.6em;
     box-shadow: 0 0 0 0.3rem rgba($secondary, 0.3);
     color: black;
-    width: 30px;
-    height: 30px;
+    width: 2em;
+    height: 2em;
     border-radius: 5px;
     display: flex;
     justify-content: center;
@@ -183,32 +185,6 @@ input:invalid {
     align-items: center;
 }
 
-table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    table-layout: fixed;
-}
-
-table tr {
-    background-color: #f8f8f8;
-    border: 1px solid #ddd;
-    padding: 0.35em;
-}
-
-table th,
-table td {
-    padding: 0.625em;
-    text-align: center;
-}
-
-table th {
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-}
-
 @media screen and (max-width: 576px) {
     #adminLogo {
         display: none;
@@ -216,57 +192,28 @@ table th {
     #userName {
         display: none;
     }
-    a {
-        font-size: 10px;
-    }
     #title {
         display: block;
         text-align: center;
     }
-    
-    table {
-        border: 0;
+    .column5 a,
+    .column5 button {
+        font-size: 1.4em !important;
     }
-
-    table thead {
-        border: none;
-        clip: rect(0 0 0 0);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-    }
-
-    table tr {
-        border-bottom: 3px solid #ddd;
-        display: block;
-        margin-bottom: 0.625em;
-    }
-
-    table td {
-        border-bottom: 1px solid #ddd;
-        display: block;
-        text-align: right;
-    }
-
-    table td::before {
-        content: attr(data-label);
-        float: left;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-    table td:last-child {
-        border-bottom: 0;
+    #show-buttons{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1em;
     }
 }
 
-
 //SPONSORSHIP
 /* Add these styles to your CSS file */
-.bronze-card, .silver-card, .gold-card {
+.bronze-card,
+.silver-card,
+.gold-card {
     color: #fff;
     padding: 20px;
     margin: 10px 0;
