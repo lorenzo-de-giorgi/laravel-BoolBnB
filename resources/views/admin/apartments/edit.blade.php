@@ -74,7 +74,7 @@
             id="uploadImage" name="image[]" value="{{ old('image', $apartment->image) }}" maxlength="255">
             <div class="media me-4">
                 @if($apartment->image)
-                    <img class="shadow" width="100" src="{{asset('storage/' . $apartment->image)}}"
+                    <img class="shadow d-none" width="100" src="{{asset('storage/' . $apartment->image)}}"
                         alt="{{$apartment->title}}" id="uploadPreview">
                 @endif
             </div>
@@ -101,7 +101,7 @@
        
         
         </div>
-        <input type="text" value="" id="toDelete" name="toDelete">
+        <input type="text" value="" id="toDelete" name="toDelete" class="d-none">
 
           {{--services--}}
           <h5 class="mt-2">Services *</h5>
