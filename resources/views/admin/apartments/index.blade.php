@@ -35,7 +35,7 @@
 
         <!-- COL-5 -->
 
-        <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-between">
+        <div class="col-sm-12 col-md-6 d-flex flex-column justify-content-evenly">
         <h2 class="text-center">{{ $apartment->title }}</h2>
         <div class="d-flex align-items-center justify-content-center flex-column">
           <h4>Available</h4>
