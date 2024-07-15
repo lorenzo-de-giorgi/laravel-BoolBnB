@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Project')
+@section('title', 'Edit Apartment')
 
 <div id="loader">
 @section('content')
