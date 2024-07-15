@@ -5,7 +5,7 @@
 <div id="loader">
 @section('content')
 <section>
-    <h2>Create a new Apartment</h2>
+    <h2>Edit Apartment</h2>
     <form id="update" action="{{ route('admin.apartments.update', $apartment->slug) }}" method="POST" enctype="multipart/form-data" onsubmit="return validaForm()">
         @csrf
         @method('PUT')
