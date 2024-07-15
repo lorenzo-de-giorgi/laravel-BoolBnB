@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.loader')
-@section('title', 'Create Apartment')
+@section('title', 'Add Sponsorship')
 
 @section('content')
 <section>
@@ -13,7 +13,7 @@
             <div>
                 <input type="hidden" name="apartment_id" value="{{ $apartment->id }}">
             </div>
-            <div class="invalid-feedback" id="checkError"></div>
+            <div class="invalid-feedback text-center" id="checkError"></div>
             @error('apartment_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -36,7 +36,7 @@
                 @endforeach
             </div>
             <input type="hidden" name="sponsorship_id" id="selectedSponsorshipId">
-            <div class="invalid-feedback" id="checkError"></div>
+            <div class="invalid-feedback text-center" id="checkError"></div>
             @error('sponsorship_id')
                 <div class="alert alert-danger">{{ $message }}</div>
             @enderror
@@ -60,5 +60,30 @@
             });
         });
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+    const sponsorshipCards = document.querySelectorAll('.card');
+    const selectedSponsorshipIdInput = document.getElementById('selectedSponsorshipId');
+    const submitButton = document.getElementById('submitButton');
+    const checkError = document.getElementById('checkError');
+
+    sponsorshipCards.forEach(card => {
+        card.addEventListener('click', function () {
+            sponsorshipCards.forEach(c => c.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedSponsorshipIdInput.value = this.getAttribute('data-id');
+            checkError.style.display = 'none';
+        });
+    });
+
+    submitButton.addEventListener('click', function (event) {
+        if (selectedSponsorshipIdInput.value === '') {
+            event.preventDefault();
+            checkError.textContent = 'Please select a sponsorship.';
+            checkError.style.display = 'block';
+        }
+    });
+});
+
 </script>
 @endsection

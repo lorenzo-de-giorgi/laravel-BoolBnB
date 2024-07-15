@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @extends('layouts.loader')
-@section('title', 'Create Project')
+@section('title', 'Show Apartment')
 
 @section('content')
 <div class="container d-flex justify-content-between align-items-center p-4">
