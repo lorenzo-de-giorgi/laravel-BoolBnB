@@ -48,7 +48,7 @@
             @endif
           @endforeach
           @else
-         <div class="rounded-pill text-bg-success p-1">Not Sponsored</div>
+         <div class="rounded-pill text-bg-success p-1 text-center">Not Sponsored</div>
            @endif </p>
            <div class="d-flex align-items-center">
           <a href="{{route('admin.apartments.show', $apartment->slug)}}"><i class="fa-solid fa-eye"></i></a>
