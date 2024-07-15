@@ -7,7 +7,7 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <link rel="icon" href="../../../favicon.ico">
     {{-- <title>{{ config('app.name', 'Boolpress') }}</title> --}}
     <title>@yield('title', 'BoolBnB')</title>
     <!-- Fonts -->
