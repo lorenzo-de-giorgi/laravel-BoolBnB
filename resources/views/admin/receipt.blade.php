@@ -1,6 +1,6 @@
 <!-- resources/views/admin/receipt.blade.php -->
 @extends('layouts.admin')
-
+@section('title', 'Payment Recipt')
 @section('content')
     <div class="container">
         <h1>Payment Recipt</h1>
