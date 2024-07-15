@@ -88,7 +88,7 @@
                     <div class="alert alert-danger">{{ $message }}</div>
                 @enderror
 
-                <div id="ciao">ciao</div>
+                
             </div>
 
 <!-- <input type="text" list="locality">
@@ -147,7 +147,7 @@
 
             {{-- buttons --}}
             <div class="mb-3 text-center">
-                <button type="submit" class="btn btn-primary" id="submitButton">Crea</button>
+                <button type="submit" class="btn btn-primary" id="submitButton">Creat</button>
             </div>
         </form>
     </div>
