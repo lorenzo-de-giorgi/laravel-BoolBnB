@@ -43,8 +43,8 @@ class DashboardController extends Controller
             // Crea il dataset per il grafico corrente
             $dataset = [
                 'label' => $title,
-                'backgroundColor' =>  $randomColor,
-                'borderColor' =>  $randomColor,
+                'backgroundColor' => $randomColor,
+                'borderColor' => $randomColor,
                 'data' => $data,
             ];
 
@@ -56,13 +56,19 @@ class DashboardController extends Controller
                 ->labels($labels)
                 ->datasets([$dataset])
                 ->options([
+                    'scales' => [
+                        'y' => [
+                            'suggestedMin' => 1,
+                            'suggestedMax' => 10
+                        ]
+                    ],
                     'plugins' => [
                         'legend' => [
                             'display' => true,
-                            
+
                             'title' => [
                                 'align' => 'end',
-                                'color'=> $randomColor,
+                                'color' => $randomColor,
                                 'text' => $title,
                                 'display' => true,
                                 'font' => [
@@ -71,12 +77,12 @@ class DashboardController extends Controller
 
                             ],
                             'labels' => [
-                                'color'=> $randomColor,
+                                'color' => $randomColor,
                                 'font' => [
                                     'weight' => 'bolder',
                                 ]
-                                
-                                
+
+
                             ],
                         ],
                     ],
