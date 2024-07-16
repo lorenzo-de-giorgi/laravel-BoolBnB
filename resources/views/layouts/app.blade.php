@@ -24,7 +24,7 @@
                 <div class="col-auto px-sm-2 px-0 bg-dark">
                     <div
                         class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
-                        <a class="navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5173') }}">
+                        <a class="navbar-brand d-flex align-items-center" href="{{ url('http://localhost:5174') }}">
                             <div id="adminLogo">
                                 <img src="{{ asset('img/adminLogo.png') }}" alt="Admin Logo">
                             </div>
